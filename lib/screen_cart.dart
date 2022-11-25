@@ -55,7 +55,8 @@ class _ScreenCartState extends State<ScreenCart> {
     });
   }
 
-  _insertItem() async {
+  Future<int> _insertItem() async {
+    int result = 0;  
     String sCode = await getCodeHead();
     for (int i = 0; i < widget.foodlistone.length; i++) {
       String nameProduct = widget.foodlistone[i].title;
@@ -71,8 +72,9 @@ class _ScreenCartState extends State<ScreenCart> {
         Constant.codeHead: sCode
       };
 
-      await db.insertItem(map);
+      result = await db.insertItem(map);
     }
+    return result;
   }
 
 
@@ -91,8 +93,13 @@ class _ScreenCartState extends State<ScreenCart> {
   }
 
   saveTransaction() async {
-    await _insertItem();
-    await _insertHead();
+    int result = 0;   
+    result = await _insertItem();
+    if(result > 0){
+      result = await _insertHead();
+    }
+    if(result > 0){
+    }
   }
 
 
