@@ -1,0 +1,93 @@
+import 'dart:async';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
+import '../constant.dart';
+
+class SqlLiteManager {
+  final String databaseName = "po.db";
+  final String tableHead = 'po_head';
+  final String tableItem = 'po_item';
+  int version = 4;
+
+ 
+
+  static Database? _database;
+
+  Future<Database?> get database async {
+    if (_database != null){
+      return _database;
+    }
+
+    _database = await _initDB('po.db');
+
+    return _database!;
+  }
+
+  Future<Database> _initDB(String filePath) async {
+    final dbPath = await getDatabasesPath();
+    final path = join(dbPath,filePath);
+    return await openDatabase(path,version: 1,onCreate: _createDB);
+  } 
+
+  Future _createDB(Database db,int version) async {
+    final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
+    final textType = 'TEXT NOT NULL';
+    final booltype = 'BOOLEAN NOT NULL';
+    final integerType = ' INTEGER NOT NULL ';
+    final autoIncrement = 'INTEGER AUTOINCREMENT';
+    final primaryKey = 'PRIMARY KEY';
+
+    final String idForeignKey = "FOREIGN KEY";
+
+    await db.execute(
+            'CREATE TABLE $tableHead (${Constant.id} $autoIncrement , ${Constant.totalPrice} $textType, ${Constant.payMent} $textType,${Constant.code} $textType + ' ' + $primaryKey)')
+            ;
+    await db.execute(
+            'CREATE TABLE $tableItem (${Constant.id} $idType , ${Constant.codeHead} $textType, ${Constant.nameProduct} $textType, ${Constant.priceProduct} $textType, ${Constant.qtyProduct} $textType, ${Constant.totalPriceProduct} $textType,$idForeignKey (${Constant.codeHead}) REFERENCES $tableHead (${Constant.code}))')
+            ;
+
+  }
+
+  Future<List<Map>> getData () async {
+    final db = await database;
+    return await db!.query(tableHead);
+  }
+
+  Future<List<Map>> getLastCode ()async{
+    final db = await database;
+    return await db!.query(tableHead,limit: 1,orderBy: "${Constant.code} DESC ");
+  }
+
+  Future<List<Map>> getID ()async{
+    final db = await database;
+    return db!.query(tableHead,limit: 1,orderBy: "${Constant.id} ",);
+  }
+
+  Future<int> insertHead (Map<String,dynamic> map) async{
+    final db = await database;
+    return await db!.insert(tableHead, map);
+  } 
+
+  Future<int> insertItem (Map<String,dynamic> map) async{
+    final db = await database;
+    return await db!.insert(tableItem, map);
+  }
+
+  // Future<int> deleteItem (Map<String,dynamic> map)async{
+  //   final db = await database;
+  //   return await db!.delete(tableDatabase);
+  // }
+
+  
+
+  
+
+
+
+  // initDatabase() async {
+  //   await openDatabase(join(await getDatabasesPath(), databaseName),
+  //       onCreate: (db, version) => db.execute(
+  //           'CREATE TABLE $tableDatabase ($idColumn INTEGER PRIMARY KEY, $totalPrice TEXT, $payMent TEXT, name TEXT)'),
+  //       version: version);
+  // }
+}
