@@ -305,14 +305,7 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
                                                                           index]
                                                                       .price;
 
-                                                              ScaffoldMessenger
-                                                                      .of(
-                                                                          context)
-                                                                  .showSnackBar(
-                                                                      SnackBar(
-                                                                       duration: Duration(seconds: 1),                          
-                                                                          content:
-                                                                              Text('คุณเลือก ${foodlist[index].title}  จำนวน ${foodlist[index].qty} เข้าตะกร้าแล้ว')));
+                                                              
 
                                                               // totalprice =
                                                               //     dTotalall;

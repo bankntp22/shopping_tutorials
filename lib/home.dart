@@ -35,16 +35,16 @@ class _HomeState extends State<Home> {
     return SafeArea(
         child: Scaffold(
             backgroundColor: Colors.white70,
-            appBar: AppBar(
-              title: Text('หมวดหมู่อาหาร'),
-              elevation: 1,
-              centerTitle: true,
-              leading: Icon(Icons.person),
-              backgroundColor: Colors.transparent,
-              actions: [
-                IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart))
-              ],
-            ),
+            // appBar: AppBar(
+            //   title: Text('หมวดหมู่อาหาร'),
+            //   elevation: 1,
+            //   centerTitle: true,
+            //   leading: Icon(Icons.person),
+            //   backgroundColor: Colors.transparent,
+            //   actions: [
+            //     IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart))
+            //   ],
+            // ),
             body: listMenu.elementAt(_currentIndex),
             bottomNavigationBar: BottomNavigationBar(
               selectedItemColor: Colors.amber[800],
