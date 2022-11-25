@@ -5,15 +5,15 @@ const double bg = 16.0;
 
 class Constant {
 //head
-  static const String totalPrice = 'total_Price';
-  static const String payMent = 'payMent';
-  static const String id = 'id';
-  static const String code = 'code';
+  static const String totalPrice = 'TOTAL_PRICE';
+  static const String payMent = 'PAYMENT';
+  static const String id = 'ID';
+  static const String code = 'CODE';
 //item
-  static const String codeHead = 'code_head';
-  static const String nameProduct = 'name_Product';
-  static const String priceProduct = 'price_Product';
-  static const String qtyProduct = 'qty_Product';
-  static const String totalPriceProduct = 'total_PriceProduct';
+  static const String codeHead = 'CODE_HEAD';
+  static const String nameProduct = 'NAME_PRODUCT';
+  static const String priceProduct = 'PRICE_PRODUCT';
+  static const String qtyProduct = 'QTY_PRODUCT';
+  static const String totalPriceProduct = 'TOTAL_PRICEPRODUCT';
   
 }

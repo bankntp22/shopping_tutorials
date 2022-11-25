@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'bottomnvg_screen/screen_order.dart';
 import 'constant.dart';
 import 'db/db_sqlite.dart';
 import 'foodlist.dart';
@@ -41,12 +42,13 @@ class _ScreenCartState extends State<ScreenCart> {
     }
   }
 
-  sumqtyScreenCart (){
-    for(int i = 0;i < widget.foodlistone.length;i++){
+  sumqtyScreenCart() {
+    for (int i = 0; i < widget.foodlistone.length; i++) {
       int qty = 0;
       qty = widget.foodlistone[i].qty;
-      iQty = qty + iQty; 
-    };
+      iQty = qty + iQty;
+    }
+    ;
   }
 
   defaultPayment() {
@@ -56,7 +58,7 @@ class _ScreenCartState extends State<ScreenCart> {
   }
 
   Future<int> _insertItem() async {
-    int result = 0;  
+    int result = 0;
     String sCode = await getCodeHead();
     for (int i = 0; i < widget.foodlistone.length; i++) {
       String nameProduct = widget.foodlistone[i].title;
@@ -77,42 +79,37 @@ class _ScreenCartState extends State<ScreenCart> {
     return result;
   }
 
-
-
-  _insertHead() async {  
+  _insertHead() async {
     String sCode = await getCodeHead();
     String sTotal = dtotal.toString();
-    
-    Map<String,dynamic> map = {  
-      Constant.totalPrice : sTotal, 
-      Constant.payMent : payMent,
-      Constant.code : sCode
+
+    Map<String, dynamic> map = {
+      Constant.totalPrice: sTotal,
+      Constant.payMent: payMent,
+      Constant.code: sCode
     };
 
     await db.insertHead(map);
   }
 
   saveTransaction() async {
-    int result = 0;   
+    int result = 0;
     result = await _insertItem();
-    if(result > 0){
+    if (result > 0) {
       result = await _insertHead();
     }
-    if(result > 0){
-    }
+    if (result > 0) {}
   }
-
-
 
   Future<String> getCodeHead() async {
     List<Map> listMap = await db.getLastCode();
     String sCode = "1000";
-    if(listMap.isNotEmpty ){
+    if (listMap.isNotEmpty) {
       Map map = listMap[0];
-    String sCode = map[Constant.code];
-    int iCode = int.parse(sCode);
-    iCode = iCode + 1;
-    sCode = iCode.toString();
+      String sCode = map[Constant.code];
+      int iCode = int.parse(sCode);
+      iCode = iCode + 1;
+      sCode = iCode.toString();
     }
     return sCode;
   }
@@ -185,7 +182,7 @@ class _ScreenCartState extends State<ScreenCart> {
                     padding: const EdgeInsets.all(5),
                     height: 300,
                     decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey, width: 3)),                       
+                        border: Border.all(color: Colors.grey, width: 3)),
                     child: widget.foodlistone.isNotEmpty
                         ? ListView.builder(
                             shrinkWrap: true,
@@ -257,8 +254,8 @@ class _ScreenCartState extends State<ScreenCart> {
                         ],
                       ),
                       RadioListTile(
-                          title: Text(payMentQR),
-                          value: paymenyTypeQR,
+                          title: Text(payMentCash),
+                          value: paymentTypeCash,
                           groupValue: payMent,
                           onChanged: (value) {
                             setState(() {
@@ -266,8 +263,8 @@ class _ScreenCartState extends State<ScreenCart> {
                             });
                           }),
                       RadioListTile(
-                          title: Text(payMentCash),
-                          value: paymentTypeCash,
+                          title: Text(payMentQR),
+                          value: paymenyTypeQR,
                           groupValue: payMent,
                           onChanged: (value) {
                             setState(() {
@@ -292,48 +289,7 @@ class _ScreenCartState extends State<ScreenCart> {
                           style: ElevatedButton.styleFrom(
                               primary: Colors.greenAccent.shade700,
                               minimumSize: const Size(double.infinity, 50)),
-                          onPressed: () {
-                            if (payMent == null) {
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                      title: Text(
-                                        'ขออภัย!',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            color: Colors.redAccent,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      content: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Text(
-                                            'คุณต้องเลือก วิธีการชำระเงินก่อนถึงจะสั่งซื้ออาหารได้',
-                                            style: TextStyle(fontSize: 19),
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              ElevatedButton(
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                          primary: Colors
-                                                              .greenAccent
-                                                              .shade700),
-                                                  onPressed: () {
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child: const Text('OK')),
-                                            ],
-                                          ),
-                                        ],
-                                      ));
-                                },
-                              );
-                            } else
-                              // ignore: curly_braces_in_flow_control_structures
+                          onPressed: () {                                                      // ignore: curly_braces_in_flow_control_structures
                               showDialog(
                                 context: context,
                                 builder: (context) {
@@ -354,7 +310,12 @@ class _ScreenCartState extends State<ScreenCart> {
                                                     Colors.greenAccent.shade700,
                                               ),
                                               onPressed: () {
-                                                Navigator.pop(context);
+                                                Navigator.push(context,
+                                                    MaterialPageRoute(
+                                                  builder: (context) {
+                                                    return ScreenOrder();
+                                                  },
+                                                ));
                                                 saveTransaction();
                                               },
                                               child: const Text('OK')),
