@@ -17,7 +17,8 @@ class _ScreenOrderState extends State<ScreenOrder> {
             backgroundColor: Colors.transparent,
             elevation: 0,
               leading:
-                  IconButton(onPressed: () {
+                  IconButton(
+                    onPressed: () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) {
                       return Home();
                     },));

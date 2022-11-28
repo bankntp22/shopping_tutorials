@@ -7,7 +7,7 @@ class SqlLiteManager {
   final String databaseName = "po.db";
   final String tableHead = 'po_head';
   final String tableItem = 'po_item';
-  int version = 11;
+  int version = 15;
 
  
 
@@ -30,20 +30,24 @@ class SqlLiteManager {
   } 
 
   Future _createDB(Database db,int version) async {
-    final idType = ' INTEGER AUTOINCREMENT NOT NULL';
     final textType = 'TEXT NOT NULL';
     final booltype = 'BOOLEAN NOT NULL';
-    final integerType = ' INTEGER NOT NULL ';
     final autoIncrement = ' INTEGER AUTOINCREMENT NOT NULL';
     final primaryKey = ' PRIMARY KEY ';
-
     final String idForeignKey = "FOREIGN KEY";
 
+    // await db.execute(
+    //         'CREATE TABLE $tableHead (${Constant.id} $autoIncrement , ${Constant.totalPrice} $textType, ${Constant.payMent} $textType,${Constant.code} $textType $primaryKey)')
+    //         ;
+    // await db.execute(
+    //         'CREATE TABLE $tableItem (${Constant.id} $idType , ${Constant.codeHead} $textType, ${Constant.nameProduct} $textType, ${Constant.priceProduct} $textType, ${Constant.qtyProduct} $textType, ${Constant.totalPriceProduct} $textType,$idForeignKey (${Constant.codeHead}) REFERENCES $tableHead (${Constant.code}))')
+    //         ;
+
     await db.execute(
-            'CREATE TABLE $tableHead (${Constant.id} $autoIncrement , ${Constant.totalPrice} $textType, ${Constant.payMent} $textType,${Constant.code} $textType $primaryKey)')
+            "CREATE TABLE $tableHead ( ${Constant.totalPrice} $textType, ${Constant.payMent} $textType, ${Constant.code} $textType $primaryKey)")
             ;
     await db.execute(
-            'CREATE TABLE $tableItem (${Constant.id} $idType , ${Constant.codeHead} $textType, ${Constant.nameProduct} $textType, ${Constant.priceProduct} $textType, ${Constant.qtyProduct} $textType, ${Constant.totalPriceProduct} $textType,$idForeignKey (${Constant.codeHead}) REFERENCES $tableHead (${Constant.code}))')
+            "CREATE TABLE $tableItem ( ${Constant.codeHead} $textType, ${Constant.nameProduct} $textType, ${Constant.priceProduct} $textType, ${Constant.qtyProduct} $textType, ${Constant.totalPriceProduct} $textType, FOREIGN KEY (${Constant.codeHead}) REFERENCES $tableHead (${Constant.code}) )")
             ;
 
   }
@@ -55,10 +59,8 @@ class SqlLiteManager {
 
   Future<List<Map>> getLastCode ()async{
     final db = await database;
-    return await db!.query(tableHead,limit: 1,orderBy: "${Constant.id} DESC ");
+    return await db!.query(tableHead,limit: 1,orderBy: "${Constant.code} DESC ");
   }
-
-  
 
   Future<int> insertHead (Map<String,dynamic> map) async{
     final db = await database;
