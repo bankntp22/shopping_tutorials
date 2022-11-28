@@ -7,9 +7,9 @@ class Constant {
 //head
   static const String totalPrice = 'TOTAL_PRICE';
   static const String payMent = 'PAYMENT';
-  static const String id = 'ID';
   static const String code = 'CODE';
 //item
+  static const String idHead = 'ID_HEAD';
   static const String codeHead = 'CODE_HEAD';
   static const String nameProduct = 'NAME_PRODUCT';
   static const String priceProduct = 'PRICE_PRODUCT';

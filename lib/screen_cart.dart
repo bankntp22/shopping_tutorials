@@ -48,7 +48,6 @@ class _ScreenCartState extends State<ScreenCart> {
       qty = widget.foodlistone[i].qty;
       iQty = qty + iQty;
     }
-    ;
   }
 
   defaultPayment() {
@@ -79,7 +78,7 @@ class _ScreenCartState extends State<ScreenCart> {
     return result;
   }
 
-  _insertHead() async {
+  Future<int> _insertHead() async {
     String sCode = await getCodeHead();
     String sTotal = dtotal.toString();
 
@@ -88,8 +87,8 @@ class _ScreenCartState extends State<ScreenCart> {
       Constant.payMent: payMent,
       Constant.code: sCode
     };
-
-    await db.insertHead(map);
+    
+    return await db.insertHead(map);
   }
 
   saveTransaction() async {
@@ -326,7 +325,7 @@ class _ScreenCartState extends State<ScreenCart> {
                                               style: ElevatedButton.styleFrom(
                                                   primary: Colors.redAccent),
                                               onPressed: () {
-                                                Navigator.pop(context);
+                                                Navigator.pop(context);                                
                                               },
                                               child: const Text('Cancel')),
                                         ],
