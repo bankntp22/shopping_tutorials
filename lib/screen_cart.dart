@@ -80,7 +80,7 @@ class _ScreenCartState extends State<ScreenCart> {
 
   Future<int> _insertHead() async {
     String sCode = await getCodeHead();
-    String sTotal = dtotal.toString();
+    String sTotal = dtotal.toString();  
 
     Map<String, dynamic> map = {
       Constant.totalPrice: sTotal,
@@ -105,7 +105,7 @@ class _ScreenCartState extends State<ScreenCart> {
     String sCode = "1000";
     if (listMap.isNotEmpty) {
       Map map = listMap[0];
-      String sCode = map[Constant.code];
+      sCode = map[Constant.code];
       int iCode = int.parse(sCode);
       iCode = iCode + 1;
       sCode = iCode.toString();

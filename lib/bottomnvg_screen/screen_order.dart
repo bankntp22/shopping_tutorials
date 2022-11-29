@@ -1,3 +1,4 @@
+import 'package:app_tutorial1/db/db_sqlite.dart';
 import 'package:app_tutorial1/home.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,13 @@ class ScreenOrder extends StatefulWidget {
 }
 
 class _ScreenOrderState extends State<ScreenOrder> {
+  SqlLiteManager db = SqlLiteManager();
+  
+  Future getAllOrder ()async{
+    
+  List<Map<dynamic,dynamic>> listMap = await db.getData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -57,6 +65,8 @@ class _ScreenOrderState extends State<ScreenOrder> {
                       const SizedBox(
                         height: 50,
                       ),
+                      
+                      
                       Container(
                           padding: const EdgeInsets.all(8),
                           color: Colors.grey.shade400,

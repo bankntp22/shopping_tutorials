@@ -46,7 +46,7 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.white,
         onTap: _updatedIndex,
         currentIndex: _currentIndex,
-        items: [
+        items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'ORDER'),
           BottomNavigationBarItem(
