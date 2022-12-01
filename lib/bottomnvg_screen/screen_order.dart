@@ -18,10 +18,10 @@ class _ScreenOrderState extends State<ScreenOrder> {
 
   List<OrderSummary> list = [];
 
-   _getOrderAll() async {
+  _getOrderAll() async {
     List<Map<dynamic, dynamic>> listMap = await db.getData();
     listMap.forEach(
-      (row) {      
+      (row) {
         print(row);
         String sGetPayment = row[Constant.payMent];
         String sGetTotalPrice = row[Constant.totalPrice];
@@ -37,11 +37,10 @@ class _ScreenOrderState extends State<ScreenOrder> {
 
   @override
   void initState() {
-    
+    _getOrderAll();
     super.initState();
   }
 
- 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -76,7 +75,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
                   child: Column(
                     children: [
                       const Text(
-                        'สรุปคำสั่งซื้อ',
+                        'รายการสั่งซื้อ',
                         style: TextStyle(fontSize: 23),
                       ),
                       const Divider(
@@ -87,57 +86,57 @@ class _ScreenOrderState extends State<ScreenOrder> {
                           padding: const EdgeInsets.all(8),
                           color: Colors.grey.shade400,
                           width: double.infinity,
-                          child: const Text(
-                            'วิธีการชำระเงิน',
-                            style: TextStyle(fontSize: 17),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'วิธีการชำระเงิน',
+                                style: TextStyle(fontSize: 17),
+                              ),
+                              Text(
+                                'จำนวนเงิน',
+                                style: TextStyle(fontSize: 17),
+                              ),
+                            ],
                           )),
-                          
-                      Container(
-                        margin: EdgeInsets.symmetric(vertical: 10),
-                        height: 150,
-                        
-                        width: double.infinity,
-                        child: ListView.builder(
-                          itemCount: list.length,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              child: Text(list[index].sPayment.toString()),
-                            );
-                          },),
-                      ),
-                      Container(
-                          padding: const EdgeInsets.all(8),
-                          color: Colors.grey.shade400,
-                          width: double.infinity,
-                          child: const Text(
-                            'ราคารวมทั้งหมด',
-                            style: TextStyle(fontSize: 17),
-                          )),
-                      
-                      Container(
-                        margin: EdgeInsets.symmetric(vertical: 10),
-                        height: 150,
-                        
-                        width: double.infinity,
-                        child: ListView.builder(
-                          itemCount: list.length,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              child: Text(list[index].sTotal.toString()),
-                            );
-                          },),
-                      ),
-                      
+                      Column(
+                        children: [
+                          ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: list.length,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                height: 40,
+                                child: Card(
+                                  margin: EdgeInsets.all(3),
+                                  child: Container(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(list[index].sPayment.toString()),
+                                        Text(list[index].sTotal.toString())
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 ),
                 Spacer(),
                 ElevatedButton(
-                        onPressed: () {
-                          _getOrderAll();
-                        },
-                        child: Text('data'),
-                      ),
+                  onPressed: () {
+                    _getOrderAll();
+                  },
+                  child: Text('data'),
+                ),
               ],
             ),
           )),
