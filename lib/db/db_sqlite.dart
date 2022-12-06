@@ -57,6 +57,18 @@ class SqlLiteManager {
     return await db!.query(tableHead);
   }
 
+  Future<List<Map>> getOrder (String code)async{
+    final db = await database;
+    String sWhere = Constant.code + "= ?";
+    List<String> list = [code];
+    return await db!.query(tableHead,where: sWhere,whereArgs: list);
+  }
+  
+  Future<List<Map>> getItem ()async{
+    final db = await database;
+    return await db!.query(tableItem);
+  }
+
   Future<List<Map>> getLastCode ()async{
     final db = await database;
     return await db!.query(tableHead,limit: 1,orderBy: "${Constant.code} DESC ");

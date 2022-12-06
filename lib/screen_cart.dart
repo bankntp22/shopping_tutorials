@@ -80,14 +80,14 @@ class _ScreenCartState extends State<ScreenCart> {
 
   Future<int> _insertHead() async {
     String sCode = await getCodeHead();
-    String sTotal = dtotal.toString();  
+    String sTotal = dtotal.toString();
 
     Map<String, dynamic> map = {
       Constant.totalPrice: sTotal,
       Constant.payMent: payMent,
       Constant.code: sCode
     };
-    
+
     return await db.insertHead(map);
   }
 
@@ -181,7 +181,16 @@ class _ScreenCartState extends State<ScreenCart> {
                     padding: const EdgeInsets.all(5),
                     height: 300,
                     decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey, width: 3)),
+                      border: Border(
+                          top: BorderSide(
+                        width: 2,
+                        color: Colors.grey.shade400,
+                      ),
+                      bottom: BorderSide(
+                        width: 2,
+                        color: Colors.grey.shade400,
+                      ),),
+                    ),
                     child: widget.foodlistone.isNotEmpty
                         ? ListView.builder(
                             shrinkWrap: true,
@@ -288,50 +297,49 @@ class _ScreenCartState extends State<ScreenCart> {
                           style: ElevatedButton.styleFrom(
                               primary: Colors.greenAccent.shade700,
                               minimumSize: const Size(double.infinity, 50)),
-                          onPressed: () {                                                      // ignore: curly_braces_in_flow_control_structures
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                      title: Text(
-                                        'ยืนยันที่จะสั่งซื้ออาหารจำวนเงิน ${dtotal.toStringAsFixed(0)} ใช่หรือไม่ ?',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline6,
-                                      ),
-                                      content: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                primary:
-                                                    Colors.greenAccent.shade700,
-                                              ),
-                                              onPressed: () {
-                                                Navigator.push(context,
-                                                    MaterialPageRoute(
-                                                  builder: (context) {
-                                                    return ScreenOrder();
-                                                  },
-                                                ));
-                                                saveTransaction();
-                                              },
-                                              child: const Text('OK')),
-                                          const SizedBox(
-                                            width: 5,
-                                          ),
-                                          ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                  primary: Colors.redAccent),
-                                              onPressed: () {
-                                                Navigator.pop(context);                                
-                                              },
-                                              child: const Text('Cancel')),
-                                        ],
-                                      ));
-                                },
-                              );
+                          onPressed: () {
+                            // ignore: curly_braces_in_flow_control_structures
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                    title: Text(
+                                      'ยืนยันที่จะสั่งซื้ออาหารจำวนเงิน ${dtotal.toStringAsFixed(0)} ใช่หรือไม่ ?',
+                                      style:
+                                          Theme.of(context).textTheme.headline6,
+                                    ),
+                                    content: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              primary:
+                                                  Colors.greenAccent.shade700,
+                                            ),
+                                            onPressed: () {
+                                              Navigator.push(context,
+                                                  MaterialPageRoute(
+                                                builder: (context) {
+                                                  return ScreenOrder();
+                                                },
+                                              ));
+                                              saveTransaction();
+                                            },
+                                            child: const Text('OK')),
+                                        const SizedBox(
+                                          width: 5,
+                                        ),
+                                        ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                                primary: Colors.redAccent),
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text('Cancel')),
+                                      ],
+                                    ));
+                              },
+                            );
                           },
                           child: Text(
                             'ORDER NOW (${dtotal.toStringAsFixed(0)}) บาท',

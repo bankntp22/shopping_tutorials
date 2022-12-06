@@ -1,7 +1,7 @@
 
 class OrderSummary {
-   String? sPayment;
-   String? sTotal;
+   String sPayment = "";
+   String sTotal =  "";
 }
 
 

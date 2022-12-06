@@ -1,4 +1,5 @@
 import 'package:app_tutorial1/bottomnvg_screen/model_ordersummary.dart';
+import 'package:app_tutorial1/bottomnvg_screen/screen_orderdetailpd.dart';
 import 'package:app_tutorial1/constant.dart';
 import 'package:app_tutorial1/db/db_sqlite.dart';
 import 'package:app_tutorial1/foodlist.dart';
@@ -7,37 +8,37 @@ import 'package:flutter/material.dart';
 import './model_ordersummary.dart';
 
 class ScreenOrder extends StatefulWidget {
-  const ScreenOrder({Key? key}) : super(key: key);
-
   @override
   _ScreenOrderState createState() => _ScreenOrderState();
 }
 
 class _ScreenOrderState extends State<ScreenOrder> {
   SqlLiteManager db = SqlLiteManager();
-
   List<OrderSummary> list = [];
+  String? sPayment, sTotal;
 
-  _getOrderAll() async {
+  _getListSummaryOrder() async {
     List<Map<dynamic, dynamic>> listMap = await db.getData();
-    listMap.forEach(
-      (row) {
-        print(row);
-        String sGetPayment = row[Constant.payMent];
-        String sGetTotalPrice = row[Constant.totalPrice];
-        String sGetCode = row[Constant.code];
+    setState(() {
+      listMap.forEach(
+        (row) {
+          print(row);
+          String sGetPayment = row[Constant.payMent];
+          String sGetTotalPrice = row[Constant.totalPrice];
+          String sGetCode = row[Constant.code];
 
-        OrderSummary orderSummarymodel = OrderSummary();
-        orderSummarymodel.sPayment = sGetPayment;
-        orderSummarymodel.sTotal = sGetTotalPrice;
-        list.add(orderSummarymodel);
-      },
-    );
+          OrderSummary orderSummarymodel = OrderSummary();
+          orderSummarymodel.sPayment = sGetPayment;
+          orderSummarymodel.sTotal = sGetTotalPrice;
+          list.add(orderSummarymodel);
+        },
+      );
+    });
   }
 
   @override
   void initState() {
-    _getOrderAll();
+    _getListSummaryOrder();
     super.initState();
   }
 
@@ -76,66 +77,110 @@ class _ScreenOrderState extends State<ScreenOrder> {
                     children: [
                       const Text(
                         'รายการสั่งซื้อ',
-                        style: TextStyle(fontSize: 23),
+                        style: TextStyle(
+                            fontSize: 23,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black45),
                       ),
                       const Divider(
                         thickness: 2,
                         height: 30,
                       ),
                       Container(
-                          padding: const EdgeInsets.all(8),
-                          color: Colors.grey.shade400,
-                          width: double.infinity,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'วิธีการชำระเงิน',
-                                style: TextStyle(fontSize: 17),
-                              ),
-                              Text(
-                                'จำนวนเงิน',
-                                style: TextStyle(fontSize: 17),
-                              ),
-                            ],
-                          )),
+                        padding: const EdgeInsets.only(
+                            top: 12, bottom: 12, right: 5, left: 5),
+                        decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                              begin: FractionalOffset(0.0, 0.0),
+                              end: FractionalOffset(1.0, 0.0),
+                              colors: [
+                                Color.fromARGB(255, 156, 157, 163),
+                                Color.fromARGB(255, 165, 167, 167),
+                              ],
+                            ),
+                            borderRadius: BorderRadius.circular(5)),
+                        width: double.infinity,
+                        margin: EdgeInsets.only(bottom: 5),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              sPayment = 'วิธีการชำระเงิน',
+                              style: const TextStyle(
+                                  fontSize: 19,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              sTotal = 'จำนวนเงิน',
+                              style: const TextStyle(
+                                  fontSize: 19,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 4,
+                      ),
                       Column(
                         children: [
-                          ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: list.length,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                height: 40,
-                                child: Card(
-                                  margin: EdgeInsets.all(3),
+                          Container(
+                            height: 420,
+                            decoration: BoxDecoration(
+                                border: Border(
+                                    bottom: BorderSide(
+                                        color: Colors.grey.shade400,
+                                        width: 3))),
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: list.length,
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(context, MaterialPageRoute(
+                                      builder: (context) {
+                                        return ScreenOrderDetailpd();
+                                      },
+                                    ));
+                                  },
                                   child: Container(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 10),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(list[index].sPayment.toString()),
-                                        Text(list[index].sTotal.toString())
-                                      ],
+                                    height: 70,
+                                    child: Card(
+                                      elevation: 0,
+                                      margin: EdgeInsets.only(bottom: 4),
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              list[index]
+                                                  .sPayment
+                                                  .toString()
+                                                  .toUpperCase(),
+                                              style: TextStyle(fontSize: 17),
+                                            ),
+                                            Text(
+                                              "${list[index].sTotal} บาท",
+                                              style: TextStyle(fontSize: 17),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              );
-                            },
+                                );
+                              },
+                            ),
                           ),
                         ],
                       )
                     ],
                   ),
-                ),
-                Spacer(),
-                ElevatedButton(
-                  onPressed: () {
-                    _getOrderAll();
-                  },
-                  child: Text('data'),
                 ),
               ],
             ),
