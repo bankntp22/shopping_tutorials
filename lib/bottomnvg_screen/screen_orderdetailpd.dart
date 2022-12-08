@@ -1,11 +1,44 @@
-import 'package:app_tutorial1/db/db_sqlite.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:app_tutorial1/bottomnvg_screen/model_item.dart';
+import 'package:app_tutorial1/constant.dart';
 import 'package:flutter/material.dart';
 
-class ScreenOrderDetailpd extends StatelessWidget {
+import 'package:app_tutorial1/db/db_sqlite.dart';
+
+class ScreenOrderDetailpd extends StatefulWidget {
+  String sCode;
+
+
+  ScreenOrderDetailpd({
+    Key? key,
+    this.sCode = "",
+  }) : super(key: key);
+
+  @override
+  State<ScreenOrderDetailpd> createState() => _ScreenOrderDetailpdState();
+}
+
+class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
   SqlLiteManager db = SqlLiteManager();
   
+  List<ModelItem> list = [];
+  
+  getData (){
+  }
+
+  getDataHead(){}
+
+  getDataItem()async{
+     List<Map<dynamic,dynamic>> listgetItem = await db.getItem(widget.sCode);
+     listgetItem.forEach((row) { 
+      String sGetNameProduct = row[Constant.nameProduct];
+      String sGetTotalProduct = row[Constant.totalPrice];
+      String sGetQty = row[Constant.qtyProduct];
+     });
+  }
 
   var divider = SizedBox(child: Divider(thickness: 2,),height: 30,);
+
    var buttonStyle = TextStyle(
       fontSize: 25,
       fontWeight: FontWeight.bold,
@@ -15,7 +48,6 @@ class ScreenOrderDetailpd extends StatelessWidget {
       fontSize: 20,
       fontWeight: FontWeight.bold,
     );
-
 
   @override
   Widget build(BuildContext context) {
@@ -61,16 +93,22 @@ class ScreenOrderDetailpd extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                'ชื่อสินค้า',
-                                style: buttonStyle1,
-                              ),        
-                              divider,                 
+                              Row(
+                                children: [
+                                  Text(
+                                    'ชื่อสินค้า',
+                                    style: buttonStyle1,
+                                  ),
+                                  Container(
+                                    height: 100,
+                                  )
+                                ],
+                              ),       
+                               
                               Text(
                                 'ราคาสินค้า',
                                 style: buttonStyle1,
                               ),
-                              divider,
                               Text(
                                 'จำนวนสินค้า',
                                 style: buttonStyle1,
