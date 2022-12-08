@@ -16,7 +16,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
   SqlLiteManager db = SqlLiteManager();
   List<OrderSummary> list = [];
   String? sPayment, sTotal;
-
+  
   _getListSummaryOrder() async {
     List<Map<dynamic, dynamic>> listMap = await db.getData();
     setState(() {
@@ -30,6 +30,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
           OrderSummary orderSummarymodel = OrderSummary();
           orderSummarymodel.sPayment = sGetPayment;
           orderSummarymodel.sTotal = sGetTotalPrice;
+          orderSummarymodel.sCode = sGetCode;
           list.add(orderSummarymodel);
         },
       );
@@ -40,6 +41,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
   void initState() {
     _getListSummaryOrder();
     super.initState();
+    
   }
 
   @override
@@ -78,9 +80,10 @@ class _ScreenOrderState extends State<ScreenOrder> {
                       const Text(
                         'รายการสั่งซื้อ',
                         style: TextStyle(
-                            fontSize: 23,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black45),
+                          fontSize: 23,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
                       const Divider(
                         thickness: 2,
@@ -89,16 +92,6 @@ class _ScreenOrderState extends State<ScreenOrder> {
                       Container(
                         padding: const EdgeInsets.only(
                             top: 12, bottom: 12, right: 5, left: 5),
-                        decoration: BoxDecoration(
-                            gradient: const LinearGradient(
-                              begin: FractionalOffset(0.0, 0.0),
-                              end: FractionalOffset(1.0, 0.0),
-                              colors: [
-                                Color.fromARGB(255, 156, 157, 163),
-                                Color.fromARGB(255, 165, 167, 167),
-                              ],
-                            ),
-                            borderRadius: BorderRadius.circular(5)),
                         width: double.infinity,
                         margin: EdgeInsets.only(bottom: 5),
                         child: Row(
@@ -106,17 +99,19 @@ class _ScreenOrderState extends State<ScreenOrder> {
                           children: [
                             Text(
                               sPayment = 'วิธีการชำระเงิน',
-                              style: const TextStyle(
-                                  fontSize: 19,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                fontSize: 19,
+                                color: Colors.grey.shade800,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                             Text(
                               sTotal = 'จำนวนเงิน',
-                              style: const TextStyle(
-                                  fontSize: 19,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                fontSize: 19,
+                                color: Colors.grey.shade800,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ],
                         ),
@@ -141,7 +136,9 @@ class _ScreenOrderState extends State<ScreenOrder> {
                                   onTap: () {
                                     Navigator.push(context, MaterialPageRoute(
                                       builder: (context) {
-                                        return ScreenOrderDetailpd();
+                                        return ScreenOrderDetailpd(
+                                          sCode: list[index].sCode,
+                                        );
                                       },
                                     ));
                                   },
@@ -162,11 +159,16 @@ class _ScreenOrderState extends State<ScreenOrder> {
                                                   .sPayment
                                                   .toString()
                                                   .toUpperCase(),
-                                              style: TextStyle(fontSize: 17),
+                                              style: TextStyle(
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                             ),
                                             Text(
                                               "${list[index].sTotal} บาท",
-                                              style: TextStyle(fontSize: 17),
+                                              style: TextStyle(
+                                                  fontSize: 17,
+                                                  fontWeight: FontWeight.w800),
                                             ),
                                           ],
                                         ),
