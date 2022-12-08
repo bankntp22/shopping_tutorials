@@ -86,7 +86,11 @@ class MenuFood extends StatelessWidget {
             width: 140,
             height: 140,
             child: Column(
-              children: [Expanded(child: Image.asset('assets/breakfast.png'))],
+              children: [
+                Expanded(
+                  child: Image.asset('assets/breakfast.png'),
+                ),
+              ],
             ),
           ),
         ),
