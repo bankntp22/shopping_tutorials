@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import '../constant.dart';
+import '../models/constant.dart';
 
 class SqlLiteManager {
   final String databaseName = "po.db";

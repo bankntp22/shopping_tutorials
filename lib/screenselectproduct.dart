@@ -1,5 +1,5 @@
-import 'package:app_tutorial1/constant.dart';
-import 'package:app_tutorial1/foodlist.dart';
+import 'package:app_tutorial1/models/constant.dart';
+import 'package:app_tutorial1/models/foodlist.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'screen_cart.dart';

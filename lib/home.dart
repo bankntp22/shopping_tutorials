@@ -1,4 +1,4 @@
-import 'package:app_tutorial1/foodlist.dart';
+import 'package:app_tutorial1/models/foodlist.dart';
 import 'package:app_tutorial1/screen_cart.dart';
 import 'package:flutter/material.dart';
 
@@ -6,7 +6,7 @@ import 'bottomnvg_screen/screen_account.dart';
 
 import 'bottomnvg_screen/screen_home.dart';
 import 'bottomnvg_screen/screen_order.dart';
-import 'menu_list.dart';
+import 'models/menu_list.dart';
 import 'screenselectproduct.dart';
 
 class Home extends StatefulWidget {

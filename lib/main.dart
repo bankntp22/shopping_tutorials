@@ -1,4 +1,4 @@
-import 'package:app_tutorial1/constant.dart';
+import 'package:app_tutorial1/models/constant.dart';
 import 'package:flutter/material.dart';
 
 import 'home.dart';

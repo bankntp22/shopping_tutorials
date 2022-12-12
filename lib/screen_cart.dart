@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'bottomnvg_screen/screen_order.dart';
-import 'constant.dart';
+import 'models/constant.dart';
 import 'db/db_sqlite.dart';
-import 'foodlist.dart';
+import 'models/foodlist.dart';
 import './screenselectproduct.dart';
 
 // ignore: must_be_immutable

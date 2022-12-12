@@ -1,11 +1,11 @@
-import 'package:app_tutorial1/bottomnvg_screen/model_ordersummary.dart';
+import 'package:app_tutorial1/models/model_ordersummary.dart';
 import 'package:app_tutorial1/bottomnvg_screen/screen_orderdetailpd.dart';
-import 'package:app_tutorial1/constant.dart';
+import 'package:app_tutorial1/models/constant.dart';
 import 'package:app_tutorial1/db/db_sqlite.dart';
-import 'package:app_tutorial1/foodlist.dart';
+import 'package:app_tutorial1/models/foodlist.dart';
 import 'package:app_tutorial1/home.dart';
 import 'package:flutter/material.dart';
-import './model_ordersummary.dart';
+import '../models/model_ordersummary.dart';
 
 class ScreenOrder extends StatefulWidget {
   @override
