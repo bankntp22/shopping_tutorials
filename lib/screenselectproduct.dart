@@ -29,7 +29,7 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
     setState(() {});
   }
 
- nextScreenCart(List<Food> foodone, BuildContext context) {
+ nextScreenCart(BuildContext context) {
     List<Food> listfoodselect = getfoodselect();
     if (listfoodselect.length == 0) {
       showDialog(
@@ -124,7 +124,7 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
                         ),
                       ),
                     IconButton(
-                        onPressed: () => nextScreenCart(foodlist, context),
+                        onPressed: () => nextScreenCart( context),
                         icon: const Icon(Icons.shopping_cart)),
                   ],
                 )

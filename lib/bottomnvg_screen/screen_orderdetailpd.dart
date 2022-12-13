@@ -123,7 +123,6 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
             child: Column(
               children: [
                 Container(
-                  margin: EdgeInsets.only(bottom: 20),
                   width: double.infinity,
                   color: Colors.amber.shade200,
                   alignment: Alignment.center,
@@ -135,54 +134,8 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                 ),
                 Column(
                   children: [
-                    BoxType('ชื่อ'),
-                    Container(
-                      height: 100,
-                      child: ListView.builder(
-                        itemCount: listItem.length,
-                        itemBuilder: (context, index) {
-                          return Card(
-                            child: Container(
-                              child: Text(
-                                listItem[index].sNameProduct.toString(),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                    BoxType('จำนวนเงิน'),
-                    Container(
-                      height: 100,
-                      child: ListView.builder(
-                        itemCount: listItem.length,
-                        itemBuilder: (context, index) {
-                          return Card(
-                            child: Container(
-                              child: Text(
-                                listItem[index].sTotalPriceProduct.toString(),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                    BoxType('จำนวน'),
-                    Container(
-                      height: 100,
-                      child: ListView.builder(
-                        itemCount: listItem.length,
-                        itemBuilder: (context, index) {
-                          return Card(
-                            child: Container(
-                              child: Text(
-                                listItem[index].sQty.toString(),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
+                    TypeOrder(),
+                    listviewOrder(),
                   ],
                 )
               ],
@@ -193,14 +146,87 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
     );
   }
 
-  Container BoxType(String name) {
+  Container listviewOrder() {
+    return Container(
+      padding: EdgeInsets.only(left: 20, top: 5, bottom: 5, right: 20),
+      height: 300,
+      child: ListView.builder(
+        itemCount: listItem.length,
+        itemBuilder: (context, index) {
+          return Column(
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    flex: 5,
+                    child: Text(
+                      listItem[index].sNameProduct.toString(),
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          listItem[index].sQty.toString(),
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    flex: 7,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          listItem[index].sTotalPriceProduct.toString(),
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              )
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Container TypeOrder() {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(color: Colors.blue.shade200),
-      padding: EdgeInsets.only(left: 25, top: 5, bottom: 5, right: 5),
-      child: Text(
-        name,
-        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      padding: EdgeInsets.only(left: 25, top: 5, bottom: 5, right: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'ชื่อ',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            'จำนวน',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            'ราคารวม',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
       ),
     );
   }

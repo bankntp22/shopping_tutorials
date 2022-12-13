@@ -50,7 +50,7 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'ORDER'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.account_balance_wallet), label: 'Accounting'),
+              icon: Icon(Icons.person), label: 'Profile'),
         ],
       ),
     ));

@@ -324,6 +324,9 @@ class _ScreenCartState extends State<ScreenCart> {
                                                 },
                                               ));
                                               saveTransaction();
+                                              setState(() {
+                                                
+                                              });
                                             },
                                             child: const Text('OK')),
                                         const SizedBox(
@@ -452,6 +455,10 @@ class _ScreenCartState extends State<ScreenCart> {
                               ),
                               onPressed: () {
                                 Navigator.pop(context);
+                                setState(() {
+                                  
+                                });
+
                               },
                               child: const Text('OK')),
                           const SizedBox(
