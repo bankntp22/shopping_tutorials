@@ -20,6 +20,12 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
   double dTotalScreen = 0;
   int qtySum = 0;
 
+  int i = 0;
+
+  int addNumber(int number1,int number2){
+    return number1 + number2;
+  }
+
   sumTotalPrice() {
     for (int i = 0; i < foodlist.length; i++) {
       double totalprice = 0;

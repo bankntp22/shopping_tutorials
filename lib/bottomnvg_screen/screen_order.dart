@@ -16,32 +16,31 @@ class _ScreenOrderState extends State<ScreenOrder> {
   SqlLiteManager db = SqlLiteManager();
   List<OrderSummary> list = [];
   String? sPayment, sTotal;
-  
+
   _getListSummaryOrder() async {
     List<Map<dynamic, dynamic>> listMap = await db.getData();
-    setState(() {
-      listMap.forEach(
-        (row) {
-          print(row);
-          String sGetPayment = row[Constant.payMent];
-          String sGetTotalPrice = row[Constant.totalPrice];
-          String sGetCode = row[Constant.code];
 
-          OrderSummary orderSummarymodel = OrderSummary();
-          orderSummarymodel.sPayment = sGetPayment;
-          orderSummarymodel.sTotal = sGetTotalPrice;
-          orderSummarymodel.sCode = sGetCode;
-          list.add(orderSummarymodel);
-        },
-      );
-    });
+    listMap.forEach(
+      (row) {
+        print(row);
+        String sGetPayment = row[Constant.payMent];
+        String sGetTotalPrice = row[Constant.totalPrice];
+        String sGetCode = row[Constant.code];
+
+        OrderSummary orderSummarymodel = OrderSummary();
+        orderSummarymodel.sPayment = sGetPayment;
+        orderSummarymodel.sTotal = sGetTotalPrice;
+        orderSummarymodel.sCode = sGetCode;
+        list.add(orderSummarymodel);
+      },
+    );
+    setState(() {});
   }
 
   @override
   void initState() {
     _getListSummaryOrder();
     super.initState();
-    
   }
 
   @override
@@ -124,59 +123,66 @@ class _ScreenOrderState extends State<ScreenOrder> {
                           Container(
                             height: 420,
                             decoration: BoxDecoration(
-                                border: Border(
-                                    bottom: BorderSide(
-                                        color: Colors.grey.shade400,
-                                        width: 3))),
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: list.length,
-                              itemBuilder: (context, index) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(
-                                      builder: (context) {
-                                        return ScreenOrderDetailpd(
-                                          sCode: list[index].sCode,
-                                        );
-                                      },
-                                    ));
-                                  },
-                                  child: Container(
-                                    height: 70,
-                                    child: Card(
-                                      elevation: 0,
-                                      margin: EdgeInsets.only(bottom: 4),
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 10),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              list[index]
-                                                  .sPayment
-                                                  .toString()
-                                                  .toUpperCase(),
-                                              style: TextStyle(
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            Text(
-                                              "${list[index].sTotal} บาท",
-                                              style: TextStyle(
+                              border: Border(
+                                bottom: BorderSide(
+                                    color: Colors.grey.shade400, width: 3),
+                              ),
+                            ),
+                            child: RefreshIndicator(
+                              onRefresh: () async {
+                                await Future.delayed(Duration(seconds: 1));
+                              },
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: list.length,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(context, MaterialPageRoute(
+                                        builder: (context) {
+                                          return ScreenOrderDetailpd(
+                                            sCode: list[index].sCode,
+                                          );
+                                        },
+                                      ));
+                                    },
+                                    child: Container(
+                                      height: 70,
+                                      child: Card(
+                                        elevation: 0,
+                                        margin: EdgeInsets.only(bottom: 4),
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 10),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                list[index]
+                                                    .sPayment
+                                                    .toString()
+                                                    .toUpperCase(),
+                                                style: TextStyle(
                                                   fontSize: 17,
-                                                  fontWeight: FontWeight.w800),
-                                            ),
-                                          ],
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Text(
+                                                "${list[index].sTotal} บาท",
+                                                style: TextStyle(
+                                                    fontSize: 17,
+                                                    fontWeight:
+                                                        FontWeight.w800),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                );
-                              },
+                                  );
+                                },
+                              ),
                             ),
                           ),
                         ],

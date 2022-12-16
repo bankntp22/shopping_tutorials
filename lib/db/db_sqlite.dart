@@ -49,7 +49,6 @@ class SqlLiteManager {
     await db.execute(
             "CREATE TABLE $tableItem ( ${Constant.codeHead} $textType, ${Constant.nameProduct} $textType, ${Constant.priceProduct} $textType, ${Constant.qtyProduct} $textType, ${Constant.totalPriceProduct} $textType, FOREIGN KEY (${Constant.codeHead}) REFERENCES $tableHead (${Constant.code}) )")
             ;
-
   }
 
   Future<List<Map>> getData () async {
