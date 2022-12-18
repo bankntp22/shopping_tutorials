@@ -19,12 +19,9 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
   double totalprice = 0;
   double dTotalScreen = 0;
   int qtySum = 0;
+  String number = '';
 
   int i = 0;
-
-  int addNumber(int number1,int number2){
-    return number1 + number2;
-  }
 
   sumTotalPrice() {
     for (int i = 0; i < foodlist.length; i++) {
@@ -32,10 +29,22 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
       totalprice = foodlist[i].total;
       dTotalall = totalprice + dTotalall;
     }
+
     setState(() {});
   }
 
- nextScreenCart(BuildContext context) {
+  format() {
+    number = formatNumber(
+      dTotalall.toInt(),
+    );
+  }
+
+  String formatNumber(int number) {
+    final formatter = NumberFormat('#,###.00');
+    return formatter.format(number);
+  }
+
+  nextScreenCart(BuildContext context) {
     List<Food> listfoodselect = getfoodselect();
     if (listfoodselect.length == 0) {
       showDialog(
@@ -98,6 +107,7 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
 
   @override
   Widget build(BuildContext context) {
+    format();
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(
@@ -130,7 +140,7 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
                         ),
                       ),
                     IconButton(
-                        onPressed: () => nextScreenCart( context),
+                        onPressed: () => nextScreenCart(context),
                         icon: const Icon(Icons.shopping_cart)),
                   ],
                 )
@@ -139,27 +149,30 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
             body: Column(
               children: [
                 Container(
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-                    color: Colors.grey.shade500,
-                    padding: const EdgeInsets.all(10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text('เมนูทั้งหมด ',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white,
-                            )),
-                        Text('ราคารวม : ${dTotalall.toStringAsFixed(0)} ',
-                            style: const TextStyle(
-                              fontSize: 23,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white,
-                            )),
-                      ],
-                    )),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                  color: Colors.grey.shade500,
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'เมนูทั้งหมด ',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Text('ราคารวม : ${number} ',
+                          style: const TextStyle(
+                            fontSize: 23,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                          )),
+                    ],
+                  ),
+                ),
                 SingleChildScrollView(
                   child: Container(
                     height: 580,
@@ -310,8 +323,6 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
                                                                   foodlist[
                                                                           index]
                                                                       .price;
-
-                                                              
 
                                                               // totalprice =
                                                               //     dTotalall;

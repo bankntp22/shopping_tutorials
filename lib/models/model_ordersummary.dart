@@ -1,8 +1,5 @@
-
 class OrderSummary {
-   String sPayment = "";
-   String sTotal =  "";
-   String sCode = "";
+  String sPayment = "";
+  String dTotal = '';
+  String sCode = "";
 }
-
-

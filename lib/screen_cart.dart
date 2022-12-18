@@ -182,14 +182,15 @@ class _ScreenCartState extends State<ScreenCart> {
                     height: 300,
                     decoration: BoxDecoration(
                       border: Border(
-                          top: BorderSide(
-                        width: 2,
-                        color: Colors.grey.shade400,
+                        top: BorderSide(
+                          width: 2,
+                          color: Colors.grey.shade400,
+                        ),
+                        bottom: BorderSide(
+                          width: 2,
+                          color: Colors.grey.shade400,
+                        ),
                       ),
-                      bottom: BorderSide(
-                        width: 2,
-                        color: Colors.grey.shade400,
-                      ),),
                     ),
                     child: widget.foodlistone.isNotEmpty
                         ? ListView.builder(
@@ -324,9 +325,6 @@ class _ScreenCartState extends State<ScreenCart> {
                                                 },
                                               ));
                                               saveTransaction();
-                                              setState(() {
-                                                
-                                              });
                                             },
                                             child: const Text('OK')),
                                         const SizedBox(
@@ -455,10 +453,7 @@ class _ScreenCartState extends State<ScreenCart> {
                               ),
                               onPressed: () {
                                 Navigator.pop(context);
-                                setState(() {
-                                  
-                                });
-
+                                setState(() {});
                               },
                               child: const Text('OK')),
                           const SizedBox(

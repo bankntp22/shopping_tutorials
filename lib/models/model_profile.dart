@@ -1,23 +1,18 @@
-
-
 class ModelProfile {
-  String? sID;
-  String? sFirstName;
-  String? sLastName;
-  String? sNumberPhone;
-  String? sImages;
-  String? sNumberHouse; //บ้านเลขที่
-  String? sVillage; //หมู่บ้าน
-  String? sVillageNo; //หมู่ที่
-  String? sLane; //ซอย
-  String? sRoad; //ถนน
-  String? sSubdistrict; //ตำบล
-  String? sDistrict; //อำเภอ
-  String? sProvince; //จังหวัด
-  String? sPostalCode; //เลขไปรษณีย์
+  String sID = 'id'; //ไอดี //textnotnull
+  String sNickName = 'nickname'; //ไอดี //textnotnull
+  String sFirstName = 'firstname'; //ชื่อจริง //textnotnull
+  String sLastName = 'lastname'; //นามสกุล //textnotnull
+  String sNumberPhone = 'numberphone'; //เบอร์โทรสัพท์ //textnotnull
+  String sImages = 'image'; //รูปภาพ
+  String sNumberHouse = 'numberhouse'; //บ้านเลขที่
+  String sVillage = 'village'; //หมู่บ้าน
+  String sVillageNo = 'villageno'; //หมู่ที่
+  String sLane = 'lane'; //ซอย
+  String sRoad = 'road'; //ถนน
+  String sSubdistrict = 'subdistrict'; //ตำบล
+  String sDistrict = 'district'; //อำเภอ
+  String sProvince = 'province'; //จังหวัด
+  String sPostalCode = 'postalcode'; //เลขไปรษณีย์
 
-  
-  
-  
-   
 }

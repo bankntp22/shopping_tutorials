@@ -9,10 +9,6 @@ class ScreenAccount extends StatefulWidget {
   _ScreenAccountState createState() => _ScreenAccountState();
 }
 
-
-
-
-
 Column TextFormfield(String name) {
   return Column(
     children: [
@@ -36,27 +32,28 @@ Column TextFormfield(String name) {
   );
 }
 
-
-
 class _ScreenAccountState extends State<ScreenAccount> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(     
-        backgroundColor: Colors.purpleAccent.shade100,
+      child: Scaffold(
+        backgroundColor: Colors.white70,
         appBar: AppBar(
-          leading: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back)),
+          title: Text(
+            'กรอกข้อมูล',
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
           backgroundColor: Colors.transparent,
           elevation: 0,
           // actions: [
           //   IconButton(
           //     onPressed: () {},
           //     icon: Icon(Icons.save,color: Colors.black,),
-          //   ),    
+          //   ),
           // ],
         ),
-        
-        body: Textformfield()
+        body: Textformfield(),
       ),
     );
   }

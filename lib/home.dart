@@ -25,35 +25,48 @@ class _HomeState extends State<Home> {
     });
   }
 
+  Color get getContainer {
+    return Colors.blueAccent.shade400;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-      backgroundColor: Colors.white70,
-      // appBar: AppBar(
-      //   title: Text('หมวดหมู่อาหาร'),
-      //   elevation: 1,
-      //   centerTitle: true,
-      //   leading: Icon(Icons.person),
-      //   backgroundColor: Colors.transparent,
-      //   actions: [
-      //     IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart))
-      //   ],
-      // ),
-      body: listMenu.elementAt(_currentIndex),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.amber[800],
-        backgroundColor: Colors.white,
-        onTap: _updatedIndex,
-        currentIndex: _currentIndex,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'ORDER'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person), label: 'Profile'),
-        ],
+      child: Scaffold(
+        backgroundColor: Colors.white70,
+        // appBar: AppBar(
+        //   title: Text('หมวดหมู่อาหาร'),
+        //   elevation: 1,
+        //   centerTitle: true,
+        //   leading: Icon(Icons.person),
+        //   backgroundColor: Colors.transparent,
+        //   actions: [
+        //     IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart))
+        //   ],
+        // ),
+        body: listMenu.elementAt(_currentIndex),
+        bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: Colors.black,
+          backgroundColor: Colors.white,
+          onTap: _updatedIndex,
+          currentIndex: _currentIndex,
+          items: const [
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.home_rounded,
+                  color: Colors.blueAccent,
+                ),
+                label: 'Home'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.mark_as_unread, color: Colors.blueAccent),
+                label: 'ORDER'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.person, color: Colors.blueAccent),
+                label: 'Profile'),
+          ],
+        ),
       ),
-    ));
+    );
   }
 }
 

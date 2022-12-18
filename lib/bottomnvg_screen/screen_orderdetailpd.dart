@@ -24,9 +24,21 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
   List<ModelItem> listItem = [];
   ModelHead mModelHead = ModelHead();
 
+  bool _isRefreshing = false;
+
+  Future<void> _refresh() async {
+    setState(() {
+      _isRefreshing = true;
+    });
+
+    // Simulate a network request
+    await Future.delayed(Duration(seconds: 2));
+  }
+
   getData() {
     getDataHead();
     getDataItem();
+    setState(() {});
   }
 
   getDataHead() async {
@@ -116,29 +128,32 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
               icon: Icon(Icons.keyboard_backspace),
             ),
           ),
-          body: Container(
-            width: double.infinity,
-            margin: EdgeInsets.all(13),
-            color: Colors.black12,
-            child: Column(
-              children: [
-                Container(
-                  width: double.infinity,
-                  color: Colors.amber.shade200,
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.all(8),
-                  child: Text(
-                    'สรุปคำสั่งซื้อ ! ',
-                    style: buttonStyle,
+          body: RefreshIndicator(
+            onRefresh: _refresh,
+            child: Container(
+              width: double.infinity,
+              margin: EdgeInsets.all(13),
+              color: Colors.black12,
+              child: Column(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    color: Colors.amber.shade200,
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.all(8),
+                    child: Text(
+                      'สรุปคำสั่งซื้อ ! ',
+                      style: buttonStyle,
+                    ),
                   ),
-                ),
-                Column(
-                  children: [
-                    TypeOrder(),
-                    listviewOrder(),
-                  ],
-                )
-              ],
+                  Column(
+                    children: [
+                      TypeOrder(),
+                      listviewOrder(),
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         ),

@@ -1,4 +1,6 @@
 import 'package:app_tutorial1/bottomnvg_screen/screen_account.dart';
+import 'package:app_tutorial1/db/db_profile.dart';
+import 'package:app_tutorial1/models/model_profile.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +10,35 @@ class Textformfield extends StatefulWidget {
 }
 
 class _TextformfieldState extends State<Textformfield> {
+  SQLiteDatabaseProfile db = SQLiteDatabaseProfile();
+  ModelProfile _modelProfile = ModelProfile();
+
+  Future<int> _insertItem() async {
+    Map<String, dynamic> map = {
+      _modelProfile.sID.toString(): idController.text,
+      _modelProfile.sNickName.toString(): nickNameController.text,
+      _modelProfile.sFirstName.toString(): firstNameController.text,
+      _modelProfile.sLastName.toString(): lastNameController.text,
+      _modelProfile.sNumberPhone.toString(): numberPhoneController.text,
+      _modelProfile.sImages.toString(): imagesController.text,
+      _modelProfile.sNumberHouse.toString(): numberHouseController.text,
+      _modelProfile.sVillage.toString(): villageController.text,
+      _modelProfile.sVillageNo.toString(): villageNoController.text,
+      _modelProfile.sLane.toString(): laneController.text,
+      _modelProfile.sRoad.toString(): roadController.text,
+      _modelProfile.sSubdistrict.toString(): subDistrictController.text,
+      _modelProfile.sDistrict.toString(): districtController.text,
+      _modelProfile.sProvince.toString(): provincetController.text,
+      _modelProfile.sPostalCode.toString(): postalCodeController.text,
+    };
+
+    return await db.insertItem(map);
+  }
+
+  _save() async {
+    await _insertItem();
+  }
+
   var sizedBox5 = SizedBox(
     height: 10,
   );
@@ -19,9 +50,9 @@ class _TextformfieldState extends State<Textformfield> {
     if (!formKey.currentState!.validate()) {
       formKey.currentState!.save();
     }
-    if(!formKeytest.currentState!.validate()){
+    if (!formKeytest.currentState!.validate()) {}
 
-    }
+    _save();
   }
 
   TextEditingController idController = TextEditingController();
@@ -40,7 +71,8 @@ class _TextformfieldState extends State<Textformfield> {
   TextEditingController provincetController = TextEditingController();
   TextEditingController postalCodeController = TextEditingController();
 
-  Row TextFormfieldd(String name, TextEditingController controller) {
+  Row TextFormfieldd(
+      String name, TextEditingController controller, String modelProfile) {
     return Row(
       children: [
         Expanded(
@@ -65,6 +97,9 @@ class _TextformfieldState extends State<Textformfield> {
                   }
                   return null;
                 },
+                onSaved: (newValue) {
+                  modelProfile = newValue.toString();
+                },
                 decoration: InputDecoration(
                   isDense: true,
                   border: OutlineInputBorder(
@@ -79,7 +114,7 @@ class _TextformfieldState extends State<Textformfield> {
     );
   }
 
-  Row ImageTextFormfield() {
+  Row ImageTextFormfield(String sGetProfile) {
     return Row(
       children: [
         Expanded(
@@ -108,7 +143,9 @@ class _TextformfieldState extends State<Textformfield> {
                   },
                 );
               },
-              onSaved: (newValue) {},
+              onSaved: (newValue) {
+                sGetProfile = newValue.toString();
+              },
             ),
           ),
         ),
@@ -120,7 +157,6 @@ class _TextformfieldState extends State<Textformfield> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        margin: EdgeInsets.only(top: 15),
         width: double.infinity,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -142,15 +178,16 @@ class _TextformfieldState extends State<Textformfield> {
                     ),
                   ),
                   TextButton.icon(
-                      onPressed: submit,
-                      icon: Icon(
-                        Icons.save,
-                        color: Colors.black,
-                      ),
-                      label: Text(
-                        'บันทึก',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ))
+                    onPressed: submit,
+                    icon: Icon(
+                      Icons.save,
+                      color: Colors.black,
+                    ),
+                    label: Text(
+                      'บันทึก',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  )
                 ],
               ),
               sizedBox5,
@@ -200,7 +237,7 @@ class _TextformfieldState extends State<Textformfield> {
               SizedBox(
                 height: 15,
               ),
-              ImageTextFormfield(),
+              ImageTextFormfield(idController.text),
               SizedBox(
                 height: 10,
               ),
@@ -208,15 +245,35 @@ class _TextformfieldState extends State<Textformfield> {
                 key: formKeytest,
                 child: Column(
                   children: [
-                    TextFormfieldd('ID ผู้ใช้งาน', idController),
+                    TextFormfieldd(
+                      'ID ผู้ใช้งาน',
+                      idController,
+                      idController.text,
+                    ),
                     sizedBox5,
-                    TextFormfieldd('ชื่อเล่น', nickNameController),
+                    TextFormfieldd(
+                      'ชื่อเล่น',
+                      nickNameController,
+                      nickNameController.text,
+                    ),
                     sizedBox5,
-                    TextFormfieldd('ชื่อจริง', firstNameController),
+                    TextFormfieldd(
+                      'ชื่อจริง',
+                      firstNameController,
+                      firstNameController.text,
+                    ),
                     sizedBox5,
-                    TextFormfieldd('นามสกุล', lastNameController),
+                    TextFormfieldd(
+                      'นามสกุล',
+                      lastNameController,
+                      lastNameController.text,
+                    ),
                     sizedBox5,
-                    TextFormfieldd('เบอร์โทรสัพท์', numberPhoneController),
+                    TextFormfieldd(
+                      'เบอร์โทรสัพท์',
+                      numberPhoneController,
+                      numberPhoneController.text,
+                    ),
                     sizedBox5,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -231,23 +288,59 @@ class _TextformfieldState extends State<Textformfield> {
                       ],
                     ),
                     sizedBox5,
-                    TextFormfieldd('บ้านเลขที่', numberHouseController),
+                    TextFormfieldd(
+                      'บ้านเลขที่',
+                      numberHouseController,
+                      numberHouseController.text,
+                    ),
                     sizedBox5,
-                    TextFormfieldd('หมู่บ้าน', villageController),
+                    TextFormfieldd(
+                      'หมู่บ้าน',
+                      villageController,
+                      villageController.text,
+                    ),
                     sizedBox5,
-                    TextFormfieldd('หมู่ที่', villageNoController),
+                    TextFormfieldd(
+                      'หมู่ที่',
+                      villageNoController,
+                      villageNoController.text,
+                    ),
                     sizedBox5,
-                    TextFormfieldd('ซอย', laneController),
+                    TextFormfieldd(
+                      'ซอย',
+                      laneController,
+                      laneController.text,
+                    ),
                     sizedBox5,
-                    TextFormfieldd('ถนน', roadController),
+                    TextFormfieldd(
+                      'ถนน',
+                      roadController,
+                      roadController.text,
+                    ),
                     sizedBox5,
-                    TextFormfieldd('ตำบล', subDistrictController),
+                    TextFormfieldd(
+                      'ตำบล',
+                      subDistrictController,
+                      subDistrictController.text,
+                    ),
                     sizedBox5,
-                    TextFormfieldd('อำเภอ', districtController),
+                    TextFormfieldd(
+                      'อำเภอ',
+                      districtController,
+                      districtController.text,
+                    ),
                     sizedBox5,
-                    TextFormfieldd('จังหวัด', provincetController),
+                    TextFormfieldd(
+                      'จังหวัด',
+                      provincetController,
+                      provincetController.text,
+                    ),
                     sizedBox5,
-                    TextFormfieldd('เลขไปรษณีย์', postalCodeController),
+                    TextFormfieldd(
+                      'เลขไปรษณีย์',
+                      postalCodeController,
+                      postalCodeController.text,
+                    ),
                   ],
                 ),
               ),
