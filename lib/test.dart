@@ -1,89 +1,62 @@
 import 'package:flutter/material.dart';
 
 class Test extends StatefulWidget {
-  const Test({Key? key}) : super(key: key);
-
   @override
   _TestState createState() => _TestState();
 }
 
 class _TestState extends State<Test> {
-  TextEditingController testForm = TextEditingController();
-  TextEditingController testone = TextEditingController();
+  Map<String, int> playerScore = {
+    'Kane': 0,
+    'Kulusevski': 0,
+    'Son': 0,
+  };
 
-  final formKey = GlobalKey<FormState>();
-
-  submit() {
-    formKey.currentState?.validate();
+  addScore(String player, int score) {
+    setState(() {
+      playerScore.update(player, (value) => value + score);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SafeArea(
-        child: Scaffold(
-          backgroundColor: Colors.amber.shade500,
-          body: Container(
-            margin: EdgeInsets.all(25),
-            child: Center(
-              child: Card(
-                child: Container(
-                  padding: EdgeInsets.all(15),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Form(
-                        key: formKey,
-                        child: Column(
-                          children: [
-                            TextFormField(
-                              controller: testone,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'eioeiena';
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                prefixIcon: Icon(Icons.person),
-                                hintText: 'ชื่อ',
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            TextFormField(
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'eioeiena';
-                                }
-                                return null;
-                              },
-                              controller: testForm,
-                              decoration: InputDecoration(
-                                  prefixIcon: Icon(Icons.lock),
-                                  hintText: 'Password'),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: submit,
-                          child: Text('Submit'),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+      home: Scaffold(
+          appBar: AppBar(
+            title: Text('Score Example'),
           ),
-        ),
-      ),
+          body: Container(
+            margin: EdgeInsets.all(8),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Player 1 : ${playerScore['Kane']}'),
+                    Text('Player 1 : ${playerScore['Kulusevski']}'),
+                    Text('Player 1 : ${playerScore['Son']}'),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () => addScore('Kane', 10),
+                      child: Text('Add Score'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () => addScore('Kulusevski', 21),
+                      child: Text('Add Score'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () => addScore('Son', 7),
+                      child: Text('Add Score'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          )),
     );
   }
 }
