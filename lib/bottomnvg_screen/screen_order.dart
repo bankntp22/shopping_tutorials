@@ -16,7 +16,6 @@ class ScreenOrder extends StatefulWidget {
 class _ScreenOrderState extends State<ScreenOrder> {
   SqlLiteManager db = SqlLiteManager();
   List<OrderSummary> list = [];
-
   String? sPayment, sTotal;
 
   _getListSummaryOrder() async {
@@ -42,7 +41,6 @@ class _ScreenOrderState extends State<ScreenOrder> {
   @override
   void initState() {
     _getListSummaryOrder();
-
     super.initState();
   }
 
@@ -55,11 +53,14 @@ class _ScreenOrderState extends State<ScreenOrder> {
             elevation: 0,
             leading: IconButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (context) {
-                    return Home();
-                  },
-                ));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return Home();
+                    },
+                  ),
+                );
               },
               icon: Icon(
                 Icons.arrow_back,
@@ -67,11 +68,11 @@ class _ScreenOrderState extends State<ScreenOrder> {
               ),
             ),
           ),
-          backgroundColor: Color.fromARGB(255, 201, 231, 236),
+          backgroundColor: Color.fromARGB(255, 221, 248, 220),
           body: Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Color.fromARGB(171, 96, 110, 119),
+              color: Color.fromARGB(171, 169, 182, 190),
               borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(30),
                 topLeft: Radius.circular(30),
@@ -90,7 +91,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
                         style: TextStyle(
                           fontSize: 23,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                       ),
                       const Divider(
@@ -110,7 +111,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
                               sPayment = 'วิธีการชำระเงิน',
                               style: TextStyle(
                                 fontSize: 19,
-                                color: Colors.white,
+                                color: Colors.grey.shade700,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -118,7 +119,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
                               sTotal = 'จำนวนเงิน',
                               style: TextStyle(
                                 fontSize: 19,
-                                color: Colors.white,
+                                color: Colors.grey.shade700,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -141,18 +142,12 @@ class _ScreenOrderState extends State<ScreenOrder> {
                               ),
                             ),
                             child: ListView.builder(
+                              reverse: true,
                               shrinkWrap: true,
                               itemCount: list.length,
                               itemBuilder: (context, index) {
-                                String sConvert = list[index].dTotal;
-                                double pi = double.parse(sConvert);
-
-                                var formatNumber = NumberFormat('#,###,##0.00');
-                                void format() {
-                                  var formatted = formatNumber.format(pi);
-                                  print(formatted);
-                                }
-
+                                // String sConvert = list[index].dTotal;
+                                double pi = double.parse(list[index].dTotal);
                                 return GestureDetector(
                                   onTap: () {
                                     Navigator.push(context, MaterialPageRoute(
@@ -167,7 +162,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
                                     height: 70,
                                     child: Card(
                                       elevation: 0,
-                                      color: Color.fromARGB(255, 176, 243, 243),
+                                      color: Color.fromARGB(255, 202, 247, 247),
                                       margin: EdgeInsets.only(bottom: 4),
                                       child: Container(
                                         padding: EdgeInsets.symmetric(

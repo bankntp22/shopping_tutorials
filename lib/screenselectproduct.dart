@@ -20,8 +20,8 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
   double dTotalScreen = 0;
   int qtySum = 0;
   String number = '';
-
   int i = 0;
+  String eieina = '';
 
   sumTotalPrice() {
     for (int i = 0; i < foodlist.length; i++) {
@@ -33,16 +33,22 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
     setState(() {});
   }
 
-  format() {
-    number = formatNumber(
-      dTotalall.toInt(),
-    );
-  }
-
   String formatNumber(int number) {
-    final formatter = NumberFormat('#,###.00');
+    var formatter = NumberFormat('#,###.##');
+    if(number < 0){
+      formatter = NumberFormat('#,###.##');
+    }else if (number > 0){
+      formatter = NumberFormat('#,###.00');
+    }
     return formatter.format(number);
   }
+
+  // format() {
+  //   number = formatNumber(
+  //     dTotalall.toInt(),
+  //   );
+  // eieina = number;
+  // }
 
   nextScreenCart(BuildContext context) {
     List<Food> listfoodselect = getfoodselect();
@@ -107,7 +113,6 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
 
   @override
   Widget build(BuildContext context) {
-    format();
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(
@@ -164,7 +169,7 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
                           color: Colors.white,
                         ),
                       ),
-                      Text('ราคารวม : ${number} ',
+                      Text('ราคารวม : ${formatNumber(dTotalall.toInt())} ',
                           style: const TextStyle(
                             fontSize: 23,
                             fontWeight: FontWeight.w500,

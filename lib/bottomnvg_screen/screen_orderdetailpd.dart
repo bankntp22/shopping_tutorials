@@ -72,7 +72,7 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
     listgetItem.forEach(
       (row) {
         String sGetNameProduct = row[Constant.nameProduct];
-        String sGetTotalProduct = row[Constant.priceProduct];
+        String sGetTotalProduct = row[Constant.totalPriceProduct];
         String sGetQty = row[Constant.qtyProduct];
 
         ModelItem sGetModelItem = ModelItem();
@@ -168,6 +168,7 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
       child: ListView.builder(
         itemCount: listItem.length,
         itemBuilder: (context, index) {
+          double dTotalprice = double.parse(listItem[index].sTotalPriceProduct.toString());
           return Column(
             children: [
               Row(
@@ -197,7 +198,7 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          listItem[index].sTotalPriceProduct.toString(),
+                          '${dTotalprice.toStringAsFixed(0)}',
                           style: Theme.of(context).textTheme.headline6,
                         ),
                       ],
