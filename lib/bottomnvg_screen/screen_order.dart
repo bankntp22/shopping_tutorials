@@ -32,6 +32,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
         orderSummarymodel.sPayment = sGetPayment;
         orderSummarymodel.dTotal = sGetTotalPrice;
         orderSummarymodel.sCode = sGetCode;
+
         list.add(orderSummarymodel);
       },
     );
@@ -142,7 +143,6 @@ class _ScreenOrderState extends State<ScreenOrder> {
                               ),
                             ),
                             child: ListView.builder(
-                              reverse: true,
                               shrinkWrap: true,
                               itemCount: list.length,
                               itemBuilder: (context, index) {
