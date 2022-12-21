@@ -20,7 +20,7 @@ class _TextformfieldState extends State<Textformfield> {
       _modelProfile.sFirstName.toString(): firstNameController.text,
       _modelProfile.sLastName.toString(): lastNameController.text,
       _modelProfile.sNumberPhone.toString(): numberPhoneController.text,
-      _modelProfile.sImages.toString(): imagesController.text,
+      // _modelProfile.sImages.toString(): imagesController.text,
       _modelProfile.sNumberHouse.toString(): numberHouseController.text,
       _modelProfile.sVillage.toString(): villageController.text,
       _modelProfile.sVillageNo.toString(): villageNoController.text,
@@ -33,6 +33,13 @@ class _TextformfieldState extends State<Textformfield> {
     };
 
     return await db.insertItem(map);
+  }
+
+  getitem() async {
+    List<Map<dynamic, dynamic>> list = await db.getData();
+    list.forEach((element) {
+      print(element);
+    });
   }
 
   _save() async {
@@ -128,29 +135,35 @@ class _TextformfieldState extends State<Textformfield> {
           child: Form(
             key: formKey,
             child: TextFormField(
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'กรุณาใส่ ลิงค์ Url';
-                }
-                return null;
-              },
+              // validator: (value) {
+              //   if (value!.isEmpty) {
+              //     return 'กรุณาใส่ ลิงค์ Url';
+              //   }
+              //   return null;
+              // },
               controller: imagesController,
               decoration: InputDecoration(hintText: 'ใส่ Url รูปภาพ'),
               onChanged: (value) {
                 setState(
                   () {
-                    value = imagesController.text;
+                    // value = imagesController.text;
                   },
                 );
               },
-              onSaved: (newValue) {
-                sGetProfile = newValue.toString();
-              },
+              // onSaved: (newValue) {
+              //   sGetProfile = newValue.toString();
+              // },
             ),
           ),
         ),
       ],
     );
+  }
+
+  @override
+  void initState() {
+    getitem();
+    super.initState();
   }
 
   @override
