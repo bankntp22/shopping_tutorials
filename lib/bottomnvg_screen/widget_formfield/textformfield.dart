@@ -13,6 +13,8 @@ class _TextformfieldState extends State<Textformfield> {
   SQLiteDatabaseProfile db = SQLiteDatabaseProfile();
   ModelProfile _modelProfile = ModelProfile();
 
+  
+
   Future<int> _insertItem() async {
     Map<String, dynamic> map = {
       _modelProfile.sID.toString(): idController.text,
@@ -31,15 +33,63 @@ class _TextformfieldState extends State<Textformfield> {
       _modelProfile.sProvince.toString(): provincetController.text,
       _modelProfile.sPostalCode.toString(): postalCodeController.text,
     };
-
     return await db.insertItem(map);
   }
+  
+  String sGetid = '';
+  String sGetFirstName = '';
+  String sGetLastName = '';
+  String sGetNickName = '';
+  String sGetNumberPhone = '';
+  String sGetNumberHouse = '';
+  String sGetVillage = '';
+  String sGetVillageNo = '';
+  String sGetLane = '';
+  String sGetRoad = '';
+  String sGetSubdistrict = '';
+  String sGetDistrict = '';
+  String sGetProvince = ''; 
+  String sGetPostalCode = '';
 
   getitem() async {
+    
     List<Map<dynamic, dynamic>> list = await db.getData();
-    list.forEach((element) {
-      print(element);
+    setState(() {
+      list.forEach((row) {
+        
+      sGetid = row[_modelProfile.sID];
+      sGetFirstName = row[_modelProfile.sFirstName];
+      sGetLastName = row[_modelProfile.sLastName];
+      sGetNickName = row[_modelProfile.sNickName];
+      sGetNumberPhone = row[_modelProfile.sNumberPhone];
+      sGetNumberHouse = row[_modelProfile.sNumberHouse];
+      sGetVillage = row[_modelProfile.sVillage];
+      sGetVillageNo = row[_modelProfile.sVillageNo];
+      sGetLane = row[_modelProfile.sLane];
+      sGetRoad = row[_modelProfile.sRoad];
+      sGetSubdistrict = row[_modelProfile.sSubdistrict];
+      sGetDistrict = row[_modelProfile.sDistrict];
+      sGetProvince = row[_modelProfile.sProvince];
+      sGetPostalCode = row[_modelProfile.sPostalCode];
+    // idController = TextEditingController(text: sGetid);
+    nickNameController = TextEditingController(text: sGetNickName);
+    firstNameController = TextEditingController(text: sGetFirstName);
+    lastNameController = TextEditingController(text: sGetLastName);
+    numberPhoneController = TextEditingController(text: sGetNumberPhone);
+    numberHouseController = TextEditingController(text: sGetNumberHouse);
+    villageController = TextEditingController(text: sGetVillage);
+    villageNoController = TextEditingController(text: sGetVillageNo);
+    laneController = TextEditingController(text: sGetLane);
+    roadController = TextEditingController(text: sGetRoad);
+    subDistrictController = TextEditingController(text: sGetSubdistrict);
+    districtController = TextEditingController(text: sGetDistrict);
+    provincetController = TextEditingController(text: sGetProvince);
+    postalCodeController = TextEditingController(text: sGetPostalCode);
+    
+    // print(idController.text);
     });
+    });
+    
   }
 
   _save() async {
@@ -62,21 +112,38 @@ class _TextformfieldState extends State<Textformfield> {
     _save();
   }
 
-  TextEditingController idController = TextEditingController();
-  TextEditingController nickNameController = TextEditingController();
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
-  TextEditingController numberPhoneController = TextEditingController();
+  TextEditingController idController = TextEditingController(text: 'default');
+  TextEditingController nickNameController =
+      TextEditingController(text: 'Default');
+  TextEditingController firstNameController =
+      TextEditingController(text: 'Default');
+  TextEditingController lastNameController =
+      TextEditingController(text: 'Default');
+  TextEditingController numberPhoneController =
+      TextEditingController(text: 'Default');
   TextEditingController imagesController = TextEditingController();
-  TextEditingController numberHouseController = TextEditingController();
-  TextEditingController villageController = TextEditingController();
-  TextEditingController villageNoController = TextEditingController();
-  TextEditingController laneController = TextEditingController();
-  TextEditingController roadController = TextEditingController();
-  TextEditingController subDistrictController = TextEditingController();
-  TextEditingController districtController = TextEditingController();
-  TextEditingController provincetController = TextEditingController();
-  TextEditingController postalCodeController = TextEditingController();
+  TextEditingController numberHouseController =
+      TextEditingController(text: 'Default');
+  TextEditingController villageController =
+      TextEditingController(text: 'Default');
+  TextEditingController villageNoController =
+      TextEditingController(text: 'Default');
+  TextEditingController laneController = TextEditingController(text: 'Default');
+  TextEditingController roadController = TextEditingController(text: 'Default');
+  TextEditingController subDistrictController =
+      TextEditingController(text: 'Default');
+  TextEditingController districtController =
+      TextEditingController(text: 'Default');
+  TextEditingController provincetController =
+      TextEditingController(text: 'Default');
+  TextEditingController postalCodeController =
+      TextEditingController(text: 'Default');
+
+
+  //     void controller (){
+  //   String sGetid = _modelProfile.sFirstName;
+  //    idController  = TextEditingController(text: sGetid);
+  // }
 
   Row TextFormfieldd(
       String name, TextEditingController controller, String modelProfile) {
@@ -163,11 +230,13 @@ class _TextformfieldState extends State<Textformfield> {
   @override
   void initState() {
     getitem();
+    // controller ();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    print(sGetFirstName);
     return SingleChildScrollView(
       child: Container(
         width: double.infinity,
