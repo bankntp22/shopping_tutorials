@@ -54,9 +54,11 @@ class _TextformfieldState extends State<Textformfield> {
   getitem() async {
     
     List<Map<dynamic, dynamic>> list = await db.getData();
+    
+
     setState(() {
       list.forEach((row) {
-        
+      print(row);
       sGetid = row[_modelProfile.sID];
       sGetFirstName = row[_modelProfile.sFirstName];
       sGetLastName = row[_modelProfile.sLastName];
@@ -71,7 +73,7 @@ class _TextformfieldState extends State<Textformfield> {
       sGetDistrict = row[_modelProfile.sDistrict];
       sGetProvince = row[_modelProfile.sProvince];
       sGetPostalCode = row[_modelProfile.sPostalCode];
-    // idController = TextEditingController(text: sGetid);
+    idController = TextEditingController(text: sGetid);
     nickNameController = TextEditingController(text: sGetNickName);
     firstNameController = TextEditingController(text: sGetFirstName);
     lastNameController = TextEditingController(text: sGetLastName);
@@ -112,32 +114,32 @@ class _TextformfieldState extends State<Textformfield> {
     _save();
   }
 
-  TextEditingController idController = TextEditingController(text: 'default');
+  TextEditingController idController = TextEditingController();
   TextEditingController nickNameController =
-      TextEditingController(text: 'Default');
+      TextEditingController();
   TextEditingController firstNameController =
-      TextEditingController(text: 'Default');
+      TextEditingController();
   TextEditingController lastNameController =
-      TextEditingController(text: 'Default');
+      TextEditingController();
   TextEditingController numberPhoneController =
-      TextEditingController(text: 'Default');
+      TextEditingController();
   TextEditingController imagesController = TextEditingController();
   TextEditingController numberHouseController =
-      TextEditingController(text: 'Default');
+      TextEditingController();
   TextEditingController villageController =
-      TextEditingController(text: 'Default');
+      TextEditingController();
   TextEditingController villageNoController =
-      TextEditingController(text: 'Default');
-  TextEditingController laneController = TextEditingController(text: 'Default');
-  TextEditingController roadController = TextEditingController(text: 'Default');
+      TextEditingController();
+  TextEditingController laneController = TextEditingController();
+  TextEditingController roadController = TextEditingController();
   TextEditingController subDistrictController =
-      TextEditingController(text: 'Default');
+      TextEditingController();
   TextEditingController districtController =
-      TextEditingController(text: 'Default');
+      TextEditingController();
   TextEditingController provincetController =
-      TextEditingController(text: 'Default');
+      TextEditingController();
   TextEditingController postalCodeController =
-      TextEditingController(text: 'Default');
+      TextEditingController();
 
 
   //     void controller (){
@@ -165,6 +167,7 @@ class _TextformfieldState extends State<Textformfield> {
               ),
               child: TextFormField(
                 controller: controller,
+                keyboardType: TextInputType.text,
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'กรุณาใส่ ลิงค์ Url';

@@ -16,14 +16,18 @@ class ScreenOrder extends StatefulWidget {
 class _ScreenOrderState extends State<ScreenOrder> {
   SqlLiteManager db = SqlLiteManager();
   List<OrderSummary> list = [];
+
+  
+
   String? sPayment, sTotal;
+
 
   _getListSummaryOrder() async {
     List<Map<dynamic, dynamic>> listMap = await db.getData();
 
     listMap.forEach(
       (row) {
-        print(row);
+        
         String sGetPayment = row[Constant.payMent];
         String sGetTotalPrice = row[Constant.totalPrice];
         String sGetCode = row[Constant.code];
@@ -39,12 +43,23 @@ class _ScreenOrderState extends State<ScreenOrder> {
     setState(() {});
   }
 
+  String formatNumber(double number) {  
+    var formatter = NumberFormat('#,###.##');
+    if (number < 0) {
+      formatter = NumberFormat('#,###.##');
+    } else if (number > 0) {
+      formatter = NumberFormat('#,###.00');
+    }
+    return formatter.format(number);
+  }
+
   @override
   void initState() {
     _getListSummaryOrder();
+    // listSwap();
     super.initState();
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -69,14 +84,14 @@ class _ScreenOrderState extends State<ScreenOrder> {
               ),
             ),
           ),
-          backgroundColor: Color.fromARGB(255, 221, 248, 220),
+          backgroundColor: Colors.lightBlue,
           body: Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Color.fromARGB(171, 169, 182, 190),
+              color: Colors.white,
               borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(30),
-                topLeft: Radius.circular(30),
+                topRight: Radius.circular(25),
+                topLeft: Radius.circular(25),
               ),
             ),
             margin: const EdgeInsets.only(top: 15),
@@ -148,21 +163,28 @@ class _ScreenOrderState extends State<ScreenOrder> {
                               itemBuilder: (context, index) {
                                 // String sConvert = list[index].dTotal;
                                 double pi = double.parse(list[index].dTotal);
+
+                                double axs =
+                                    double.parse(pi.toStringAsFixed(0));
+
                                 return GestureDetector(
                                   onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(
-                                      builder: (context) {
-                                        return ScreenOrderDetailpd(
-                                          sCode: list[index].sCode,
-                                        );
-                                      },
-                                    ));
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) {
+                                          return ScreenOrderDetailpd(
+                                            sCode: list[index].sCode,
+                                          );
+                                        },
+                                      ),
+                                    );
                                   },
                                   child: Container(
                                     height: 70,
                                     child: Card(
                                       elevation: 0,
-                                      color: Color.fromARGB(255, 202, 247, 247),
+                                      color: Color.fromARGB(255, 201, 235, 235),
                                       margin: EdgeInsets.only(bottom: 4),
                                       child: Container(
                                         padding: EdgeInsets.symmetric(
@@ -182,10 +204,11 @@ class _ScreenOrderState extends State<ScreenOrder> {
                                               ),
                                             ),
                                             Text(
-                                              "${pi.toStringAsFixed(0)}  บาท",
+                                              "${formatNumber(axs)}  บาท",
                                               style: TextStyle(
-                                                  fontSize: 17,
-                                                  fontWeight: FontWeight.w800),
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.w800,
+                                              ),
                                             ),
                                           ],
                                         ),
