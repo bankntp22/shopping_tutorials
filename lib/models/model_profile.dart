@@ -14,5 +14,6 @@ class ModelProfile {
   String sDistrict = 'district'; //อำเภอ
   String sProvince = 'province'; //จังหวัด
   String sPostalCode = 'postalcode'; //เลขไปรษณีย์
+  String sOrderStatus = 'postalcode'; //เลขไปรษณีย์
 
 }

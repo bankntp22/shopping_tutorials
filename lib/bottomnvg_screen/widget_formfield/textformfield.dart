@@ -13,8 +13,6 @@ class _TextformfieldState extends State<Textformfield> {
   SQLiteDatabaseProfile db = SQLiteDatabaseProfile();
   ModelProfile _modelProfile = ModelProfile();
 
-  
-
   Future<int> _insertItem() async {
     Map<String, dynamic> map = {
       _modelProfile.sID.toString(): idController.text,
@@ -35,7 +33,7 @@ class _TextformfieldState extends State<Textformfield> {
     };
     return await db.insertItem(map);
   }
-  
+
   String sGetid = '';
   String sGetFirstName = '';
   String sGetLastName = '';
@@ -48,50 +46,47 @@ class _TextformfieldState extends State<Textformfield> {
   String sGetRoad = '';
   String sGetSubdistrict = '';
   String sGetDistrict = '';
-  String sGetProvince = ''; 
+  String sGetProvince = '';
   String sGetPostalCode = '';
 
   getitem() async {
-    
     List<Map<dynamic, dynamic>> list = await db.getData();
-    
 
     setState(() {
       list.forEach((row) {
-      print(row);
-      sGetid = row[_modelProfile.sID];
-      sGetFirstName = row[_modelProfile.sFirstName];
-      sGetLastName = row[_modelProfile.sLastName];
-      sGetNickName = row[_modelProfile.sNickName];
-      sGetNumberPhone = row[_modelProfile.sNumberPhone];
-      sGetNumberHouse = row[_modelProfile.sNumberHouse];
-      sGetVillage = row[_modelProfile.sVillage];
-      sGetVillageNo = row[_modelProfile.sVillageNo];
-      sGetLane = row[_modelProfile.sLane];
-      sGetRoad = row[_modelProfile.sRoad];
-      sGetSubdistrict = row[_modelProfile.sSubdistrict];
-      sGetDistrict = row[_modelProfile.sDistrict];
-      sGetProvince = row[_modelProfile.sProvince];
-      sGetPostalCode = row[_modelProfile.sPostalCode];
-    idController = TextEditingController(text: sGetid);
-    nickNameController = TextEditingController(text: sGetNickName);
-    firstNameController = TextEditingController(text: sGetFirstName);
-    lastNameController = TextEditingController(text: sGetLastName);
-    numberPhoneController = TextEditingController(text: sGetNumberPhone);
-    numberHouseController = TextEditingController(text: sGetNumberHouse);
-    villageController = TextEditingController(text: sGetVillage);
-    villageNoController = TextEditingController(text: sGetVillageNo);
-    laneController = TextEditingController(text: sGetLane);
-    roadController = TextEditingController(text: sGetRoad);
-    subDistrictController = TextEditingController(text: sGetSubdistrict);
-    districtController = TextEditingController(text: sGetDistrict);
-    provincetController = TextEditingController(text: sGetProvince);
-    postalCodeController = TextEditingController(text: sGetPostalCode);
-    
-    // print(idController.text);
+        print(row);
+        sGetid = row[_modelProfile.sID];
+        sGetFirstName = row[_modelProfile.sFirstName];
+        sGetLastName = row[_modelProfile.sLastName];
+        sGetNickName = row[_modelProfile.sNickName];
+        sGetNumberPhone = row[_modelProfile.sNumberPhone];
+        sGetNumberHouse = row[_modelProfile.sNumberHouse];
+        sGetVillage = row[_modelProfile.sVillage];
+        sGetVillageNo = row[_modelProfile.sVillageNo];
+        sGetLane = row[_modelProfile.sLane];
+        sGetRoad = row[_modelProfile.sRoad];
+        sGetSubdistrict = row[_modelProfile.sSubdistrict];
+        sGetDistrict = row[_modelProfile.sDistrict];
+        sGetProvince = row[_modelProfile.sProvince];
+        sGetPostalCode = row[_modelProfile.sPostalCode];
+        idController = TextEditingController(text: sGetid);
+        nickNameController = TextEditingController(text: sGetNickName);
+        firstNameController = TextEditingController(text: sGetFirstName);
+        lastNameController = TextEditingController(text: sGetLastName);
+        numberPhoneController = TextEditingController(text: sGetNumberPhone);
+        numberHouseController = TextEditingController(text: sGetNumberHouse);
+        villageController = TextEditingController(text: sGetVillage);
+        villageNoController = TextEditingController(text: sGetVillageNo);
+        laneController = TextEditingController(text: sGetLane);
+        roadController = TextEditingController(text: sGetRoad);
+        subDistrictController = TextEditingController(text: sGetSubdistrict);
+        districtController = TextEditingController(text: sGetDistrict);
+        provincetController = TextEditingController(text: sGetProvince);
+        postalCodeController = TextEditingController(text: sGetPostalCode);
+
+        // print(idController.text);
+      });
     });
-    });
-    
   }
 
   _save() async {
@@ -115,32 +110,20 @@ class _TextformfieldState extends State<Textformfield> {
   }
 
   TextEditingController idController = TextEditingController();
-  TextEditingController nickNameController =
-      TextEditingController();
-  TextEditingController firstNameController =
-      TextEditingController();
-  TextEditingController lastNameController =
-      TextEditingController();
-  TextEditingController numberPhoneController =
-      TextEditingController();
+  TextEditingController nickNameController = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController numberPhoneController = TextEditingController();
   TextEditingController imagesController = TextEditingController();
-  TextEditingController numberHouseController =
-      TextEditingController();
-  TextEditingController villageController =
-      TextEditingController();
-  TextEditingController villageNoController =
-      TextEditingController();
+  TextEditingController numberHouseController = TextEditingController();
+  TextEditingController villageController = TextEditingController();
+  TextEditingController villageNoController = TextEditingController();
   TextEditingController laneController = TextEditingController();
   TextEditingController roadController = TextEditingController();
-  TextEditingController subDistrictController =
-      TextEditingController();
-  TextEditingController districtController =
-      TextEditingController();
-  TextEditingController provincetController =
-      TextEditingController();
-  TextEditingController postalCodeController =
-      TextEditingController();
-
+  TextEditingController subDistrictController = TextEditingController();
+  TextEditingController districtController = TextEditingController();
+  TextEditingController provincetController = TextEditingController();
+  TextEditingController postalCodeController = TextEditingController();
 
   //     void controller (){
   //   String sGetid = _modelProfile.sFirstName;
@@ -235,6 +218,25 @@ class _TextformfieldState extends State<Textformfield> {
     getitem();
     // controller ();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // idController.dispose();
+    // idController.dispose();
+    // idController.dispose();
+    // idController.dispose();
+    // idController.dispose();
+    // idController.dispose();
+    // idController.dispose();
+    // idController.dispose();
+    // idController.dispose();
+    // idController.dispose();
+    // idController.dispose();
+    // idController.dispose();
+    // idController.dispose();
+    // idController.dispose();
+    super.dispose();
   }
 
   @override

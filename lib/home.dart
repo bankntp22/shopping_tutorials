@@ -10,18 +10,22 @@ import 'models/menu_list.dart';
 import 'screenselectproduct.dart';
 
 class Home extends StatefulWidget {
+  int screenIndex = 0;
+
+  Home({
+    this.screenIndex = 0,
+  });
+
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  int _currentIndex = 0;
-
   static List<Widget> listMenu = [ScreenHome(), ScreenOrder(), ScreenAccount()];
 
   void _updatedIndex(int value) {
     setState(() {
-      _currentIndex = value;
+      widget.screenIndex = value;
     });
   }
 
@@ -44,12 +48,12 @@ class _HomeState extends State<Home> {
         //     IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart))
         //   ],
         // ),
-        body: listMenu.elementAt(_currentIndex),
+        body: listMenu.elementAt(widget.screenIndex),
         bottomNavigationBar: BottomNavigationBar(
           selectedItemColor: Colors.black,
           backgroundColor: Colors.white,
-          onTap: _updatedIndex,        
-          currentIndex: _currentIndex,
+          onTap: _updatedIndex,
+          currentIndex: widget.screenIndex,
           items: const [
             BottomNavigationBarItem(
                 icon: Icon(

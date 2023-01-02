@@ -17,17 +17,13 @@ class _ScreenOrderState extends State<ScreenOrder> {
   SqlLiteManager db = SqlLiteManager();
   List<OrderSummary> list = [];
 
-  
-
   String? sPayment, sTotal;
-
 
   _getListSummaryOrder() async {
     List<Map<dynamic, dynamic>> listMap = await db.getData();
 
     listMap.forEach(
       (row) {
-        
         String sGetPayment = row[Constant.payMent];
         String sGetTotalPrice = row[Constant.totalPrice];
         String sGetCode = row[Constant.code];
@@ -40,10 +36,12 @@ class _ScreenOrderState extends State<ScreenOrder> {
         list.add(orderSummarymodel);
       },
     );
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 
-  String formatNumber(double number) {  
+  String formatNumber(double number) {
     var formatter = NumberFormat('#,###.##');
     if (number < 0) {
       formatter = NumberFormat('#,###.##');
@@ -59,7 +57,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
     // listSwap();
     super.initState();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

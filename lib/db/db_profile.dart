@@ -53,5 +53,9 @@ class SQLiteDatabaseProfile {
     final db = await database;
     return await db!.query(tableProfile);
   }
-  
+
+  Future<int> updateData(Map<String, dynamic> map) async {
+    final db = await database;
+    return await db!.update(tableProfile, map);
+  }
 }

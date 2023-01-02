@@ -1,3 +1,4 @@
+import 'package:app_tutorial1/home.dart';
 import 'package:flutter/material.dart';
 import 'bottomnvg_screen/screen_order.dart';
 import 'models/constant.dart';
@@ -318,13 +319,24 @@ class _ScreenCartState extends State<ScreenCart> {
                                                   Colors.greenAccent.shade700,
                                             ),
                                             onPressed: () {
-                                              Navigator.push(context,
-                                                  MaterialPageRoute(
-                                                builder: (context) {
-                                                  return ScreenOrder();
-                                                },
-                                              ));
                                               saveTransaction();
+
+                                              // Navigator.push(context,
+                                              //     MaterialPageRoute(
+                                              //   builder: (context) {
+                                              //     return Home(
+                                              //       screenIndex: 1,
+                                              //     );
+                                              //   },
+                                              // ));
+                                              Navigator.pushAndRemoveUntil(
+                                                  context, MaterialPageRoute(
+                                                builder: (context) {
+                                                  return Home(
+                                                    screenIndex: 1,
+                                                  );
+                                                },
+                                              ), (route) => false);
                                             },
                                             child: const Text('OK')),
                                         const SizedBox(
