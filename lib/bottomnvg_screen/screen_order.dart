@@ -19,6 +19,8 @@ class _ScreenOrderState extends State<ScreenOrder> {
 
   String? sPayment, sTotal;
 
+  var _selectedValue;
+
   _getListSummaryOrder() async {
     List<Map<dynamic, dynamic>> listMap = await db.getData();
 
@@ -49,6 +51,16 @@ class _ScreenOrderState extends State<ScreenOrder> {
       formatter = NumberFormat('#,###.00');
     }
     return formatter.format(number);
+  }
+
+  String get stringColorRed {
+    String fontRed = 'ยกเลิก';
+    Text(
+      fontRed,
+      style: TextStyle(color: Colors.red),
+    );
+
+    return fontRed;
   }
 
   @override
@@ -191,21 +203,67 @@ class _ScreenOrderState extends State<ScreenOrder> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text(
-                                              list[index]
-                                                  .sPayment
-                                                  .toString()
-                                                  .toUpperCase(),
-                                              style: TextStyle(
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.bold,
+                                            Expanded(
+                                              child: Text(
+                                                list[index]
+                                                    .sPayment
+                                                    .toString()
+                                                    .toUpperCase(),
+                                                style: TextStyle(
+                                                  fontSize: 17,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                               ),
                                             ),
-                                            Text(
-                                              "${formatNumber(axs)}  บาท",
-                                              style: TextStyle(
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.w800,
+                                            SizedBox(
+                                              width: 30,
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                "${formatNumber(axs)} ",
+                                                style: TextStyle(
+                                                  fontSize: 17,
+                                                  fontWeight: FontWeight.w800,
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Container(
+                                                width: 20,
+                                                color: Colors.amber,
+                                                child: DropdownButton<String>(                                                
+                                                  value: _selectedValue,
+                                                  icon: Icon(Icons.more_horiz),
+                                                  
+                                                  onChanged: (String? newValue) {
+                                                    setState(() {
+                                                      showDialog(
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return AlertDialog(
+                                                            content: Text(
+                                                                'คุณต้องการจะลบ ออเดอร์นี้ใช่หรือไม่'),
+                                                          );
+                                                        },
+                                                      );
+                                                    });
+                                                  },
+                                                  items: [
+                                                    stringColorRed,
+                                                    'ได้รับสินค้า',
+                                                  ].map<DropdownMenuItem<String>>(
+                                                      (String value) {
+                                                    return DropdownMenuItem<String>(
+                                                      value: value,
+                                                      child: Text(
+                                                        value,
+                                                        style: TextStyle(
+                                                          color: Colors.red,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }).toList(),
+                                                ),
                                               ),
                                             ),
                                           ],

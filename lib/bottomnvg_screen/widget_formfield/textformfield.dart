@@ -10,11 +10,13 @@ class Textformfield extends StatefulWidget {
 }
 
 class _TextformfieldState extends State<Textformfield> {
+
   SQLiteDatabaseProfile db = SQLiteDatabaseProfile();
   ModelProfile _modelProfile = ModelProfile();
 
+  Map<String, dynamic> map = {};
   Future<int> _insertItem() async {
-    Map<String, dynamic> map = {
+    map = {
       _modelProfile.sID.toString(): idController.text,
       _modelProfile.sNickName.toString(): nickNameController.text,
       _modelProfile.sFirstName.toString(): firstNameController.text,
@@ -34,6 +36,10 @@ class _TextformfieldState extends State<Textformfield> {
     return await db.insertItem(map);
   }
 
+  Future<int> _updateData ()async{
+    return db.updateData(map);
+  }
+
   String sGetid = '';
   String sGetFirstName = '';
   String sGetLastName = '';
@@ -48,6 +54,14 @@ class _TextformfieldState extends State<Textformfield> {
   String sGetDistrict = '';
   String sGetProvince = '';
   String sGetPostalCode = '';
+
+  getitem1()async{
+    List<Map<dynamic, dynamic>> list1 = await db.getData1();
+
+    list1.forEach((element) {
+      print(element);
+     });
+  }
 
   getitem() async {
     List<Map<dynamic, dynamic>> list = await db.getData();
@@ -89,8 +103,11 @@ class _TextformfieldState extends State<Textformfield> {
     });
   }
 
-  _save() async {
-    await _insertItem();
+
+
+  _save() async {    
+   
+    // await _insertItem();
   }
 
   var sizedBox5 = SizedBox(
@@ -215,8 +232,8 @@ class _TextformfieldState extends State<Textformfield> {
 
   @override
   void initState() {
-    getitem();
-    // controller ();
+    getitem();  
+    
     super.initState();
   }
 
@@ -241,7 +258,7 @@ class _TextformfieldState extends State<Textformfield> {
 
   @override
   Widget build(BuildContext context) {
-    print(sGetFirstName);
+    
     return SingleChildScrollView(
       child: Container(
         width: double.infinity,
