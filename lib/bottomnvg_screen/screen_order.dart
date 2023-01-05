@@ -191,7 +191,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
                                     );
                                   },
                                   child: Container(
-                                    height: 70,
+                                    height: 70,                                  
                                     child: Card(
                                       elevation: 0,
                                       color: Color.fromARGB(255, 201, 235, 235),
@@ -218,53 +218,44 @@ class _ScreenOrderState extends State<ScreenOrder> {
                                             SizedBox(
                                               width: 30,
                                             ),
-                                            Expanded(
-                                              child: Text(
-                                                "${formatNumber(axs)} ",
-                                                style: TextStyle(
-                                                  fontSize: 17,
-                                                  fontWeight: FontWeight.w800,
-                                                ),
+                                            Text(
+                                              "${formatNumber(axs)} ",
+                                              style: TextStyle(
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.w800,
                                               ),
                                             ),
-                                            Expanded(
-                                              child: Container(
-                                                width: 20,
-                                                color: Colors.amber,
-                                                child: DropdownButton<String>(                                                
-                                                  value: _selectedValue,
-                                                  icon: Icon(Icons.more_horiz),
-                                                  
-                                                  onChanged: (String? newValue) {
-                                                    setState(() {
-                                                      showDialog(
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return AlertDialog(
-                                                            content: Text(
-                                                                'คุณต้องการจะลบ ออเดอร์นี้ใช่หรือไม่'),
-                                                          );
-                                                        },
+                                            DropdownButton<String>(                                                
+                                              value: _selectedValue,
+                                              icon: Icon(Icons.more_horiz),                                                                                           
+                                              onChanged: (String? newValue) {
+                                                setState(() {
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return AlertDialog(
+                                                        content: Text(
+                                                            'คุณต้องการจะลบ ออเดอร์นี้ใช่หรือไม่'),
                                                       );
-                                                    });
-                                                  },
-                                                  items: [
-                                                    stringColorRed,
-                                                    'ได้รับสินค้า',
-                                                  ].map<DropdownMenuItem<String>>(
-                                                      (String value) {
-                                                    return DropdownMenuItem<String>(
-                                                      value: value,
-                                                      child: Text(
-                                                        value,
-                                                        style: TextStyle(
-                                                          color: Colors.red,
-                                                        ),
-                                                      ),
-                                                    );
-                                                  }).toList(),
-                                                ),
-                                              ),
+                                                    },
+                                                  );
+                                                });
+                                              },
+                                              items: [
+                                                stringColorRed,
+                                                'ได้รับสินค้า',
+                                              ].map<DropdownMenuItem<String>>(
+                                                  (String value) {
+                                                return DropdownMenuItem<String>(
+                                                  value: value,
+                                                  child: Text(
+                                                    value,
+                                                    style: TextStyle(
+                                                      color: Colors.red,
+                                                    ),
+                                                  ),
+                                                );
+                                              }).toList(),
                                             ),
                                           ],
                                         ),
