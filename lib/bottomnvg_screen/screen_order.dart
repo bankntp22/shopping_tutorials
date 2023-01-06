@@ -191,7 +191,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
                                     );
                                   },
                                   child: Container(
-                                    height: 70,                                  
+                                    height: 70,
                                     child: Card(
                                       elevation: 0,
                                       color: Color.fromARGB(255, 201, 235, 235),
@@ -225,37 +225,60 @@ class _ScreenOrderState extends State<ScreenOrder> {
                                                 fontWeight: FontWeight.w800,
                                               ),
                                             ),
-                                            DropdownButton<String>(                                                
-                                              value: _selectedValue,
-                                              icon: Icon(Icons.more_horiz),                                                                                           
-                                              onChanged: (String? newValue) {
-                                                setState(() {
-                                                  showDialog(
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return AlertDialog(
-                                                        content: Text(
-                                                            'คุณต้องการจะลบ ออเดอร์นี้ใช่หรือไม่'),
+                                            Container(
+                                              height: 50,
+                                              
+                                              child: DropdownButton<String>(
+                                                  
+                                                  value: _selectedValue,
+                                                  icon: Icon(Icons.more_horiz),
+                                                  isDense: true,
+                                                  
+                                                  onChanged: (String? newValue) {
+                                                    setState(() {
+                                                      showDialog(
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return AlertDialog(
+                                                            title: Text(
+                                                                'คุณแน่ใจที่จะ ',textAlign: TextAlign.center,),
+                                                            content: Text(
+                                                              newValue.toString(),
+                                                            ),
+                                                          );
+                                                        },
                                                       );
-                                                    },
-                                                  );
-                                                });
-                                              },
-                                              items: [
-                                                stringColorRed,
-                                                'ได้รับสินค้า',
-                                              ].map<DropdownMenuItem<String>>(
-                                                  (String value) {
-                                                return DropdownMenuItem<String>(
-                                                  value: value,
-                                                  child: Text(
-                                                    value,
-                                                    style: TextStyle(
-                                                      color: Colors.red,
+                                                    });
+                                                  },
+                                                  items: [
+                                                    DropdownMenuItem(
+                                                        value: 'ยกเลิก',
+                                                        child: Container(
+                                                          width: 50,
+                                                          child: Text(
+                                                            'ยกเลิก',
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.redAccent,
+                                                              fontWeight:
+                                                                  FontWeight.bold,
+                                                            ),
+                                                          ),
+                                                        )),
+                                                    DropdownMenuItem(
+                                                      value: 'แน่ใจที่จะรับสินค้า',
+                                                      child: Container(
+                                                        width: 50,
+                                                        child: Text(
+                                                          'รับสินค้า',
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                        ),
+                                                      ),
                                                     ),
-                                                  ),
-                                                );
-                                              }).toList(),
+                                                  ]),
                                             ),
                                           ],
                                         ),

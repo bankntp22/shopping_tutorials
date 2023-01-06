@@ -230,6 +230,24 @@ class _TextformfieldState extends State<Textformfield> {
     );
   }
 
+  controllerDispose (){
+    idController.dispose();
+    nickNameController.dispose();
+    firstNameController.dispose();
+    lastNameController.dispose();
+    numberPhoneController.dispose();
+    imagesController.dispose();
+    numberHouseController.dispose();
+    villageController.dispose();
+    villageNoController.dispose();
+    laneController.dispose();
+    roadController.dispose();
+    subDistrictController.dispose();
+    districtController.dispose();
+    provincetController.dispose();
+    postalCodeController.dispose();
+  }
+
   @override
   void initState() {
     getitem();  
@@ -239,20 +257,7 @@ class _TextformfieldState extends State<Textformfield> {
 
   @override
   void dispose() {
-    // idController.dispose();
-    // idController.dispose();
-    // idController.dispose();
-    // idController.dispose();
-    // idController.dispose();
-    // idController.dispose();
-    // idController.dispose();
-    // idController.dispose();
-    // idController.dispose();
-    // idController.dispose();
-    // idController.dispose();
-    // idController.dispose();
-    // idController.dispose();
-    // idController.dispose();
+    controllerDispose();
     super.dispose();
   }
 
