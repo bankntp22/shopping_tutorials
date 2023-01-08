@@ -8,6 +8,7 @@ class Constant {
   static const String totalPrice = 'TOTAL_PRICE';
   static const String payMent = 'PAYMENT';
   static const String code = 'CODE';
+  static const String statusOrder = 'STATUS_ORDER';
 //item
   static const String idHead = 'ID_HEAD';
   static const String codeHead = 'CODE_HEAD';

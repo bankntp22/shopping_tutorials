@@ -5,12 +5,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class Textformfield extends StatefulWidget {
+  // final Function function;
+
+  // Textformfield(this.function);
   @override
   State<Textformfield> createState() => _TextformfieldState();
 }
 
 class _TextformfieldState extends State<Textformfield> {
-
   SQLiteDatabaseProfile db = SQLiteDatabaseProfile();
   ModelProfile _modelProfile = ModelProfile();
 
@@ -36,7 +38,24 @@ class _TextformfieldState extends State<Textformfield> {
     return await db.insertItem(map);
   }
 
-  Future<int> _updateData ()async{
+  Future<int> _updateData() async {
+    map = {
+      _modelProfile.sID.toString(): idController.text,
+      _modelProfile.sNickName.toString(): nickNameController.text,
+      _modelProfile.sFirstName.toString(): firstNameController.text,
+      _modelProfile.sLastName.toString(): lastNameController.text,
+      _modelProfile.sNumberPhone.toString(): numberPhoneController.text,
+      // _modelProfile.sImages.toString(): imagesController.text,
+      _modelProfile.sNumberHouse.toString(): numberHouseController.text,
+      _modelProfile.sVillage.toString(): villageController.text,
+      _modelProfile.sVillageNo.toString(): villageNoController.text,
+      _modelProfile.sLane.toString(): laneController.text,
+      _modelProfile.sRoad.toString(): roadController.text,
+      _modelProfile.sSubdistrict.toString(): subDistrictController.text,
+      _modelProfile.sDistrict.toString(): districtController.text,
+      _modelProfile.sProvince.toString(): provincetController.text,
+      _modelProfile.sPostalCode.toString(): postalCodeController.text,
+    };
     return db.updateData(map);
   }
 
@@ -55,16 +74,8 @@ class _TextformfieldState extends State<Textformfield> {
   String sGetProvince = '';
   String sGetPostalCode = '';
 
-  getitem1()async{
-    List<Map<dynamic, dynamic>> list1 = await db.getData1();
-
-    list1.forEach((element) {
-      print(element);
-     });
-  }
-
   getitem() async {
-    List<Map<dynamic, dynamic>> list = await db.getData();
+    List<Map<String, dynamic>> list = await db.getData();
 
     setState(() {
       list.forEach((row) {
@@ -103,11 +114,32 @@ class _TextformfieldState extends State<Textformfield> {
     });
   }
 
+  Future<bool> _checkRecordDatabase() async {
+    bool haveData = false;
+    List<Map<String, dynamic>> database = await db.getData();
+    if (database.length < 1) {
+      haveData = false;
+    } else {
+      haveData = true;
+    }
 
+    return haveData;
+  }
 
-  _save() async {    
-   
-    // await _insertItem();
+  _save() async {
+    int result = 0;
+    bool haveData = await _checkRecordDatabase();
+    if (haveData) {
+      result = await _updateData();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('แก้ไขข้อมูลสำเร็จ!'),
+        ),
+      );
+    } else {
+      result = await _insertItem();
+    }
+    if (result > 0) {}
   }
 
   var sizedBox5 = SizedBox(
@@ -230,7 +262,7 @@ class _TextformfieldState extends State<Textformfield> {
     );
   }
 
-  controllerDispose (){
+  controllerDispose() {
     idController.dispose();
     nickNameController.dispose();
     firstNameController.dispose();
@@ -250,8 +282,8 @@ class _TextformfieldState extends State<Textformfield> {
 
   @override
   void initState() {
-    getitem();  
-    
+    getitem();
+
     super.initState();
   }
 
@@ -263,7 +295,6 @@ class _TextformfieldState extends State<Textformfield> {
 
   @override
   Widget build(BuildContext context) {
-    
     return SingleChildScrollView(
       child: Container(
         width: double.infinity,

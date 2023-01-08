@@ -49,10 +49,11 @@ class SQLiteDatabaseProfile {
     return await db!.insert(tableProfile, map);
   }
 
-  Future<List<Map>> getData() async {
+  Future<List<Map<String, dynamic>>> getData() async {
     final db = await database;
     return await db!.query(tableProfile);
   }
+
   Future<List<Map>> getData1() async {
     final db = await database;
     return await db!.query(tableProfile);

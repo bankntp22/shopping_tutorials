@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'widget_formfield/textformfield.dart';
 
 class ScreenAccount extends StatefulWidget {
-  const ScreenAccount({Key? key}) : super(key: key);
+  // Function function;
 
+  // ScreenAccount(this.function);
   @override
   _ScreenAccountState createState() => _ScreenAccountState();
 }

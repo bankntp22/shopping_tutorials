@@ -26,11 +26,11 @@ class _ScreenHomeState extends State<ScreenHome> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(
-                        builder: (context) {
-                          return Screenselectproduct();
-                        },
-                      ));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  listmenu[index].pageWidget));
                     },
                     child: Container(
                       padding: EdgeInsets.all(10),
