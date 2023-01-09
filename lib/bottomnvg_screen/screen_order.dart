@@ -227,23 +227,26 @@ class _ScreenOrderState extends State<ScreenOrder> {
                                             ),
                                             Container(
                                               height: 50,
-                                              
                                               child: DropdownButton<String>(
-                                                  
                                                   value: _selectedValue,
                                                   icon: Icon(Icons.more_horiz),
                                                   isDense: true,
-                                                  
-                                                  onChanged: (String? newValue) {
+                                                  onChanged:
+                                                      (String? newValue) {
                                                     setState(() {
                                                       showDialog(
                                                         context: context,
                                                         builder: (context) {
                                                           return AlertDialog(
                                                             title: Text(
-                                                                'คุณแน่ใจที่จะ ',textAlign: TextAlign.center,),
+                                                              'คุณแน่ใจที่จะ ',
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                            ),
                                                             content: Text(
-                                                              newValue.toString(),
+                                                              newValue
+                                                                  .toString(),
                                                             ),
                                                           );
                                                         },
@@ -252,21 +255,23 @@ class _ScreenOrderState extends State<ScreenOrder> {
                                                   },
                                                   items: [
                                                     DropdownMenuItem(
-                                                        value: 'ยกเลิก',
-                                                        child: Container(
-                                                          width: 50,
-                                                          child: Text(
-                                                            'ยกเลิก',
-                                                            style: TextStyle(
-                                                              color:
-                                                                  Colors.redAccent,
-                                                              fontWeight:
-                                                                  FontWeight.bold,
-                                                            ),
+                                                      value: 'ยกเลิก',
+                                                      child: Container(
+                                                        width: 50,
+                                                        child: Text(
+                                                          'ยกเลิก',
+                                                          style: TextStyle(
+                                                            color: Colors
+                                                                .redAccent,
+                                                            fontWeight:
+                                                                FontWeight.bold,
                                                           ),
-                                                        )),
+                                                        ),
+                                                      ),
+                                                    ),
                                                     DropdownMenuItem(
-                                                      value: 'แน่ใจที่จะรับสินค้า',
+                                                      value:
+                                                          'แน่ใจที่จะรับสินค้า',
                                                       child: Container(
                                                         width: 50,
                                                         child: Text(

@@ -73,6 +73,7 @@ class _TextformfieldState extends State<Textformfield> {
   String sGetDistrict = '';
   String sGetProvince = '';
   String sGetPostalCode = '';
+  
 
   getitem() async {
     List<Map<String, dynamic>> list = await db.getData();
@@ -139,7 +140,9 @@ class _TextformfieldState extends State<Textformfield> {
     } else {
       result = await _insertItem();
     }
-    if (result > 0) {}
+    if (result > 0) {
+      
+    }
   }
 
   var sizedBox5 = SizedBox(

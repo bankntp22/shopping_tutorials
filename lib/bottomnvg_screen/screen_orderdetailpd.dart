@@ -26,6 +26,8 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
 
   bool _isRefreshing = false;
 
+  String? _selectedValue;
+
   Future<void> _refresh() async {
     setState(() {
       _isRefreshing = true;
@@ -127,6 +129,67 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
               },
               icon: Icon(Icons.keyboard_backspace),
             ),
+            actions: [
+              Container(
+                height: 50,
+                margin: EdgeInsets.only(right: 15, top: 5, left: 5, bottom: 5),
+                child: DropdownButton<String>(
+                  value: _selectedValue,
+                  icon: Icon(
+                    Icons.more_horiz,
+                    size: 40,
+                    color: Colors.black,
+                  ),
+                  isDense: true,
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text(
+                              'คุณแน่ใจที่จะ ',
+                              textAlign: TextAlign.center,
+                            ),
+                            content: Text(
+                              newValue.toString(),
+                            ),
+                          );
+                        },
+                      );
+                    });
+                  },
+                  items: [
+                    DropdownMenuItem(
+                      value: 'ยกเลิก',
+                      child: Container(
+                        width: 50,
+                        child: Text(
+                          'ยกเลิก',
+                          style: TextStyle(
+                            color: Colors.redAccent,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    DropdownMenuItem(
+                      value: 'แน่ใจที่จะรับสินค้า',
+                      child: Container(
+                        width: 50,
+                        child: Text(
+                          'รับสินค้า',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    
+                  ],
+                ),
+              ),
+            ],
           ),
           body: RefreshIndicator(
             onRefresh: _refresh,
@@ -168,7 +231,8 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
       child: ListView.builder(
         itemCount: listItem.length,
         itemBuilder: (context, index) {
-          double dTotalprice = double.parse(listItem[index].sTotalPriceProduct.toString());
+          double dTotalprice =
+              double.parse(listItem[index].sTotalPriceProduct.toString());
           return Column(
             children: [
               Row(

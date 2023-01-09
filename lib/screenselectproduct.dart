@@ -35,9 +35,9 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
 
   String formatNumber(int number) {
     var formatter = NumberFormat('#,###.##');
-    if(number < 0){
+    if (number < 0) {
       formatter = NumberFormat('#,###.##');
-    }else if (number > 0){
+    } else if (number > 0) {
       formatter = NumberFormat('#,###.00');
     }
     return formatter.format(number);
