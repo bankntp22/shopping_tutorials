@@ -185,7 +185,6 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                         ),
                       ),
                     ),
-                    
                   ],
                 ),
               ),
@@ -195,8 +194,7 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
             onRefresh: _refresh,
             child: Container(
               width: double.infinity,
-              margin: EdgeInsets.all(13),
-              color: Colors.black12,
+              margin: EdgeInsets.all(10),
               child: Column(
                 children: [
                   Container(
@@ -214,7 +212,41 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                       TypeOrder(),
                       listviewOrder(),
                     ],
-                  )
+                  ),
+                  Spacer(),
+                  GestureDetector(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text('โปรดเลือกคำตอบ 2 อย่างนี้'),
+                          );
+                        },
+                      );
+                    },
+                    child: Container(
+                      height: 50,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            colors: [
+                              Colors.greenAccent.shade200,
+                              Colors.green.shade400
+                            ],
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight),
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        'ยืนยันการสั่งซื้อสินค้า',
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
