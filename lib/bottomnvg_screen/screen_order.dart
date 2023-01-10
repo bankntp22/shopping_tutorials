@@ -70,6 +70,8 @@ class _ScreenOrderState extends State<ScreenOrder> {
     super.initState();
   }
 
+  
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -94,7 +96,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
               ),
             ),
           ),
-          backgroundColor: Colors.lightBlue,
+          backgroundColor: Color.fromARGB(255, 108, 208, 255),
           body: Container(
             width: double.infinity,
             decoration: BoxDecoration(
@@ -167,132 +169,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
                                 ),
                               ),
                             ),
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: list.length,
-                              itemBuilder: (context, index) {
-                                // String sConvert = list[index].dTotal;
-                                double pi = double.parse(list[index].dTotal);
-
-                                double axs =
-                                    double.parse(pi.toStringAsFixed(0));
-
-                                return GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) {
-                                          return ScreenOrderDetailpd(
-                                            sCode: list[index].sCode,
-                                          );
-                                        },
-                                      ),
-                                    );
-                                  },
-                                  child: Container(
-                                    height: 70,
-                                    child: Card(
-                                      elevation: 0,
-                                      color: Color.fromARGB(255, 201, 235, 235),
-                                      margin: EdgeInsets.only(bottom: 4),
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 10),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                list[index]
-                                                    .sPayment
-                                                    .toString()
-                                                    .toUpperCase(),
-                                                style: TextStyle(
-                                                  fontSize: 17,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: 30,
-                                            ),
-                                            Text(
-                                              "${formatNumber(axs)} ",
-                                              style: TextStyle(
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.w800,
-                                              ),
-                                            ),
-                                            Container(
-                                              height: 50,
-                                              child: DropdownButton<String>(
-                                                  value: _selectedValue,
-                                                  icon: Icon(Icons.more_horiz),
-                                                  isDense: true,
-                                                  onChanged:
-                                                      (String? newValue) {
-                                                    setState(() {
-                                                      showDialog(
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return AlertDialog(
-                                                            title: Text(
-                                                              'คุณแน่ใจที่จะ ',
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
-                                                            ),
-                                                            content: Text(
-                                                              newValue
-                                                                  .toString(),
-                                                            ),
-                                                          );
-                                                        },
-                                                      );
-                                                    });
-                                                  },
-                                                  items: [
-                                                    DropdownMenuItem(
-                                                      value: 'ยกเลิก',
-                                                      child: Container(
-                                                        width: 50,
-                                                        child: Text(
-                                                          'ยกเลิก',
-                                                          style: TextStyle(
-                                                            color: Colors
-                                                                .redAccent,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    DropdownMenuItem(
-                                                      value:
-                                                          'แน่ใจที่จะรับสินค้า',
-                                                      child: Container(
-                                                        width: 50,
-                                                        child: Text(
-                                                          'รับสินค้า',
-                                                          style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ]),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
+                            child: listviewOrder(),
                           ),
                         ],
                       )
@@ -302,6 +179,180 @@ class _ScreenOrderState extends State<ScreenOrder> {
               ],
             ),
           )),
+    );
+  }
+
+  ListView listviewOrder() {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: list.length,
+      itemBuilder: (context, index) {
+        // String sConvert = list[index].dTotal;
+        double pi = double.parse(list[index].dTotal);
+
+        double axs = double.parse(pi.toStringAsFixed(0));
+
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return ScreenOrderDetailpd(
+                    sCode: list[index].sCode,
+                  );
+                },
+              ),
+            );
+          },
+          child: Container(
+            height: 110,
+            child: Card(
+              elevation: 0,
+              color: Color.fromARGB(255, 255, 193, 101),
+              // color: Color.fromARGB(255, 201, 235, 235),
+              margin: EdgeInsets.only(bottom: 8),
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            list[index].sPayment.toString().toUpperCase(),
+                            style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 30,
+                        ),
+                        Text(
+                          "${formatNumber(axs)} ",
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.white,
+                              ),
+                        ),
+                        // Container(
+                        //   height: 50,
+                        //   child: DropdownButton<String>(
+                        //       value: _selectedValue,
+                        //       icon: Icon(Icons.more_horiz),
+                        //       isDense: true,
+                        //       onChanged:
+                        //           (String? newValue) {
+                        //         setState(() {
+                        //           showDialog(
+                        //             context: context,
+                        //             builder: (context) {
+                        //               return AlertDialog(
+                        //                 title: Text(
+                        //                   'คุณแน่ใจที่จะ ',
+                        //                   textAlign:
+                        //                       TextAlign
+                        //                           .center,
+                        //                 ),
+                        //                 content: Text(
+                        //                   newValue
+                        //                       .toString(),
+                        //                 ),
+                        //               );
+                        //             },
+                        //           );
+                        //         });
+                        //       },
+                        //       items: [
+                        //         DropdownMenuItem(
+                        //           value: 'ยกเลิก',
+                        //           child: Container(
+                        //             width: 50,
+                        //             child: Text(
+                        //               'ยกเลิก',
+                        //               style: TextStyle(
+                        //                 color: Colors
+                        //                     .redAccent,
+                        //                 fontWeight:
+                        //                     FontWeight.bold,
+                        //               ),
+                        //             ),
+                        //           ),
+                        //         ),
+                        //         DropdownMenuItem(
+                        //           value:
+                        //               'แน่ใจที่จะรับสินค้า',
+                        //           child: Container(
+                        //             width: 50,
+                        //             child: Text(
+                        //               'รับสินค้า',
+                        //               style: TextStyle(
+                        //                 fontWeight:
+                        //                     FontWeight.bold,
+                        //               ),
+                        //             ),
+                        //           ),
+                        //         ),
+                        //       ]),
+                        // ),
+                      ],
+                    ),
+                    Spacer(),
+                    buttonConfirmandCancelOrder()
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class buttonConfirmandCancelOrder extends StatelessWidget {
+  const buttonConfirmandCancelOrder({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        height: 70,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            ElevatedButton.icon(
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(
+                      Color.fromARGB(255, 10, 212, 54))),
+              onPressed: () {},
+              icon: Icon(Icons.check),
+              label: Text(
+                'รับสินค้า',
+                style: TextStyle(fontSize: 17),
+              ),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            ElevatedButton.icon(
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(
+                      Color.fromARGB(255, 255, 72, 72))),
+              onPressed: () {},
+              icon: Icon(Icons.cancel),
+              label: Text('ยกเลิก', style: TextStyle(fontSize: 17)),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

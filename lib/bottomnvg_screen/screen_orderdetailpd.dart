@@ -279,7 +279,7 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                   Expanded(
                     flex: 1,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
                           listItem[index].sQty.toString(),

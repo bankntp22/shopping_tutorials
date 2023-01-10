@@ -7,7 +7,7 @@ class SqlLiteManager {
   final String databaseName = "po.db";
   final String tableHead = 'po_head';
   final String tableItem = 'po_item';
-  int version = 15;
+  int version = 16;
 
  
 
@@ -26,7 +26,7 @@ class SqlLiteManager {
   Future<Database> _initDB(String filePath) async {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath,filePath);
-    return await openDatabase(path,version: 1,onCreate: _createDB);
+    return await openDatabase(path,version: 2,onCreate: _createDB);
   } 
 
   Future _createDB(Database db,int version) async {
@@ -44,7 +44,7 @@ class SqlLiteManager {
     //         ;
 
     await db.execute(
-            "CREATE TABLE $tableHead ( ${Constant.totalPrice} $textType, ${Constant.payMent} $textType, ${Constant.code} $textType $primaryKey)")
+            "CREATE TABLE $tableHead ( ${Constant.totalPrice} $textType, ${Constant.payMent} $textType, ${Constant.statusOrder} $textType, ${Constant.code} $textType $primaryKey)")
             ;
     await db.execute(
             "CREATE TABLE $tableItem ( ${Constant.codeHead} $textType, ${Constant.nameProduct} $textType, ${Constant.priceProduct} $textType, ${Constant.qtyProduct} $textType, ${Constant.totalPriceProduct} $textType, FOREIGN KEY (${Constant.codeHead}) REFERENCES $tableHead (${Constant.code}) )")

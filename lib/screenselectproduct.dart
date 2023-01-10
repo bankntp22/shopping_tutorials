@@ -397,7 +397,9 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
                                                                 .total;
                                                       },
                                                       icon: const Icon(
-                                                          Icons.add)),
+                                                        Icons.add,
+                                                        size: 30,
+                                                      )),
                                                   const SizedBox(
                                                     width: 5,
                                                   ),
@@ -406,7 +408,7 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
                                                         .qty
                                                         .toString(),
                                                     style: const TextStyle(
-                                                        fontSize: 15,
+                                                        fontSize: 18,
                                                         fontWeight:
                                                             FontWeight.w500),
                                                   ),
@@ -414,35 +416,38 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
                                                     Row(
                                                       children: [
                                                         IconButton(
-                                                            splashRadius: 15,
-                                                            splashColor: Colors
-                                                                .redAccent,
-                                                            onPressed: () {
-                                                              setState(() {
-                                                                qtySum--;
-                                                                foodlist[index]
-                                                                    .qty--;
+                                                          splashRadius: 15,
+                                                          splashColor:
+                                                              Colors.redAccent,
+                                                          onPressed: () {
+                                                            setState(() {
+                                                              qtySum--;
+                                                              foodlist[index]
+                                                                  .qty--;
 
-                                                                // result = foodlist[index].amount -foodlist[index]
-                                                                //         .price;
-                                                                foodlist[index]
-                                                                    .total = foodlist[
-                                                                            index]
-                                                                        .total -
-                                                                    foodlist[
-                                                                            index]
-                                                                        .price;
+                                                              // result = foodlist[index].amount -foodlist[index]
+                                                              //         .price;
+                                                              foodlist[index]
+                                                                  .total = foodlist[
+                                                                          index]
+                                                                      .total -
+                                                                  foodlist[
+                                                                          index]
+                                                                      .price;
 
-                                                                dTotalall = dTotalall -
-                                                                    foodlist[
-                                                                            index]
-                                                                        .price;
-                                                              });
-                                                              dRemovetotal =
-                                                                  dTotalall;
-                                                            },
-                                                            icon: const Icon(
-                                                                Icons.remove)),
+                                                              dTotalall = dTotalall -
+                                                                  foodlist[
+                                                                          index]
+                                                                      .price;
+                                                            });
+                                                            dRemovetotal =
+                                                                dTotalall;
+                                                          },
+                                                          icon: const Icon(
+                                                            Icons.remove,
+                                                            size: 30,
+                                                          ),
+                                                        ),
                                                       ],
                                                     ),
                                                   const Spacer(),

@@ -40,37 +40,41 @@ class _HistoryOrderState extends State<HistoryOrder> {
                       bottomRight: Radius.circular(30),
                       bottomLeft: Radius.circular(30),
                     ),
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.greenAccent.shade700,
+                        Colors.green.shade400,
+                      ],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                    ),
                   ),
                   alignment: Alignment.center,
                   child: Text(
                     'ประวัติการสั่งซื้อ',
                     style: TextStyle(
                         fontSize: 24,
-                        color: Colors.grey.shade700,
+                        color: Colors.white,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
                 SizedBox(
-                  height: 12,
+                  height: 5,
                 ),
                 Expanded(
                   child: Container(
+                    margin: EdgeInsets.only(
+                        top: 15, bottom: 15, left: 10, right: 10),
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: Colors.green.shade100,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                      ),
+                      color: Color.fromARGB(255, 193, 240, 195),
+                      borderRadius: BorderRadius.circular(15),
                     ),
                     child: Container(
-                      margin: EdgeInsets.only(
-                          top: 30, bottom: 30, left: 20, right: 20),
-                      width: double.infinity,
+                      margin: EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: Colors.green.shade200,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15)),
                     ),
                   ),
                 ),
