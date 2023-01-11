@@ -1,5 +1,6 @@
 import 'package:app_tutorial1/bottomnvg_screen/screen_account.dart';
 import 'package:app_tutorial1/db/db_profile.dart';
+import 'package:app_tutorial1/home.dart';
 import 'package:app_tutorial1/models/model_profile.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -15,10 +16,12 @@ class Textformfield extends StatefulWidget {
 class _TextformfieldState extends State<Textformfield> {
   SQLiteDatabaseProfile db = SQLiteDatabaseProfile();
   ModelProfile _modelProfile = ModelProfile();
+  
 
-  Map<String, dynamic> map = {};
-  Future<int> _insertItem() async {
-    map = {
+
+  Map<String,dynamic> getListmap (){
+    Map<String, dynamic> mapp;  
+    return mapp = {
       _modelProfile.sID.toString(): idController.text,
       _modelProfile.sNickName.toString(): nickNameController.text,
       _modelProfile.sFirstName.toString(): firstNameController.text,
@@ -34,28 +37,16 @@ class _TextformfieldState extends State<Textformfield> {
       _modelProfile.sDistrict.toString(): districtController.text,
       _modelProfile.sProvince.toString(): provincetController.text,
       _modelProfile.sPostalCode.toString(): postalCodeController.text,
-    };
+    };    
+  }
+
+  Future<int> _insertItem() async {
+    Map<String, dynamic> map = getListmap();
     return await db.insertItem(map);
   }
 
   Future<int> _updateData() async {
-    map = {
-      _modelProfile.sID.toString(): idController.text,
-      _modelProfile.sNickName.toString(): nickNameController.text,
-      _modelProfile.sFirstName.toString(): firstNameController.text,
-      _modelProfile.sLastName.toString(): lastNameController.text,
-      _modelProfile.sNumberPhone.toString(): numberPhoneController.text,
-      // _modelProfile.sImages.toString(): imagesController.text,
-      _modelProfile.sNumberHouse.toString(): numberHouseController.text,
-      _modelProfile.sVillage.toString(): villageController.text,
-      _modelProfile.sVillageNo.toString(): villageNoController.text,
-      _modelProfile.sLane.toString(): laneController.text,
-      _modelProfile.sRoad.toString(): roadController.text,
-      _modelProfile.sSubdistrict.toString(): subDistrictController.text,
-      _modelProfile.sDistrict.toString(): districtController.text,
-      _modelProfile.sProvince.toString(): provincetController.text,
-      _modelProfile.sPostalCode.toString(): postalCodeController.text,
-    };
+    Map<String, dynamic> map = getListmap();
     return db.updateData(map);
   }
 
@@ -123,7 +114,6 @@ class _TextformfieldState extends State<Textformfield> {
     } else {
       haveData = true;
     }
-
     return haveData;
   }
 
@@ -132,16 +122,20 @@ class _TextformfieldState extends State<Textformfield> {
     bool haveData = await _checkRecordDatabase();
     if (haveData) {
       result = await _updateData();
+      
+    } else {
+      result = await _insertItem();
+    }
+
+    if (result > 0) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return Home(screenIndex: 0,);
+      },));
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('แก้ไขข้อมูลสำเร็จ!'),
         ),
       );
-    } else {
-      result = await _insertItem();
-    }
-    if (result > 0) {
-      
     }
   }
 

@@ -21,6 +21,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  
   static List<Widget> listMenu = [ScreenHome(), ScreenOrder(), ScreenAccount()];
 
   void _updatedIndex(int value) {
