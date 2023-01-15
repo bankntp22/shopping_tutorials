@@ -40,8 +40,8 @@ class _HistoryOrderState extends State<HistoryOrder> {
                   decoration: BoxDecoration(
                     color: Colors.greenAccent,
                     borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(30),
-                      bottomLeft: Radius.circular(30),
+                      bottomRight: Radius.circular(40),
+                      bottomLeft: Radius.circular(40),
                     ),
                     gradient: LinearGradient(
                       colors: [
@@ -62,171 +62,101 @@ class _HistoryOrderState extends State<HistoryOrder> {
                   ),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 3,
                 ),
-                Container(
-                  height: 250,
-                  margin:
-                      EdgeInsets.only(top: 15, bottom: 15, left: 10, right: 10),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 193, 240, 195),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
+                Expanded(
                   child: Container(
-                    margin: EdgeInsets.all(12),
+                    margin: EdgeInsets.only(
+                      top: 10,
+                      bottom: 10,
+                      left: 5,
+                      right: 5,
+                    ),
+                    width: double.infinity,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Color.fromARGB(255, 193, 240, 195),
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    child: ListView.builder(
-                      itemCount: listFoodTest.length,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          height: 65,
-                          width: double.infinity,
-                          color: Colors.lightBlue,
-                          margin: EdgeInsets.only(bottom: 5),
-                          padding: EdgeInsets.only(right: 5, left: 5),
-                          child: Container(
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: 50,
-                                  height: 50,
-                                  color: Colors.orangeAccent.shade200,
-                                  alignment: Alignment.center,
-                                  child: Text(listFoodTest[index]
-                                      .price
-                                      .toStringAsFixed(0)),
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    margin: EdgeInsets.all(5),
-                                    height: double.infinity,
-                                    color: Colors.white,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(listFoodTest[index].title),
-                                        Expanded(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              ElevatedButton(
-                                                onPressed: () {
-                                                  setState(() {
-                                                    // listFoodTest
-                                                    //     .removeAt(index);
-                                                    // listfoodadd.insert(
-                                                    //   index,
-                                                    //   listFoodTest[index],
-                                                    // );
-                                                    listfoodadd.add(
-                                                        listFoodTest[index]);
-                                                    listFoodTest.remove(
-                                                      listFoodTest[index],
-                                                    );
-                                                    if (index >= 0 &&
-                                                        index < listFoodTest.length) {
-                                                      var item = listFoodTest[index];
-                                                    }
-                                                  });
-                                                },
-                                                child: Text('ลบ'),
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                      ],
+                    child: Container(
+                      margin: EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: ListView.builder(
+                        itemCount: listFoodTest.length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            height: 65,
+                            width: double.infinity,
+                            color: Colors.lightBlue,
+                            margin: EdgeInsets.only(bottom: 5),
+                            padding: EdgeInsets.only(right: 5, left: 5),
+                            child: Container(
+                              child: Row(
+                                children: [
+                                  Container(
+                                    width: 50,
+                                    height: 50,
+                                    color: Colors.orangeAccent.shade200,
+                                    alignment: Alignment.center,
+                                    child: Text(listFoodTest[index]
+                                        .price
+                                        .toStringAsFixed(0)),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      margin: EdgeInsets.all(5),
+                                      height: double.infinity,
+                                      color: Colors.white,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(listFoodTest[index].title),
+                                          Expanded(
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                ElevatedButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      // listFoodTest
+                                                      //     .removeAt(index);
+                                                      // listfoodadd.insert(
+                                                      //   index,
+                                                      //   listFoodTest[index],
+                                                      // );
+                                                      listfoodadd.add(
+                                                          listFoodTest[index]);
+                                                      listFoodTest.remove(
+                                                        listFoodTest[index],
+                                                      );
+                                                      if (index >= 0 &&
+                                                          index <
+                                                              listFoodTest
+                                                                  .length) {
+                                                        var item =
+                                                            listFoodTest[index];
+                                                      }
+                                                    });
+                                                  },
+                                                  child: Text('ลบ'),
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ),
-                Container(
-                  height: 250,
-                  margin:
-                      EdgeInsets.only(top: 15, bottom: 15, left: 10, right: 10),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 193, 240, 195),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Container(
-                    margin: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: ListView.builder(
-                      itemCount: listfoodadd.length,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          height: 65,
-                          width: double.infinity,
-                          color: Colors.lightBlue,
-                          margin: EdgeInsets.only(bottom: 5),
-                          padding: EdgeInsets.only(right: 5, left: 5),
-                          child: Container(
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: 50,
-                                  height: 50,
-                                  color: Colors.orangeAccent.shade200,
-                                  alignment: Alignment.center,
-                                  child: Text(listFoodTest[index]
-                                      .price
-                                      .toStringAsFixed(0)),
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    margin: EdgeInsets.all(5),
-                                    height: double.infinity,
-                                    color: Colors.white,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(listFoodTest[index].title),
-                                        Expanded(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              ElevatedButton(
-                                                onPressed: () {
-                                                  setState(() {
-                                                    listFoodTest.remove(
-                                                      listFoodTest[index],
-                                                    );
-                                                    listfoodadd.add(
-                                                        listFoodTest[index]);
-                                                  });
-                                                },
-                                                child: Text('ลบ'),
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),

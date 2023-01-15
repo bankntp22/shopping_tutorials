@@ -21,10 +21,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  
-  static List<Widget> listMenu = [ScreenHome(), ScreenOrder(), ScreenAccount()];
+  static List<Widget> listMenu = [
+    // ScreenHome(),
+    // ScreenOrder(),
+    // ScreenAccount(updatedIndex(0))
+  ];
 
-  void _updatedIndex(int value) {
+  void updatedIndex(int value) {
     setState(() {
       widget.screenIndex = value;
     });
@@ -32,6 +35,18 @@ class _HomeState extends State<Home> {
 
   Color get getContainer {
     return Colors.blueAccent.shade400;
+  }
+
+  @override
+  void initState() {
+    listMenu = [
+      ScreenHome(),
+      ScreenOrder(),
+      ScreenAccount(
+        updatedIndex,
+      ),
+    ];
+    super.initState();
   }
 
   @override
@@ -53,7 +68,7 @@ class _HomeState extends State<Home> {
         bottomNavigationBar: BottomNavigationBar(
           selectedItemColor: Colors.black,
           backgroundColor: Colors.white,
-          onTap: _updatedIndex,
+          onTap: updatedIndex,
           currentIndex: widget.screenIndex,
           items: const [
             BottomNavigationBarItem(

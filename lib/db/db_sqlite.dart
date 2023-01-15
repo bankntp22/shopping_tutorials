@@ -9,12 +9,10 @@ class SqlLiteManager {
   final String tableItem = 'po_item';
   int version = 16;
 
- 
-
   static Database? _database;
 
   Future<Database?> get database async {
-    if (_database != null){
+    if (_database != null) {
       return _database;
     }
 
@@ -25,11 +23,11 @@ class SqlLiteManager {
 
   Future<Database> _initDB(String filePath) async {
     final dbPath = await getDatabasesPath();
-    final path = join(dbPath,filePath);
-    return await openDatabase(path,version: 2,onCreate: _createDB);
-  } 
+    final path = join(dbPath, filePath);
+    return await openDatabase(path, version: 2, onCreate: _createDB);
+  }
 
-  Future _createDB(Database db,int version) async {
+  Future _createDB(Database db, int version) async {
     final textType = 'TEXT NOT NULL';
     final booltype = 'BOOLEAN NOT NULL';
     final autoIncrement = ' INTEGER AUTOINCREMENT NOT NULL';
@@ -44,57 +42,63 @@ class SqlLiteManager {
     //         ;
 
     await db.execute(
-            "CREATE TABLE $tableHead ( ${Constant.totalPrice} $textType, ${Constant.payMent} $textType, ${Constant.statusOrder} $textType, ${Constant.code} $textType $primaryKey)")
-            ;
+        "CREATE TABLE $tableHead ( ${Constant.totalPrice} $textType, ${Constant.payMent} $textType, ${Constant.statusOrder} $textType, ${Constant.code} $textType $primaryKey)");
     await db.execute(
-            "CREATE TABLE $tableItem ( ${Constant.codeHead} $textType, ${Constant.nameProduct} $textType, ${Constant.priceProduct} $textType, ${Constant.qtyProduct} $textType, ${Constant.totalPriceProduct} $textType, FOREIGN KEY (${Constant.codeHead}) REFERENCES $tableHead (${Constant.code}) )")
-            ;
+        "CREATE TABLE $tableItem ( ${Constant.codeHead} $textType, ${Constant.nameProduct} $textType, ${Constant.priceProduct} $textType, ${Constant.qtyProduct} $textType, ${Constant.totalPriceProduct} $textType, FOREIGN KEY (${Constant.codeHead}) REFERENCES $tableHead (${Constant.code}) )");
   }
 
-  Future<List<Map>> getData () async {
+  Future<List<Map>> getData() async {
     final db = await database;
-    return await db!.query(tableHead);
+    return await db!.query(
+      tableHead,
+    );
   }
 
-  Future<List<Map>> getOrder (String code)async{
+  Future<List<Map>> getOrder(String code) async {
     final db = await database;
     String sWhere = Constant.code + "= ?";
     List<String> list = [code];
-    return await db!.query(tableHead,where: sWhere,whereArgs: list);
+    return await db!.query(tableHead, where: sWhere, whereArgs: list);
   }
-  
-  Future<List<Map>> getItem (String code)async{
+
+  Future<List<Map>> getItem(String code) async {
     final db = await database;
     String sWhere = Constant.codeHead + "= ?";
     List<String> list = [code];
-    return await db!.query(tableItem,where: sWhere,whereArgs: list);
+    return await db!.query(tableItem, where: sWhere, whereArgs: list);
   }
 
-  Future<List<Map>> getLastCode ()async{
+  Future<List<Map>> getLastCode() async {
     final db = await database;
-    return await db!.query(tableHead,limit: 1,orderBy: "${Constant.code} DESC ");
+    return await db!
+        .query(tableHead, limit: 1, orderBy: "${Constant.code} DESC ");
   }
 
-  Future<int> insertHead (Map<String,dynamic> map) async{
+  Future<int> insertHead(Map<String, dynamic> map) async {
     final db = await database;
     return await db!.insert(tableHead, map);
-  } 
+  }
 
-  Future<int> insertItem (Map<String,dynamic> map) async{
+  Future<int> insertItem(Map<String, dynamic> map) async {
     final db = await database;
     return await db!.insert(tableItem, map);
   }
 
-  // Future<int> deleteItem (Map<String,dynamic> map)async{
-  //   final db = await database;
-  //   return await db!.delete(tableDatabase);
-  // }
+  Future<int> deleteData() async {
+    final db = await database;
+    return await db!.delete(tableHead);
+  }
 
-  
-
-  
-
-
+  Future<int> updateData(Map<String, dynamic> map, String code) async {
+    final db = await database;
+    String sWhere = Constant.code + "= ?";
+    List<String> list = [code];
+    return await db!.update(
+      tableHead,
+      map,
+      where: sWhere,
+    );
+  }
 
   // initDatabase() async {
   //   await openDatabase(join(await getDatabasesPath(), databaseName),

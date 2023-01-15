@@ -66,25 +66,6 @@ class FoodTest {
       required this.imageUrl,
       required this.total,
       required this.total1});
-
-  
 }
 
-
-List<FoodTest> listFoodTest = [
-    FoodTest(
-        title: 'ส้มตำ',
-        price: 100,
-        qty: 0,
-        imageUrl: "assets/somtum.png",
-        total: 0,
-        total1: 0),
-    FoodTest(
-        title: 'ลาบ',
-        price: 70,
-        qty: 0,
-        imageUrl: "assets/lap.png",
-        total: 0,
-        total1: 0),
-    
-  ];
+List<FoodTest> listFoodTest = [];

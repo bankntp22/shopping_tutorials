@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'widget_formfield/textformfield.dart';
 
 class ScreenAccount extends StatefulWidget {
-  // Function function;
+  Function function;
 
-  // ScreenAccount(this.function);
+  ScreenAccount(this.function);
   @override
   _ScreenAccountState createState() => _ScreenAccountState();
 }
@@ -54,7 +54,7 @@ class _ScreenAccountState extends State<ScreenAccount> {
           //   ),
           // ],
         ),
-        body: Textformfield(),
+        body: Textformfield(widget.function),
       ),
     );
   }

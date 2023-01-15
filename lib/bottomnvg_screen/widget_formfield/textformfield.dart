@@ -6,9 +6,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class Textformfield extends StatefulWidget {
-  // final Function function;
+  final Function function;
 
-  // Textformfield(this.function);
+  Textformfield(this.function);
   @override
   State<Textformfield> createState() => _TextformfieldState();
 }
@@ -16,11 +16,9 @@ class Textformfield extends StatefulWidget {
 class _TextformfieldState extends State<Textformfield> {
   SQLiteDatabaseProfile db = SQLiteDatabaseProfile();
   ModelProfile _modelProfile = ModelProfile();
-  
 
-
-  Map<String,dynamic> getListmap (){
-    Map<String, dynamic> mapp;  
+  Map<String, dynamic> getListmap() {
+    Map<String, dynamic> mapp;
     return mapp = {
       _modelProfile.sID.toString(): idController.text,
       _modelProfile.sNickName.toString(): nickNameController.text,
@@ -37,7 +35,7 @@ class _TextformfieldState extends State<Textformfield> {
       _modelProfile.sDistrict.toString(): districtController.text,
       _modelProfile.sProvince.toString(): provincetController.text,
       _modelProfile.sPostalCode.toString(): postalCodeController.text,
-    };    
+    };
   }
 
   Future<int> _insertItem() async {
@@ -64,7 +62,6 @@ class _TextformfieldState extends State<Textformfield> {
   String sGetDistrict = '';
   String sGetProvince = '';
   String sGetPostalCode = '';
-  
 
   getitem() async {
     List<Map<String, dynamic>> list = await db.getData();
@@ -122,20 +119,20 @@ class _TextformfieldState extends State<Textformfield> {
     bool haveData = await _checkRecordDatabase();
     if (haveData) {
       result = await _updateData();
-      
     } else {
       result = await _insertItem();
     }
 
     if (result > 0) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return Home(screenIndex: 0,);
-      },));
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('แก้ไขข้อมูลสำเร็จ!'),
-        ),
-      );
+      // Navigator.push(context, MaterialPageRoute(builder: (context) {
+      //   return Home(screenIndex: 0,);
+      // },));
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(
+      //     content: Text('แก้ไขข้อมูลสำเร็จ!'),
+      //   ),
+      // );
+      widget.function;
     }
   }
 
