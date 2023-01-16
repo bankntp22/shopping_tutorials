@@ -18,7 +18,6 @@ class _ScreenOrderState extends State<ScreenOrder> {
   List<OrderSummary> list = [];
 
   String? sPayment, sTotal;
-
   var _selectedValue;
 
   _getListSummaryOrder() async {
@@ -46,7 +45,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
     if (number < 0) {
       formatter = NumberFormat('#,###.##');
     } else if (number > 0) {
-      formatter = NumberFormat('#,###.00');
+      formatter = NumberFormat('#,###.##');
     }
     return formatter.format(number);
   }
@@ -81,6 +80,14 @@ class _ScreenOrderState extends State<ScreenOrder> {
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
+            title: Text(
+              'รายการสั่งซื้อ',
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            centerTitle: true,
             leading: IconButton(
               onPressed: () {
                 Navigator.push(
@@ -94,11 +101,13 @@ class _ScreenOrderState extends State<ScreenOrder> {
               },
               icon: Icon(
                 Icons.arrow_back,
-                color: Colors.black,
+                size: 25,
+                color: Colors.white,
               ),
             ),
           ),
-          backgroundColor: Color.fromARGB(255, 108, 208, 255),
+          // backgroundColor: Color.fromARGB(255, 26, 140, 192),
+          backgroundColor: Color.fromARGB(255, 63, 106, 141),
           body: Container(
             width: double.infinity,
             decoration: BoxDecoration(
@@ -116,17 +125,9 @@ class _ScreenOrderState extends State<ScreenOrder> {
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   child: Column(
                     children: [
-                      const Text(
-                        'รายการสั่งซื้อ',
-                        style: TextStyle(
-                          fontSize: 23,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
                       const Divider(
                         thickness: 2,
-                        height: 30,
+                        height: 20,
                         color: Colors.white,
                       ),
                       Container(
@@ -211,8 +212,9 @@ class _ScreenOrderState extends State<ScreenOrder> {
             height: 110,
             child: Card(
               elevation: 0,
-              color: Color.fromARGB(255, 255, 193, 101),
+              color: Color.fromARGB(255, 176, 190, 255),
               // color: Color.fromARGB(255, 201, 235, 235),
+              // color: Color.fromARGB(255, 255, 193, 101),
               margin: EdgeInsets.only(bottom: 8),
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),

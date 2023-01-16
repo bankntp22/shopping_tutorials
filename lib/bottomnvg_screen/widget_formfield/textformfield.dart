@@ -124,6 +124,9 @@ class _TextformfieldState extends State<Textformfield> {
     }
 
     if (result > 0) {
+      setState(() {
+        widget.function;
+      });
       // Navigator.push(context, MaterialPageRoute(builder: (context) {
       //   return Home(screenIndex: 0,);
       // },));
@@ -132,7 +135,6 @@ class _TextformfieldState extends State<Textformfield> {
       //     content: Text('แก้ไขข้อมูลสำเร็จ!'),
       //   ),
       // );
-      widget.function;
     }
   }
 
@@ -295,8 +297,8 @@ class _TextformfieldState extends State<Textformfield> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(16),
-            topRight: Radius.circular(16),
+            topLeft: Radius.circular(24),
+            topRight: Radius.circular(24),
           ),
         ),
         child: Container(
@@ -308,18 +310,27 @@ class _TextformfieldState extends State<Textformfield> {
                   Expanded(
                     child: Text(
                       'ข้อมูลส่วนตัว',
-                      style: Theme.of(context).textTheme.headline5,
+                      // style: Theme.of(context).textTheme.headline5,
+                      style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black45),
                     ),
                   ),
-                  TextButton.icon(
+                  ElevatedButton.icon(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                        Colors.greenAccent.shade700,
+                      ),
+                    ),
                     onPressed: submit,
                     icon: Icon(
                       Icons.save,
-                      color: Colors.black,
+                      color: Colors.white
                     ),
                     label: Text(
                       'บันทึก',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),
                     ),
                   )
                 ],

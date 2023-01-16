@@ -26,7 +26,18 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
 
   bool _isRefreshing = false;
 
-  String? _selectedValue;
+  String? selectedValue;
+
+  String? get selected {
+    selectedValue = selectStatusOrder.keys.first;
+    return selectedValue;
+  }
+
+  defaultSelectStatus() {
+    setState(() {
+      selectedValue = selectStatusOrder.values.first;
+    });
+  }
 
   Future<void> _refresh() async {
     setState(() {
@@ -40,6 +51,7 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
   getData() {
     getDataHead();
     getDataItem();
+    defaultSelectStatus();
     setState(() {});
   }
 
@@ -86,6 +98,22 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
     );
   }
 
+  List<DropdownMenuItem> get SelectStatusOrder {
+    List<DropdownMenuItem> listselectStatus =
+        ['รับสินค้า', 'ยกเลิก'].map<DropdownMenuItem<String>>((String value) {
+      return DropdownMenuItem<String>(
+        value: value,
+        child: Text(value),
+      );
+    }).toList();
+    return listselectStatus;
+  }
+
+  Map<String, String> selectStatusOrder = <String, String>{
+    'Confirmed': 'รับสินค้า',
+    'Cancel': 'ยกเลิก',
+  };
+
   @override
   void initState() {
     getData();
@@ -100,8 +128,8 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
   );
 
   var buttonStyle = TextStyle(
-    fontSize: 25,
-    fontWeight: FontWeight.bold,
+    fontSize: 22,
+    fontWeight: FontWeight.w600,
   );
 
   var buttonStyle1 = TextStyle(
@@ -117,78 +145,18 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
         child: Scaffold(
           appBar: AppBar(
             title: Text(
-              'รายละเอียดสินค้าที่สั่งซื้อ',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
+              'รายละเอียดสินค้า',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
             ),
             centerTitle: true,
             elevation: 0,
-            backgroundColor: Colors.blue.shade200,
+            backgroundColor: Color.fromARGB(255, 63, 106, 141),
             leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
               },
               icon: Icon(Icons.keyboard_backspace),
             ),
-            actions: [
-              Container(
-                height: 50,
-                margin: EdgeInsets.only(right: 15, top: 5, left: 5, bottom: 5),
-                child: DropdownButton<String>(
-                  value: _selectedValue,
-                  icon: Icon(
-                    Icons.more_horiz,
-                    size: 40,
-                    color: Colors.black,
-                  ),
-                  isDense: true,
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: Text(
-                              'คุณแน่ใจที่จะ ',
-                              textAlign: TextAlign.center,
-                            ),
-                            content: Text(
-                              newValue.toString(),
-                            ),
-                          );
-                        },
-                      );
-                    });
-                  },
-                  items: [
-                    DropdownMenuItem(
-                      value: 'ยกเลิก',
-                      child: Container(
-                        width: 50,
-                        child: Text(
-                          'ยกเลิก',
-                          style: TextStyle(
-                            color: Colors.redAccent,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                    DropdownMenuItem(
-                      value: 'แน่ใจที่จะรับสินค้า',
-                      child: Container(
-                        width: 50,
-                        child: Text(
-                          'รับสินค้า',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
           ),
           body: RefreshIndicator(
             onRefresh: _refresh,
@@ -211,19 +179,22 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                     children: [
                       TypeOrder(),
                       listviewOrder(),
+                      SizedBox(height: 10,),
+                      buttonDropdownSelectedStatusOrder()
                     ],
                   ),
                   Spacer(),
                   GestureDetector(
                     onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: Text('โปรดเลือกคำตอบ 2 อย่างนี้'),
-                          );
-                        },
-                      );
+                      if (selectedValue != null)
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              content: Text('คุณแน่ใจที่จะ ${selectedValue}'),
+                            );
+                          },
+                        );
                     },
                     child: Container(
                       height: 50,
@@ -231,7 +202,7 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                             colors: [
-                              Colors.greenAccent.shade200,
+                              Colors.greenAccent.shade400,
                               Colors.green.shade400
                             ],
                             begin: Alignment.centerLeft,
@@ -241,9 +212,10 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                       child: Text(
                         'ยืนยันการสั่งซื้อสินค้า',
                         style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
+                          fontSize: 22,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
@@ -259,7 +231,8 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
   Container listviewOrder() {
     return Container(
       padding: EdgeInsets.only(left: 20, top: 5, bottom: 5, right: 20),
-      height: 300,
+      height: 350,
+      color: Colors.black12,
       child: ListView.builder(
         itemCount: listItem.length,
         itemBuilder: (context, index) {
@@ -301,10 +274,71 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                     ),
                   ),
                 ],
-              )
+              ),
             ],
           );
         },
+      ),
+    );
+  }
+
+  Container buttonDropdownSelectedStatusOrder() {
+    return Container(
+      padding: EdgeInsets.all(6),
+      
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Container(
+                    height: 50,
+                    child: Text(
+                      'สถานะ ออเดอร์ : ',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    )),
+              ),
+              Container(
+                color: Colors.brown.shade100,
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                child: DropdownButton<String>(
+                  value: selectedValue,
+                  iconSize: 40,
+                  style: TextStyle(fontSize: 20, color: Colors.black),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      selectedValue = newValue;
+                      print(selectedValue);
+                    });
+                  },
+                  items: selectStatusOrder.values
+                      .map<DropdownMenuItem<String>>((String item) {
+                    return DropdownMenuItem<String>(
+                        value: item,
+                        child: Text(
+                          item,
+                        ));
+                  }).toList(),
+                  selectedItemBuilder: (BuildContext context) {
+                    return selectStatusOrder.values.map<Widget>((String item) {
+                      return Container(
+                        alignment: Alignment.centerLeft,
+                        constraints: const BoxConstraints(minWidth: 100),
+                        child: Text(
+                          item,
+                          style: const TextStyle(color: Colors.black),
+                        ),
+                      );
+                    }).toList();
+                  },
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

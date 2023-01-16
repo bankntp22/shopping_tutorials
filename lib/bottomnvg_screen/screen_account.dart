@@ -38,14 +38,19 @@ class _ScreenAccountState extends State<ScreenAccount> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white70,
+        backgroundColor: Color.fromARGB(255, 63, 106, 141),
         appBar: AppBar(
           title: Text(
             'กรอกข้อมูล',
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 25,
+            ),
           ),
           centerTitle: true,
-          backgroundColor: Colors.transparent,
+          backgroundColor: Color.fromARGB(255, 63, 106, 141),
+
           elevation: 0,
           // actions: [
           //   IconButton(
