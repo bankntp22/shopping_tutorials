@@ -162,7 +162,7 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
             onRefresh: _refresh,
             child: Container(
               width: double.infinity,
-              margin: EdgeInsets.all(10),
+              margin: EdgeInsets.all(7),
               child: Column(
                 children: [
                   Container(
@@ -179,7 +179,9 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                     children: [
                       TypeOrder(),
                       listviewOrder(),
-                      SizedBox(height: 10,),
+                      SizedBox(
+                        height: 10,
+                      ),
                       buttonDropdownSelectedStatusOrder()
                     ],
                   ),
@@ -190,8 +192,50 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                         showDialog(
                           context: context,
                           builder: (context) {
+                            String textResult = resultText();
                             return AlertDialog(
-                              content: Text('คุณแน่ใจที่จะ ${selectedValue}'),
+                              title: Text(
+                                '$textResult ${selectedValue} สินค้าออเดอร์นี้',
+                                textAlign: TextAlign.center,
+                              ),
+                              content: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  TextButton(
+                                    style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Colors.greenAccent.shade400)),
+                                    onPressed: () {},
+                                    child: Text(
+                                      'ยืนยัน',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  TextButton(
+                                    style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Colors.redAccent.shade200)),
+                                    onPressed: () {},
+                                    child: Text(
+                                      'ยกเลิก',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             );
                           },
                         );
@@ -226,6 +270,16 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
         ),
       ),
     );
+  }
+
+  String resultText() {
+    String textResult = '';
+    if (selectedValue == 'รับสินค้า') {
+      textResult = 'ยินดีด้วย';
+    } else {
+      textResult = 'คุณแน่ใจ';
+    }
+    return textResult;
   }
 
   Container listviewOrder() {
@@ -285,7 +339,6 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
   Container buttonDropdownSelectedStatusOrder() {
     return Container(
       padding: EdgeInsets.all(6),
-      
       child: Column(
         children: [
           Row(

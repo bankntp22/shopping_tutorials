@@ -75,6 +75,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
 
   @override
   Widget build(BuildContext context) {
+   
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
@@ -82,10 +83,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
             elevation: 0,
             title: Text(
               'รายการสั่งซื้อ',
-              style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-              ),
+              style: StyleFont.textSizeAppbar,
             ),
             centerTitle: true,
             leading: IconButton(

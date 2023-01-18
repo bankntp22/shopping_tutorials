@@ -38,6 +38,7 @@ class _TextformfieldState extends State<Textformfield> {
     };
   }
 
+
   Future<int> _insertItem() async {
     Map<String, dynamic> map = getListmap();
     return await db.insertItem(map);
@@ -427,7 +428,7 @@ class _TextformfieldState extends State<Textformfield> {
                           'ที่อยู่',
                           style: TextStyle(
                               fontSize: 22,
-                              color: Colors.red,
+                              color: Colors.grey,
                               fontWeight: FontWeight.bold),
                         ),
                       ],

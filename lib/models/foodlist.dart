@@ -1,3 +1,16 @@
+import 'package:flutter/material.dart';
+
+class TextName {
+  static String textTitle = 'ประวัติการสั่งซื้อ';
+}
+
+class StyleFont {
+  static var textSizeAppbar = TextStyle(
+    fontSize: 25,
+    fontWeight: FontWeight.bold,
+  );
+}
+
 class Food {
   String title;
   int price;

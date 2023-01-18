@@ -18,11 +18,11 @@ class _HistoryOrderState extends State<HistoryOrder> {
       home: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.white,
+            backgroundColor: Color.fromARGB(255, 63, 106, 141),
             centerTitle: true,
             elevation: 0,
             leading: IconButton(
-              color: Colors.black,
+              color: Colors.white,
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -30,40 +30,14 @@ class _HistoryOrderState extends State<HistoryOrder> {
                 Icons.arrow_back,
               ),
             ),
+            title: Text(
+              TextName.textTitle,
+              style: StyleFont.textSizeAppbar
+            ),
           ),
           body: Container(
             child: Column(
               children: [
-                Container(
-                  width: double.infinity,
-                  height: 70,
-                  decoration: BoxDecoration(
-                    color: Colors.greenAccent,
-                    borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(40),
-                      bottomLeft: Radius.circular(40),
-                    ),
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.greenAccent.shade700,
-                        Colors.green.shade400,
-                      ],
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                    ),
-                  ),
-                  alignment: Alignment.center,
-                  child: Text(
-                    'ประวัติการสั่งซื้อ',
-                    style: TextStyle(
-                        fontSize: 24,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-                SizedBox(
-                  height: 3,
-                ),
                 Expanded(
                   child: Container(
                     margin: EdgeInsets.only(
@@ -74,7 +48,9 @@ class _HistoryOrderState extends State<HistoryOrder> {
                     ),
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 193, 240, 195),
+                      color: Color.fromARGB(255, 147, 181, 255),
+                      // color: Color.fromARGB(255, 193, 208, 240),
+
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Container(
