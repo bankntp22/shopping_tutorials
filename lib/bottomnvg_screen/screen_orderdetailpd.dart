@@ -170,10 +170,9 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                     color: Colors.amber.shade200,
                     alignment: Alignment.center,
                     padding: EdgeInsets.all(8),
-                    child: Text(
-                      'สรุปคำสั่งซื้อ ! ',
-                      style: buttonStyle,
-                    ),
+                    child: Text('สรุปคำสั่งซื้อ ! ',
+                        style: TextStyle(
+                            fontSize: 23, color: Colors.grey.shade800)),
                   ),
                   Column(
                     children: [
@@ -195,8 +194,14 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                             String textResult = resultText();
                             return AlertDialog(
                               title: Text(
-                                '$textResult ${selectedValue} สินค้าออเดอร์นี้',
+                                '$textResult ${selectedValue} \nออเดอร์นี้',
                                 textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: selectedValue == 'รับสินค้า'
+                                      ? Colors.green
+                                      : Colors.red,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               content: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -224,7 +229,9 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                                         backgroundColor:
                                             MaterialStateProperty.all(
                                                 Colors.redAccent.shade200)),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
                                     child: Text(
                                       'ยกเลิก',
                                       style: TextStyle(
@@ -275,9 +282,9 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
   String resultText() {
     String textResult = '';
     if (selectedValue == 'รับสินค้า') {
-      textResult = 'ยินดีด้วย';
+      textResult = 'คุณยืนยันที่จะ ';
     } else {
-      textResult = 'คุณแน่ใจ';
+      textResult = 'คุณแน่ใจที่จะ';
     }
     return textResult;
   }
@@ -305,14 +312,17 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                   ),
                   Expanded(
                     flex: 1,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          listItem[index].sQty.toString(),
-                          style: Theme.of(context).textTheme.headline6,
-                        ),
-                      ],
+                    child: Container(
+                      padding: EdgeInsets.only(left: 5),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            listItem[index].sQty.toString(),
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   Expanded(
@@ -339,57 +349,52 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
   Container buttonDropdownSelectedStatusOrder() {
     return Container(
       padding: EdgeInsets.all(6),
-      child: Column(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: Container(
-                    height: 50,
-                    child: Text(
-                      'สถานะ ออเดอร์ : ',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    )),
-              ),
-              Container(
-                color: Colors.brown.shade100,
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: DropdownButton<String>(
-                  value: selectedValue,
-                  iconSize: 40,
-                  style: TextStyle(fontSize: 20, color: Colors.black),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      selectedValue = newValue;
-                      print(selectedValue);
-                    });
-                  },
-                  items: selectStatusOrder.values
-                      .map<DropdownMenuItem<String>>((String item) {
-                    return DropdownMenuItem<String>(
-                        value: item,
-                        child: Text(
-                          item,
-                        ));
-                  }).toList(),
-                  selectedItemBuilder: (BuildContext context) {
-                    return selectStatusOrder.values.map<Widget>((String item) {
-                      return Container(
-                        alignment: Alignment.centerLeft,
-                        constraints: const BoxConstraints(minWidth: 100),
-                        child: Text(
-                          item,
-                          style: const TextStyle(color: Colors.black),
-                        ),
-                      );
-                    }).toList();
-                  },
+          Container(
+              height: 50,
+              child: Text(
+                'สถานะ ออเดอร์ : ',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
                 ),
-              ),
-            ],
+              )),
+          Container(
+            color: Colors.grey.shade300,
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: DropdownButton<String>(
+              value: selectedValue,
+              iconSize: 40,
+              style: TextStyle(fontSize: 17, color: Colors.black),
+              onChanged: (String? newValue) {
+                setState(() {
+                  selectedValue = newValue;
+                  print(selectedValue);
+                });
+              },
+              items: selectStatusOrder.values
+                  .map<DropdownMenuItem<String>>((String item) {
+                return DropdownMenuItem<String>(
+                    value: item,
+                    child: Text(
+                      item,
+                    ));
+              }).toList(),
+              selectedItemBuilder: (BuildContext context) {
+                return selectStatusOrder.values.map<Widget>((String item) {
+                  return Container(
+                    alignment: Alignment.centerLeft,
+                    constraints: const BoxConstraints(minWidth: 100),
+                    child: Text(
+                      item,
+                      style: const TextStyle(color: Colors.black),
+                    ),
+                  );
+                }).toList();
+              },
+            ),
           ),
         ],
       ),
@@ -407,21 +412,21 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
           Text(
             'ชื่อ',
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
             'จำนวน',
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
             'ราคารวม',
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
           ),

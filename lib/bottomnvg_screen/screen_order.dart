@@ -75,7 +75,6 @@ class _ScreenOrderState extends State<ScreenOrder> {
 
   @override
   Widget build(BuildContext context) {
-   
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
@@ -210,7 +209,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
             height: 110,
             child: Card(
               elevation: 0,
-              color: Color.fromARGB(255, 176, 190, 255),
+              color: Color.fromARGB(255, 104, 120, 190),
               // color: Color.fromARGB(255, 201, 235, 235),
               // color: Color.fromARGB(255, 255, 193, 101),
               margin: EdgeInsets.only(bottom: 8),
