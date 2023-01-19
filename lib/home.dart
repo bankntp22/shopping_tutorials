@@ -65,22 +65,28 @@ class _HomeState extends State<Home> {
         //   ],
         // ),
         body: listMenu.elementAt(widget.screenIndex),
-        bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Colors.black,
+        bottomNavigationBar: NavigationBar(
+          // selectedItemColor: Colors.black,
           backgroundColor: Colors.white,
-          onTap: updatedIndex,
-          currentIndex: widget.screenIndex,
-          items: const [
-            BottomNavigationBarItem(
+          onDestinationSelected: (value) {
+            setState(() {
+              widget.screenIndex = value;
+            });
+          },
+          selectedIndex: widget.screenIndex,
+          // onTap: updatedIndex,
+          // currentIndex: widget.screenIndex,
+          destinations: const [
+            NavigationDestination(
                 icon: Icon(
                   Icons.home_rounded,
                   color: Colors.blueAccent,
                 ),
                 label: 'Home'),
-            BottomNavigationBarItem(
+            NavigationDestination(
                 icon: Icon(Icons.mark_as_unread, color: Colors.blueAccent),
                 label: 'ORDER'),
-            BottomNavigationBarItem(
+            NavigationDestination(
                 icon: Icon(Icons.person, color: Colors.blueAccent),
                 label: 'Profile'),
           ],
