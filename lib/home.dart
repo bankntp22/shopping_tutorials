@@ -68,6 +68,7 @@ class _HomeState extends State<Home> {
         bottomNavigationBar: NavigationBar(
           // selectedItemColor: Colors.black,
           backgroundColor: Colors.white,
+          elevation: 5,
           onDestinationSelected: (value) {
             setState(() {
               widget.screenIndex = value;

@@ -38,7 +38,6 @@ class _TextformfieldState extends State<Textformfield> {
     };
   }
 
-
   Future<int> _insertItem() async {
     Map<String, dynamic> map = getListmap();
     return await db.insertItem(map);
@@ -126,7 +125,14 @@ class _TextformfieldState extends State<Textformfield> {
 
     if (result > 0) {
       setState(() {
-        widget.function;
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => Home(screenIndex: 0),
+        ));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('แก้ไขข้อมูลสำเร็จ!'),
+          ),
+        );
       });
       // Navigator.push(context, MaterialPageRoute(builder: (context) {
       //   return Home(screenIndex: 0,);
@@ -325,13 +331,11 @@ class _TextformfieldState extends State<Textformfield> {
                       ),
                     ),
                     onPressed: submit,
-                    icon: Icon(
-                      Icons.save,
-                      color: Colors.white
-                    ),
+                    icon: Icon(Icons.save, color: Colors.white),
                     label: Text(
                       'บันทึก',
-                      style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
                   )
                 ],

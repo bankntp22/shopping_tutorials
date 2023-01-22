@@ -16,4 +16,7 @@ class Constant {
   static const String priceProduct = 'PRICE_PRODUCT';
   static const String qtyProduct = 'QTY_PRODUCT';
   static const String totalPriceProduct = 'TOTAL_PRICEPRODUCT';
+
+  static const String completeOrder = 'COMPLETE';
+  static const String cancelOrder = 'CANCEL';
 }

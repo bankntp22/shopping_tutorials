@@ -1,12 +1,15 @@
-import 'package:app_tutorial1/models/model_ordersummary.dart';
-import 'package:app_tutorial1/bottomnvg_screen/screen_orderdetailpd.dart';
-import 'package:app_tutorial1/models/constant.dart';
-import 'package:app_tutorial1/db/db_sqlite.dart';
-import 'package:app_tutorial1/models/foodlist.dart';
-import 'package:app_tutorial1/home.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import '../models/model_ordersummary.dart';
 import 'package:intl/intl.dart';
+
+import 'package:app_tutorial1/bottomnvg_screen/screen_orderdetailpd.dart';
+import 'package:app_tutorial1/db/db_sqlite.dart';
+import 'package:app_tutorial1/home.dart';
+import 'package:app_tutorial1/models/constant.dart';
+import 'package:app_tutorial1/models/foodlist.dart';
+import 'package:app_tutorial1/models/model_ordersummary.dart';
+
+import '../models/model_ordersummary.dart';
 
 class ScreenOrder extends StatefulWidget {
   @override
@@ -17,11 +20,13 @@ class _ScreenOrderState extends State<ScreenOrder> {
   SqlLiteManager db = SqlLiteManager();
   List<OrderSummary> list = [];
 
+  String iCodeOrder = '';
+
   String? sPayment, sTotal;
   var _selectedValue;
 
-  _getListSummaryOrder() async {
-    List<Map<dynamic, dynamic>> listMap = await db.getData();
+  Future<List<Map<String, dynamic>>> _getListSummaryOrder() async {
+    List<Map<String, dynamic>> listMap = await db.getData();
     listMap.forEach(
       (row) {
         String sGetPayment = row[Constant.payMent];
@@ -32,13 +37,18 @@ class _ScreenOrderState extends State<ScreenOrder> {
         orderSummarymodel.sPayment = sGetPayment;
         orderSummarymodel.dTotal = sGetTotalPrice;
         orderSummarymodel.sCode = sGetCode;
-        list.add(orderSummarymodel);
+        list.insert(0, orderSummarymodel);
       },
     );
     if (mounted) {
       setState(() {});
     }
+    return listMap;
   }
+
+  // Future<List<Map<String, dynamic>>> get listMapData {
+
+  // }
 
   String formatNumber(double number) {
     var formatter = NumberFormat('#,###.##');
@@ -60,9 +70,18 @@ class _ScreenOrderState extends State<ScreenOrder> {
     return fontRed;
   }
 
-  // getOrder(String code) {
-  //   db.updateData(map, code);
-  // }
+  Future<int> updateRecordComplete(String code) async {
+    Map<String, dynamic> map = Map<String, dynamic>();
+    map[Constant.statusOrder] = Constant.completeOrder;
+    print(map);
+    return db.updateData(map, code);
+  }
+
+  Future<int> updateRecordCancel(String code) async {
+    Map<String, dynamic> map = Map<String, dynamic>();
+    map[Constant.statusOrder] = Constant.cancelOrder;
+    return db.updateData(map, code);
+  }
 
   deleteOrder() {}
 
@@ -189,7 +208,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
       itemBuilder: (context, index) {
         // String sConvert = list[index].dTotal;
         double pi = double.parse(list[index].dTotal);
-
+        iCodeOrder = list[index].sCode;
         double axs = double.parse(pi.toStringAsFixed(0));
 
         return GestureDetector(
@@ -209,7 +228,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
             height: 110,
             child: Card(
               elevation: 0,
-              color: Color.fromARGB(255, 104, 120, 190),
+              color: Color.fromARGB(255, 168, 175, 196),
               // color: Color.fromARGB(255, 201, 235, 235),
               // color: Color.fromARGB(255, 255, 193, 101),
               margin: EdgeInsets.only(bottom: 8),
@@ -233,7 +252,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
                           width: 30,
                         ),
                         Text(
-                          "${formatNumber(axs)} ",
+                          "\$ ${formatNumber(axs)}  ",
                           style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.w800,
@@ -303,7 +322,11 @@ class _ScreenOrderState extends State<ScreenOrder> {
                       ],
                     ),
                     Spacer(),
-                    buttonConfirmandCancelOrder()
+                    buttonConfirmandCancelOrder(
+                      indexCode: list[index].sCode,
+                      updateConfirm: updateRecordComplete,
+                      updateCancel: updateRecordCancel,
+                    )
                   ],
                 ),
               ),
@@ -316,8 +339,15 @@ class _ScreenOrderState extends State<ScreenOrder> {
 }
 
 class buttonConfirmandCancelOrder extends StatefulWidget {
-  const buttonConfirmandCancelOrder({
+  String indexCode = '';
+
+  Function updateConfirm;
+  Function updateCancel;
+  buttonConfirmandCancelOrder({
     Key? key,
+    required this.indexCode,
+    required this.updateConfirm,
+    required this.updateCancel,
   }) : super(key: key);
 
   @override
@@ -333,109 +363,123 @@ class _buttonConfirmandCancelOrderState
       child: Container(
         height: 70,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ElevatedButton.icon(
-              style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
-                      Color.fromARGB(255, 10, 212, 54))),
-              onPressed: () {
-                setState(() {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: Text(
-                          'คุณยืนยันที่จะรับสินค้า ? ',
-                          textAlign: TextAlign.center,
-                        ),
-                        content: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                  Colors.greenAccent.shade700,
-                                ),
-                              ),
-                              onPressed: () {},
-                              child: Text('ยืนยัน'),
-                            ),
-                            SizedBox(
-                              width: 7,
-                            ),
-                            ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                  Colors.redAccent.shade700,
-                                ),
-                              ),
-                              onPressed: () {},
-                              child: Text('ยกเลิก'),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  );
-                });
-              },
-              icon: Icon(Icons.check),
-              label: Text(
-                'รับสินค้า',
-                style: TextStyle(fontSize: 17),
+            Container(
+              child: Text(
+                'ออเดอร์ ${widget.indexCode}',
+                style: TextStyle(color: Colors.white, fontSize: 16),
               ),
             ),
-            SizedBox(
-              width: 10,
-            ),
-            ElevatedButton.icon(
-              style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
-                      Color.fromARGB(255, 255, 72, 72))),
-              onPressed: () {
-                setState(() {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: Text(
-                          'คุณแน่ใจที่จะลบออเดอร์นี้  ? ',
-                          textAlign: TextAlign.center,
-                        ),
-                        content: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                  Colors.greenAccent.shade700,
+            Row(
+              children: [
+                ElevatedButton.icon(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                          Color.fromARGB(255, 10, 212, 54))),
+                  onPressed: () {
+                    setState(() {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text(
+                              'คุณยืนยันที่จะรับสินค้า ? ',
+                              textAlign: TextAlign.center,
+                            ),
+                            content: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                ElevatedButton(
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                      Colors.greenAccent.shade700,
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    widget.updateConfirm();
+                                  },
+                                  child: Text('ยืนยัน'),
                                 ),
-                              ),
-                              onPressed: () {},
-                              child: Text('ยืนยัน'),
-                            ),
-                            SizedBox(
-                              width: 7,
-                            ),
-                            ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                  Colors.redAccent.shade700,
+                                SizedBox(
+                                  width: 7,
                                 ),
-                              ),
-                              onPressed: () {},
-                              child: Text('ยกเลิก'),
+                                ElevatedButton(
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                      Colors.redAccent.shade700,
+                                    ),
+                                  ),
+                                  onPressed: () {},
+                                  child: Text('ยกเลิก'),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          );
+                        },
                       );
-                    },
-                  );
-                });
-              },
-              icon: Icon(Icons.cancel),
-              label: Text('ยกเลิก', style: TextStyle(fontSize: 17)),
+                    });
+                  },
+                  icon: Icon(Icons.check),
+                  label: Text(
+                    'รับสินค้า',
+                    style: TextStyle(fontSize: 17),
+                  ),
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                ElevatedButton.icon(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                          Color.fromARGB(255, 255, 72, 72))),
+                  onPressed: () {
+                    setState(() {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text(
+                              'คุณแน่ใจที่จะลบออเดอร์นี้  ? ',
+                              textAlign: TextAlign.center,
+                            ),
+                            content: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                ElevatedButton(
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                      Colors.greenAccent.shade700,
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    widget.updateCancel();
+                                  },
+                                  child: Text('ยืนยัน'),
+                                ),
+                                SizedBox(
+                                  width: 7,
+                                ),
+                                ElevatedButton(
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                      Colors.redAccent.shade700,
+                                    ),
+                                  ),
+                                  onPressed: () {},
+                                  child: Text('ยกเลิก'),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    });
+                  },
+                  icon: Icon(Icons.cancel),
+                  label: Text('ยกเลิก', style: TextStyle(fontSize: 17)),
+                ),
+              ],
             ),
           ],
         ),

@@ -310,8 +310,8 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                       style: Theme.of(context).textTheme.headline6,
                     ),
                   ),
-                  Expanded(
-                    flex: 1,
+                  Container(
+                    width: 30,
                     child: Container(
                       padding: EdgeInsets.only(left: 5),
                       child: Row(
@@ -331,7 +331,7 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          '${dTotalprice.toStringAsFixed(0)}',
+                          '\฿ ${dTotalprice.toStringAsFixed(0)}',
                           style: Theme.of(context).textTheme.headline6,
                         ),
                       ],

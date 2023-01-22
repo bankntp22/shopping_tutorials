@@ -7,7 +7,7 @@ class SqlLiteManager {
   final String databaseName = "po.db";
   final String tableHead = 'po_head';
   final String tableItem = 'po_item';
-  int version = 16;
+  int version = 17;
 
   static Database? _database;
 
@@ -24,13 +24,13 @@ class SqlLiteManager {
   Future<Database> _initDB(String filePath) async {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, filePath);
-    return await openDatabase(path, version: 2, onCreate: _createDB);
+    return await openDatabase(path, version: 3, onCreate: _createDB);
   }
 
   Future _createDB(Database db, int version) async {
-    final textType = 'TEXT NOT NULL';
-    final booltype = 'BOOLEAN NOT NULL';
-    final autoIncrement = ' INTEGER AUTOINCREMENT NOT NULL';
+    final textType = 'TEXT';
+    final booltype = 'BOOLEAN';
+    final autoIncrement = ' INTEGER AUTOINCREMENT';
     final primaryKey = ' PRIMARY KEY ';
     final String idForeignKey = "FOREIGN KEY";
 
@@ -47,11 +47,14 @@ class SqlLiteManager {
         "CREATE TABLE $tableItem ( ${Constant.codeHead} $textType, ${Constant.nameProduct} $textType, ${Constant.priceProduct} $textType, ${Constant.qtyProduct} $textType, ${Constant.totalPriceProduct} $textType, FOREIGN KEY (${Constant.codeHead}) REFERENCES $tableHead (${Constant.code}) )");
   }
 
-  Future<List<Map>> getData() async {
+  Future<List<Map<String, dynamic>>> getData() async {
     final db = await database;
-    return await db!.query(
-      tableHead,
-    );
+    // String sWhere =
+    //     Constant.statusOrder + " != ? and " + Constant.statusOrder + " != ? ";
+    String sWhere = Constant.statusOrder + " is null ";
+    List<String> list = ["null"];
+    // List<String> list = [Constant.completeOrder, Constant.cancelOrder];
+    return await db!.query(tableHead, where: sWhere);
   }
 
   Future<List<Map>> getOrder(String code) async {
@@ -91,7 +94,9 @@ class SqlLiteManager {
 
   Future<int> updateData(Map<String, dynamic> map, String code) async {
     final db = await database;
+    // String sWhere = Constant.code + "= ?";
     String sWhere = Constant.code + "= ?";
+
     List<String> list = [code];
     return await db!.update(
       tableHead,
