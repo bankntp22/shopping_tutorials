@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TextName {
   static String textTitle = 'ประวัติการสั่งซื้อ';
@@ -9,6 +10,21 @@ class StyleFont {
     fontSize: 25,
     fontWeight: FontWeight.bold,
   );
+
+  
+  
+  static var fontGoogleKrub = GoogleFonts.krub(fontSize: 23);
+  static var fontGoogleMali = GoogleFonts.mali(fontSize: 23,fontWeight: FontWeight.bold);
+  static var fontGoogleMali1 = GoogleFonts.mali(fontSize: 16,fontWeight: FontWeight.bold);
+  static var fontGoogleMaliUnBold = GoogleFonts.mali(fontSize: 17,);
+
+  
+}
+
+
+
+class WidgetButton {
+  static Text buttonTextName(String name) => Text(name,style: TextStyle(fontSize: 17,),);
 }
 
 class Food {

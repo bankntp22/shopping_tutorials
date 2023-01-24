@@ -101,7 +101,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
             elevation: 0,
             title: Text(
               'รายการสั่งซื้อ',
-              style: StyleFont.textSizeAppbar,
+              style: StyleFont.fontGoogleMali
             ),
             centerTitle: true,
             leading: IconButton(

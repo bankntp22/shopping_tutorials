@@ -1,6 +1,7 @@
 import 'package:app_tutorial1/models/foodlist.dart';
 import 'package:app_tutorial1/screen_cart.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'bottomnvg_screen/screen_account.dart';
 
@@ -53,6 +54,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        
         backgroundColor: Colors.white70,
         // appBar: AppBar(
         //   title: Text('หมวดหมู่อาหาร'),

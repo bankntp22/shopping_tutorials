@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:app_tutorial1/models/foodlist.dart';
 import 'package:app_tutorial1/models/model_head.dart';
 import 'package:app_tutorial1/models/model_item.dart';
 import 'package:app_tutorial1/models/constant.dart';
@@ -146,7 +147,7 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
           appBar: AppBar(
             title: Text(
               'รายละเอียดสินค้า',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
+              style: StyleFont.fontGoogleMali
             ),
             centerTitle: true,
             elevation: 0,
@@ -174,105 +175,106 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                         style: TextStyle(
                             fontSize: 23, color: Colors.grey.shade800)),
                   ),
-                  Column(
-                    children: [
-                      TypeOrder(),
-                      listviewOrder(),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      buttonDropdownSelectedStatusOrder()
-                    ],
-                  ),
-                  Spacer(),
-                  GestureDetector(
-                    onTap: () {
-                      if (selectedValue != null)
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            String textResult = resultText();
-                            return AlertDialog(
-                              title: Text(
-                                '$textResult ${selectedValue} \nออเดอร์นี้',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: selectedValue == 'รับสินค้า'
-                                      ? Colors.green
-                                      : Colors.red,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              content: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  TextButton(
-                                    style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                                Colors.greenAccent.shade400)),
-                                    onPressed: () {},
-                                    child: Text(
-                                      'ยืนยัน',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 17,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  TextButton(
-                                    style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                                Colors.redAccent.shade200)),
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text(
-                                      'ยกเลิก',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 17,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        );
-                    },
-                    child: Container(
-                      height: 50,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            colors: [
-                              Colors.greenAccent.shade400,
-                              Colors.green.shade400
-                            ],
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight),
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        'ยืนยันการสั่งซื้อสินค้า',
-                        style: TextStyle(
-                          fontSize: 22,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                  Expanded(
+                    child: Column(
+                      children: [
+                        TypeOrder(),
+                        Expanded(
+                          child: listviewOrder(),
                         ),
-                      ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                      ],
                     ),
                   ),
+                  rowButtonStatus()
                 ],
               ),
             ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  GestureDetector buttonConfirmStatusOrder(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        if (selectedValue != null)
+          showDialog(
+            context: context,
+            builder: (context) {
+              String textResult = resultText();
+              return AlertDialog(
+                title: Text(
+                  '$textResult ${selectedValue} \nออเดอร์นี้',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: selectedValue == 'รับสินค้า'
+                        ? Colors.green
+                        : Colors.red,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                content: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              Colors.greenAccent.shade400)),
+                      onPressed: () {},
+                      child: Text(
+                        'ยืนยัน',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    TextButton(
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              Colors.redAccent.shade200)),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        'ยกเลิก',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          );
+      },
+      child: Container(
+        height: 50,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              colors: [Colors.greenAccent.shade400, Colors.green.shade400],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight),
+        ),
+        alignment: Alignment.center,
+        child: Text(
+          'ยืนยันการสั่งซื้อสินค้า',
+          style: TextStyle(
+            fontSize: 22,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
@@ -292,7 +294,6 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
   Container listviewOrder() {
     return Container(
       padding: EdgeInsets.only(left: 20, top: 5, bottom: 5, right: 20),
-      height: 350,
       color: Colors.black12,
       child: ListView.builder(
         itemCount: listItem.length,
@@ -345,6 +346,77 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
       ),
     );
   }
+
+  Container rowButtonStatus() {
+    return Container(
+      child: Row(
+        children: [
+          Expanded(
+            child: ElevatedButton(
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all(Colors.green.shade600)),
+              onPressed: () {
+                setState(() {
+                  showDialog(context: context, builder: ((context) => (
+                    AlertDialog(
+                      title: Text('คุณต้องการที่จะ รับสินค้า ?'),
+                      content: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          TextButton(onPressed: (){}, child: WidgetButton.buttonTextName('ตกลง'),),
+                          TextButton(onPressed: (){}, child: WidgetButton.buttonTextName('ยกเลิก'),),
+                        ],
+                      ),
+                    )
+                  )));
+                });
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(15),
+                child: Text(
+                  'รับสินค้า',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 5,
+          ),
+          Expanded(
+            child: ElevatedButton(
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all(Colors.red.shade600)),
+              onPressed: () {
+                showDialog(context: context, builder: ((context) => (
+                    AlertDialog(
+                      title: Text('คุณแน่ใจที่จะ ยกเลิกสินค้า ?',textAlign: TextAlign.center,),
+                      content: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          TextButton(onPressed: (){}, child: WidgetButton.buttonTextName('ตกลง'),),
+                          TextButton(onPressed: (){}, child: WidgetButton.buttonTextName('ยกเลิก'),),
+                        ],
+                      ),
+                    )
+                  )));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(15),
+                child: Text('ยกเลิกสินค้า',
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  
 
   Container buttonDropdownSelectedStatusOrder() {
     return Container(

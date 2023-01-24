@@ -1,9 +1,11 @@
 import 'package:app_tutorial1/bottomnvg_screen/screen_account.dart';
 import 'package:app_tutorial1/db/db_profile.dart';
 import 'package:app_tutorial1/home.dart';
+import 'package:app_tutorial1/models/foodlist.dart';
 import 'package:app_tutorial1/models/model_profile.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Textformfield extends StatefulWidget {
   final Function function;
@@ -63,9 +65,21 @@ class _TextformfieldState extends State<Textformfield> {
   String sGetProvince = '';
   String sGetPostalCode = '';
 
+  void recordSnackbar(String title) {
+    setState(() {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => Home(screenIndex: 0),
+      ));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(title),
+        ),
+      );
+    });
+  }
+
   getitem() async {
     List<Map<String, dynamic>> list = await db.getData();
-
     setState(() {
       list.forEach((row) {
         print(row);
@@ -123,17 +137,8 @@ class _TextformfieldState extends State<Textformfield> {
       result = await _insertItem();
     }
 
-    if (result > 0) {
-      setState(() {
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => Home(screenIndex: 0),
-        ));
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('แก้ไขข้อมูลสำเร็จ!'),
-          ),
-        );
-      });
+    if (result == 0) {
+      recordSnackbar('แก้ไขข้อมูลแล้ว');
       // Navigator.push(context, MaterialPageRoute(builder: (context) {
       //   return Home(screenIndex: 0,);
       // },));
@@ -142,6 +147,8 @@ class _TextformfieldState extends State<Textformfield> {
       //     content: Text('แก้ไขข้อมูลสำเร็จ!'),
       //   ),
       // );
+    } else if (result > 0) {
+      recordSnackbar('บันทึกสำเร็จ');
     }
   }
 
@@ -189,7 +196,8 @@ class _TextformfieldState extends State<Textformfield> {
         Expanded(
           child: Text(
             name,
-            style: TextStyle(fontSize: 17, color: Colors.black87),
+            style: StyleFont.fontGoogleMaliUnBold,
+            // style: TextStyle(fontSize: 17, color: Colors.black87),
           ),
         ),
         Expanded(
@@ -230,10 +238,7 @@ class _TextformfieldState extends State<Textformfield> {
     return Row(
       children: [
         Expanded(
-          child: Text(
-            'รูปภาพ',
-            style: TextStyle(fontSize: 15, color: Colors.black87),
-          ),
+          child: Text('รูปภาพ', style: StyleFont.fontGoogleMali1),
         ),
         Expanded(
           flex: 2,
@@ -315,14 +320,14 @@ class _TextformfieldState extends State<Textformfield> {
               Row(
                 children: [
                   Expanded(
-                    child: Text(
-                      'ข้อมูลส่วนตัว',
-                      // style: Theme.of(context).textTheme.headline5,
-                      style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black45),
-                    ),
+                    child: Text('ข้อมูลส่วนตัว',
+                        // style: Theme.of(context).textTheme.headline5,
+                        // style: TextStyle(
+                        //     fontSize: 25,
+                        //     fontWeight: FontWeight.bold,
+                        //     color: Colors.black45),
+                        style:
+                            GoogleFonts.mali(fontSize: 23, color: Colors.grey.shade600)),
                   ),
                   ElevatedButton.icon(
                     style: ButtonStyle(

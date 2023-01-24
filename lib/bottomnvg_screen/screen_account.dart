@@ -1,3 +1,4 @@
+import 'package:app_tutorial1/models/foodlist.dart';
 import 'package:flutter/material.dart';
 
 import 'widget_formfield/textformfield.dart';
@@ -42,11 +43,7 @@ class _ScreenAccountState extends State<ScreenAccount> {
         appBar: AppBar(
           title: Text(
             'กรอกข้อมูล',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 25,
-            ),
+            style: StyleFont.fontGoogleMali,
           ),
           centerTitle: true,
           backgroundColor: Color.fromARGB(255, 63, 106, 141),

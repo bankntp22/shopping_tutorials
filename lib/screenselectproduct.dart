@@ -118,8 +118,8 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
             appBar: AppBar(
               backgroundColor: Colors.transparent,
               elevation: 1,
-              title: const Text(
-                'อาหารทั้งหมด',
+              title:  Text(
+                'อาหารทั้งหมด',style: StyleFont.fontGoogleMali,
               ),
               leading: IconButton(
                   onPressed: () {

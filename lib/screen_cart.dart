@@ -1,10 +1,12 @@
 import 'package:app_tutorial1/home.dart';
 import 'package:flutter/material.dart';
+
 import 'bottomnvg_screen/screen_order.dart';
 import 'models/constant.dart';
 import 'db/db_sqlite.dart';
 import 'models/foodlist.dart';
 import './screenselectproduct.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
 class ScreenCart extends StatefulWidget {
@@ -129,12 +131,12 @@ class _ScreenCartState extends State<ScreenCart> {
         child: Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text(
-          'CART',
-          style: TextStyle(color: Colors.black),
+        title: Text(
+          'ตะกร้าสินค้า',
+          style: StyleFont.fontGoogleMali
         ),
         centerTitle: true,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color.fromARGB(255, 63, 106, 141),
         elevation: 0,
         leading: IconButton(
           onPressed: () {
@@ -142,7 +144,7 @@ class _ScreenCartState extends State<ScreenCart> {
           },
           icon: const Icon(
             Icons.arrow_back,
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
       ),
@@ -407,86 +409,86 @@ class _ScreenCartState extends State<ScreenCart> {
   buildButtonOrderNow() {
     return [
       ElevatedButton(
-          style: ElevatedButton.styleFrom(
-              primary: Colors.greenAccent.shade700,
-              minimumSize: const Size(double.infinity, 50)),
-          onPressed: () {
-            if (payMent == null) {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                      title: Text(
-                        'ขออภัย!',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.redAccent,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      content: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'คุณต้องเลือก วิธีการชำระเงินก่อนถึงจะสั่งซื้ออาหารได้',
-                            style: TextStyle(fontSize: 19),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      primary: Colors.greenAccent.shade700),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text('OK')),
-                            ],
-                          ),
-                        ],
-                      ));
-                },
-              );
-            } else
-              // ignore: curly_braces_in_flow_control_structures
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                      title: Text(
-                        'ยืนยันที่จะสั่งซื้ออาหารจำวนเงิน ${dtotal.toStringAsFixed(0)} ใช่หรือไม่ ?',
-                        style: Theme.of(context).textTheme.headline6,
-                      ),
-                      content: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.greenAccent.shade700,
-                              ),
-                              onPressed: () {
-                                Navigator.pop(context);
-                                setState(() {});
-                              },
-                              child: const Text('OK')),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  primary: Colors.redAccent),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: const Text('Cancel')),
-                        ],
-                      ));
-                },
-              );
-          },
-          child: Text(
-            'ORDER NOW (${dtotal.toStringAsFixed(0)}) บาท',
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-          ))
+        style: ElevatedButton.styleFrom(
+            primary: Colors.greenAccent.shade700,
+            minimumSize: const Size(double.infinity, 50)),
+        onPressed: () {
+          if (payMent == null) {
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                    title: Text(
+                      'ขออภัย!',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.redAccent, fontWeight: FontWeight.bold),
+                    ),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'คุณต้องเลือก วิธีการชำระเงินก่อนถึงจะสั่งซื้ออาหารได้',
+                          style: TextStyle(fontSize: 19),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.greenAccent.shade700),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('OK')),
+                          ],
+                        ),
+                      ],
+                    ));
+              },
+            );
+          } else
+            // ignore: curly_braces_in_flow_control_structures
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                    title: Text(
+                      'ยืนยันที่จะสั่งซื้ออาหารจำวนเงิน ${dtotal.toStringAsFixed(0)} ใช่หรือไม่ ?',
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                    content: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.greenAccent.shade700,
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context);
+                              setState(() {});
+                            },
+                            child: const Text('OK')),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: Colors.redAccent),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text('Cancel')),
+                      ],
+                    ));
+              },
+            );
+        },
+        child: Text(
+          'ORDER NOW (${dtotal.toStringAsFixed(0)}) บาท',
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+        ),
+      ),
     ];
   }
 }
