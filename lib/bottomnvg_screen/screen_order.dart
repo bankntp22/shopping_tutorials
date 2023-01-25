@@ -99,10 +99,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
-            title: Text(
-              'รายการสั่งซื้อ',
-              style: StyleFont.fontGoogleMali
-            ),
+            title: Text('รายการสั่งซื้อ', style: StyleFont.fontGoogleMali),
             centerTitle: true,
             leading: IconButton(
               onPressed: () {
@@ -154,20 +151,18 @@ class _ScreenOrderState extends State<ScreenOrder> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              sPayment = 'วิธีการชำระเงิน',
-                              style: TextStyle(
-                                fontSize: 19,
-                                color: Colors.grey.shade700,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
+                            Text(sPayment = 'วิธีการชำระเงิน',
+                                style: StyleFont.fontMali(
+                                  size: 19,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                )),
                             Text(
                               sTotal = 'จำนวนเงิน',
-                              style: TextStyle(
-                                fontSize: 19,
-                                color: Colors.grey.shade700,
+                              style: StyleFont.fontMali(
+                                size: 19,
                                 fontWeight: FontWeight.bold,
+                                color: Colors.black,
                               ),
                             ),
                           ],

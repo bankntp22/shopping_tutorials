@@ -131,10 +131,7 @@ class _ScreenCartState extends State<ScreenCart> {
         child: Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
-          'ตะกร้าสินค้า',
-          style: StyleFont.fontGoogleMali
-        ),
+        title: Text('ตะกร้าสินค้า', style: StyleFont.fontGoogleMali),
         centerTitle: true,
         backgroundColor: Color.fromARGB(255, 63, 106, 141),
         elevation: 0,
@@ -168,10 +165,12 @@ class _ScreenCartState extends State<ScreenCart> {
                         Container(
                           color: Colors.grey.shade300,
                           width: double.infinity,
-                          padding: EdgeInsets.all(4),
+                          padding: EdgeInsets.only(
+                              top: 7, bottom: 7, right: 7, left: 15),
                           child: Text(
                             'รายการสินค้าที่สั่งซื้อ',
-                            style: Theme.of(context).textTheme.headline6,
+                            style: StyleFont.fontMali(
+                                size: 18, color: Colors.black,fontWeight: FontWeight.w500),
                           ),
                         ),
                       ],
@@ -255,18 +254,23 @@ class _ScreenCartState extends State<ScreenCart> {
                       Column(
                         children: [
                           Container(
-                              color: Colors.grey.shade300,
-                              width: double.infinity,
-                              alignment: Alignment.center,
-                              padding: const EdgeInsets.all(6),
-                              child: const Text(
-                                'วิธีการชำระเงิน',
-                                style: TextStyle(fontSize: 16),
-                              )),
+                            color: Colors.grey.shade300,
+                            width: double.infinity,
+                            padding: EdgeInsets.only(top: 7,bottom: 7,right: 7,left: 15),
+                            child: Text(
+                              'วิธีการชำระเงิน',
+                              style: StyleFont.fontMali(
+                                  size: 18, color: Colors.black,fontWeight: FontWeight.w500),
+                            ),
+                          ),
                         ],
                       ),
                       RadioListTile(
-                          title: Text(payMentCash),
+                          title: Text(
+                            payMentCash,
+                            style: StyleFont.fontMali(
+                                size: 15, color: Colors.black),
+                          ),
                           value: paymentTypeCash,
                           groupValue: payMent,
                           onChanged: (value) {
@@ -275,7 +279,9 @@ class _ScreenCartState extends State<ScreenCart> {
                             });
                           }),
                       RadioListTile(
-                          title: Text(payMentQR),
+                          title: Text(payMentQR,
+                              style: StyleFont.fontMali(
+                                  size: 15, color: Colors.black)),
                           value: paymenyTypeQR,
                           groupValue: payMent,
                           onChanged: (value) {
@@ -284,9 +290,9 @@ class _ScreenCartState extends State<ScreenCart> {
                             });
                           }),
                       RadioListTile(
-                          title: Text(
-                            payMentCreditCard,
-                          ),
+                          title: Text(payMentCreditCard,
+                              style: StyleFont.fontMali(
+                                  size: 15, color: Colors.black)),
                           value: paymentTypeCreditCard,
                           groupValue: payMent,
                           onChanged: (value) {

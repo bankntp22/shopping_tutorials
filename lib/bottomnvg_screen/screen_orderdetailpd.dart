@@ -6,6 +6,7 @@ import 'package:app_tutorial1/models/constant.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_tutorial1/db/db_sqlite.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ScreenOrderDetailpd extends StatefulWidget {
   String sCode;
@@ -145,10 +146,7 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
       home: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: Text(
-              'รายละเอียดสินค้า',
-              style: StyleFont.fontGoogleMali
-            ),
+            title: Text('รายละเอียดสินค้า', style: StyleFont.fontGoogleMali),
             centerTitle: true,
             elevation: 0,
             backgroundColor: Color.fromARGB(255, 63, 106, 141),
@@ -168,12 +166,13 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                 children: [
                   Container(
                     width: double.infinity,
-                    color: Colors.amber.shade200,
+                    color: Colors.amber.shade400,
                     alignment: Alignment.center,
                     padding: EdgeInsets.all(8),
-                    child: Text('สรุปคำสั่งซื้อ ! ',
-                        style: TextStyle(
-                            fontSize: 23, color: Colors.grey.shade800)),
+                    child: Text(
+                      'สรุปคำสั่งซื้อ ! ',
+                      style: StyleFont.fontGoogleMaliSize25
+                    ),
                   ),
                   Expanded(
                     child: Column(
@@ -308,7 +307,7 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                     flex: 5,
                     child: Text(
                       listItem[index].sNameProduct.toString(),
-                      style: Theme.of(context).textTheme.headline6,
+                      style: StyleFont.fontMali(color: Colors.black,size: 21)
                     ),
                   ),
                   Container(
@@ -320,7 +319,8 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                         children: [
                           Text(
                             listItem[index].sQty.toString(),
-                            style: Theme.of(context).textTheme.headline6,
+                            style: StyleFont.fontMali(size: 21,color: Colors.black),
+                            // style: Theme.of(context).textTheme.headline6,
                           ),
                         ],
                       ),
@@ -333,7 +333,7 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                       children: [
                         Text(
                           '\฿ ${dTotalprice.toStringAsFixed(0)}',
-                          style: Theme.of(context).textTheme.headline6,
+                          style: StyleFont.fontMali(size: 21,color: Colors.black)
                         ),
                       ],
                     ),
@@ -358,18 +358,24 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                       MaterialStateProperty.all(Colors.green.shade600)),
               onPressed: () {
                 setState(() {
-                  showDialog(context: context, builder: ((context) => (
-                    AlertDialog(
-                      title: Text('คุณต้องการที่จะ รับสินค้า ?'),
-                      content: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          TextButton(onPressed: (){}, child: WidgetButton.buttonTextName('ตกลง'),),
-                          TextButton(onPressed: (){}, child: WidgetButton.buttonTextName('ยกเลิก'),),
-                        ],
-                      ),
-                    )
-                  )));
+                  showDialog(
+                      context: context,
+                      builder: ((context) => (AlertDialog(
+                            title: Text('คุณต้องการที่จะ รับสินค้า ?'),
+                            content: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                TextButton(
+                                  onPressed: () {},
+                                  child: Text('รับสินค้า',style: GoogleFonts.mali(fontSize: 22,color: Colors.white,))
+                                ),
+                                TextButton(
+                                  onPressed: () {},
+                                  child: Text('รับสินค้า',style: GoogleFonts.mali(fontSize: 22,color: Colors.white,))
+                                ),
+                              ],
+                            ),
+                          ))));
                 });
               },
               child: Padding(
@@ -390,18 +396,27 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                   backgroundColor:
                       MaterialStateProperty.all(Colors.red.shade600)),
               onPressed: () {
-                showDialog(context: context, builder: ((context) => (
-                    AlertDialog(
-                      title: Text('คุณแน่ใจที่จะ ยกเลิกสินค้า ?',textAlign: TextAlign.center,),
-                      content: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          TextButton(onPressed: (){}, child: WidgetButton.buttonTextName('ตกลง'),),
-                          TextButton(onPressed: (){}, child: WidgetButton.buttonTextName('ยกเลิก'),),
-                        ],
-                      ),
-                    )
-                  )));
+                showDialog(
+                    context: context,
+                    builder: ((context) => (AlertDialog(
+                          title: Text(
+                            'คุณแน่ใจที่จะ ยกเลิกสินค้า ?',
+                            textAlign: TextAlign.center,
+                          ),
+                          content: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              TextButton(
+                                onPressed: () {},
+                                child: WidgetButton.buttonTextName('ตกลง'),
+                              ),
+                              TextButton(
+                                onPressed: () {},
+                                child: WidgetButton.buttonTextName('ยกเลิก'),
+                              ),
+                            ],
+                          ),
+                        ))));
               },
               child: Padding(
                 padding: const EdgeInsets.all(15),
@@ -415,8 +430,6 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
       ),
     );
   }
-
-  
 
   Container buttonDropdownSelectedStatusOrder() {
     return Container(
@@ -475,6 +488,7 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
 
   Container TypeOrder() {
     return Container(
+      height: 45,
       width: double.infinity,
       decoration: BoxDecoration(color: Colors.blue.shade200),
       padding: EdgeInsets.only(left: 25, top: 5, bottom: 5, right: 20),
@@ -483,24 +497,16 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
         children: [
           Text(
             'ชื่อ',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+            style: StyleFont.fontGoogleMali1,
             ),
-          ),
+          
           Text(
             'จำนวน',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
+            style: StyleFont.fontGoogleMali1,
           ),
           Text(
             'ราคารวม',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
+            style: StyleFont.fontGoogleMali1,
           ),
         ],
       ),

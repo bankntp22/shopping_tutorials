@@ -63,4 +63,9 @@ class SQLiteDatabaseProfile {
     final db = await database;
     return await db!.update(tableProfile, map);
   }
+
+  // Future<int> deleteData()async{
+  //   final db = await database;
+  //   return await db!.delete(table);
+  // }
 }

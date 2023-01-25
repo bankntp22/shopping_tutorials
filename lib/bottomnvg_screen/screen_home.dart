@@ -1,3 +1,4 @@
+import 'package:app_tutorial1/models/foodlist.dart';
 import 'package:flutter/material.dart';
 
 import '../models/menu_list.dart';
@@ -39,7 +40,8 @@ class _ScreenHomeState extends State<ScreenHome> {
                         color: Colors.white54,
                       ),
                       width: 160,
-                      height: 165,
+                      height: 130,
+                      // height: 165,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -48,15 +50,19 @@ class _ScreenHomeState extends State<ScreenHome> {
                               child: Image.asset(
                                 listmenu[index].imageUrl,
                                 fit: BoxFit.cover,
+                                width: 90,
+                                height: 90,
                               )),
                         ],
                       ),
                     ),
                   ),
-                  Text(
-                    listmenu[index].title,
-                    style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
-                  )
+                  Text(listmenu[index].title,
+                      style: StyleFont.fontMali(
+                        size: 19,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black
+                      ))
                 ],
               );
             },

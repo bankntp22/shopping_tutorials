@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../bottomnvg_screen/screen_order.dart';
 import '../history_order.dart';
 import '../screenselectproduct.dart';
 
@@ -8,8 +9,7 @@ class MenuList {
   String imageUrl;
   Widget pageWidget;
 
-  MenuList(
-      {required this.imageUrl, required this.title, required this.pageWidget});
+  MenuList({required this.imageUrl, required this.title,required this.pageWidget});
 }
 
 List<MenuList> listmenu = [
@@ -18,9 +18,15 @@ List<MenuList> listmenu = [
       title: "อาหารทั้งหมด",
       pageWidget: Screenselectproduct()),
   MenuList(
-      imageUrl: "assets/history-order.png",
-      title: "ประวัติการสั่งซื้อ",
-      pageWidget: HistoryOrder()),
+    imageUrl: "assets/history-order.png",
+    title: "ประวัติการสั่งซื้อ",
+    pageWidget: HistoryOrder(),
+  ),
+  MenuList(
+    imageUrl: "assets/order.png",
+    title: "รายการออเดอร์",
+    pageWidget: ScreenOrder(),
+  ),
   // MenuList(imageUrl: "assets/whan.png", title: "ขนมหวาน"),
   // MenuList(imageUrl: "assets/kanom.png", title: "ขนมคบเคี้ยว"),
   // MenuList(imageUrl: "assets/kk.png", title: "เครื่องดื่ม"),

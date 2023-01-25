@@ -17,14 +17,17 @@ class StyleFont {
   static var fontGoogleMali = GoogleFonts.mali(fontSize: 23,fontWeight: FontWeight.bold);
   static var fontGoogleMali1 = GoogleFonts.mali(fontSize: 16,fontWeight: FontWeight.bold);
   static var fontGoogleMaliUnBold = GoogleFonts.mali(fontSize: 17,);
+  static var fontGoogleMaliSize25 = GoogleFonts.mali(fontSize: 25,);
+  static var fontGoogleMaliSize20 = GoogleFonts.mali(fontSize: 18,);
 
-  
+  static TextStyle fontMali ({double size = 17,Color color = Colors.white,FontWeight? fontWeight}){
+    return GoogleFonts.mali(fontSize: size,color: color,fontWeight: fontWeight);
+  }
 }
 
-
-
 class WidgetButton {
-  static Text buttonTextName(String name) => Text(name,style: TextStyle(fontSize: 17,),);
+  static Text buttonTextName(String name) => Text(name,style: StyleFont.fontMali(size: 22),);
+  
 }
 
 class Food {

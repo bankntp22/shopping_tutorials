@@ -116,10 +116,11 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(
-              backgroundColor: Colors.transparent,
+              backgroundColor: Color.fromARGB(255, 63, 106, 141),
               elevation: 1,
-              title:  Text(
-                'อาหารทั้งหมด',style: StyleFont.fontGoogleMali,
+              title: Text(
+                'อาหารทั้งหมด',
+                style: StyleFont.fontGoogleMali,
               ),
               leading: IconButton(
                   onPressed: () {
@@ -156,24 +157,16 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
                 Container(
                   margin:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-                  color: Colors.grey.shade500,
+                  color: Colors.grey.shade800,
                   padding: const EdgeInsets.all(10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        'เมนูทั้งหมด ',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white,
-                        ),
-                      ),
+                      Text('เมนูทั้งหมด ', style: StyleFont.fontMali(size: 20)),
                       Text('ราคารวม : ${formatNumber(dTotalall.toInt())} ',
-                          style: const TextStyle(
-                            fontSize: 23,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white,
+                          style: StyleFont.fontMali(
+                            size: 22,
+                            fontWeight: FontWeight.bold,
                           )),
                     ],
                   ),
@@ -308,6 +301,7 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
                                                         if (mounted) {
                                                           setState(() {
                                                             qtySum++;
+
                                                             temptotalprice =
                                                                 dTotalall +
                                                                     foodlist[
@@ -318,6 +312,7 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
                                                                 2000) {
                                                               dTotalall =
                                                                   temptotalprice;
+
                                                               foodlist[index]
                                                                   .qty++;
 
