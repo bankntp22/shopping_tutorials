@@ -1,3 +1,4 @@
+import 'package:app_tutorial1/style/font.dart';
 import 'package:flutter/material.dart';
 import 'package:app_tutorial1/models/foodlist.dart';
 
@@ -30,10 +31,7 @@ class _HistoryOrderState extends State<HistoryOrder> {
                 Icons.arrow_back,
               ),
             ),
-            title: Text(
-              TextName.textTitle,
-              style: StyleFont.textSizeAppbar
-            ),
+            title: Text(TextName.textTitle, style: StyleFont.textSizeAppbar),
           ),
           body: Container(
             child: Column(

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-final Color bgColor = Colors.blueGrey.shade400;
-const double bg = 16.0;
-
 class Constant {
 //head
   static const String totalPrice = 'TOTAL_PRICE';

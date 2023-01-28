@@ -1,4 +1,5 @@
 import 'package:app_tutorial1/home.dart';
+import 'package:app_tutorial1/style/font.dart';
 import 'package:flutter/material.dart';
 
 import 'bottomnvg_screen/screen_order.dart';
@@ -170,7 +171,9 @@ class _ScreenCartState extends State<ScreenCart> {
                           child: Text(
                             'รายการสินค้าที่สั่งซื้อ',
                             style: StyleFont.fontMali(
-                                size: 18, color: Colors.black,fontWeight: FontWeight.w500),
+                                size: 18,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500),
                           ),
                         ),
                       ],
@@ -256,11 +259,14 @@ class _ScreenCartState extends State<ScreenCart> {
                           Container(
                             color: Colors.grey.shade300,
                             width: double.infinity,
-                            padding: EdgeInsets.only(top: 7,bottom: 7,right: 7,left: 15),
+                            padding: EdgeInsets.only(
+                                top: 7, bottom: 7, right: 7, left: 15),
                             child: Text(
                               'วิธีการชำระเงิน',
                               style: StyleFont.fontMali(
-                                  size: 18, color: Colors.black,fontWeight: FontWeight.w500),
+                                  size: 18,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500),
                             ),
                           ),
                         ],

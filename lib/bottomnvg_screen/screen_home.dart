@@ -1,4 +1,5 @@
 import 'package:app_tutorial1/models/foodlist.dart';
+import 'package:app_tutorial1/style/font.dart';
 import 'package:flutter/material.dart';
 
 import '../models/menu_list.dart';
@@ -59,10 +60,9 @@ class _ScreenHomeState extends State<ScreenHome> {
                   ),
                   Text(listmenu[index].title,
                       style: StyleFont.fontMali(
-                        size: 19,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black
-                      ))
+                          size: 19,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black))
                 ],
               );
             },

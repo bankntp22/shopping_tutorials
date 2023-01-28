@@ -3,6 +3,7 @@ import 'package:app_tutorial1/models/foodlist.dart';
 import 'package:app_tutorial1/models/model_head.dart';
 import 'package:app_tutorial1/models/model_item.dart';
 import 'package:app_tutorial1/models/constant.dart';
+import 'package:app_tutorial1/style/font.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_tutorial1/db/db_sqlite.dart';
@@ -169,10 +170,8 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                     color: Colors.amber.shade400,
                     alignment: Alignment.center,
                     padding: EdgeInsets.all(8),
-                    child: Text(
-                      'สรุปคำสั่งซื้อ ! ',
-                      style: StyleFont.fontGoogleMaliSize25
-                    ),
+                    child: Text('สรุปคำสั่งซื้อ ! ',
+                        style: StyleFont.fontGoogleMaliSize25),
                   ),
                   Expanded(
                     child: Column(
@@ -305,10 +304,9 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                 children: [
                   Expanded(
                     flex: 5,
-                    child: Text(
-                      listItem[index].sNameProduct.toString(),
-                      style: StyleFont.fontMali(color: Colors.black,size: 21)
-                    ),
+                    child: Text(listItem[index].sNameProduct.toString(),
+                        style:
+                            StyleFont.fontMali(color: Colors.black, size: 21)),
                   ),
                   Container(
                     width: 30,
@@ -319,7 +317,8 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                         children: [
                           Text(
                             listItem[index].sQty.toString(),
-                            style: StyleFont.fontMali(size: 21,color: Colors.black),
+                            style: StyleFont.fontMali(
+                                size: 21, color: Colors.black),
                             // style: Theme.of(context).textTheme.headline6,
                           ),
                         ],
@@ -331,10 +330,9 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text(
-                          '\฿ ${dTotalprice.toStringAsFixed(0)}',
-                          style: StyleFont.fontMali(size: 21,color: Colors.black)
-                        ),
+                        Text('\฿ ${dTotalprice.toStringAsFixed(0)}',
+                            style: StyleFont.fontMali(
+                                size: 21, color: Colors.black)),
                       ],
                     ),
                   ),
@@ -366,13 +364,19 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 TextButton(
-                                  onPressed: () {},
-                                  child: Text('รับสินค้า',style: GoogleFonts.mali(fontSize: 22,color: Colors.white,))
-                                ),
+                                    onPressed: () {},
+                                    child: Text('รับสินค้า',
+                                        style: GoogleFonts.mali(
+                                          fontSize: 22,
+                                          color: Colors.white,
+                                        ))),
                                 TextButton(
-                                  onPressed: () {},
-                                  child: Text('รับสินค้า',style: GoogleFonts.mali(fontSize: 22,color: Colors.white,))
-                                ),
+                                    onPressed: () {},
+                                    child: Text('รับสินค้า',
+                                        style: GoogleFonts.mali(
+                                          fontSize: 22,
+                                          color: Colors.white,
+                                        ))),
                               ],
                             ),
                           ))));
@@ -408,11 +412,11 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                             children: [
                               TextButton(
                                 onPressed: () {},
-                                child: WidgetButton.buttonTextName('ตกลง'),
+                                child: StyleFont.buttonTextName('ตกลง'),
                               ),
                               TextButton(
                                 onPressed: () {},
-                                child: WidgetButton.buttonTextName('ยกเลิก'),
+                                child: StyleFont.buttonTextName('ยกเลิก'),
                               ),
                             ],
                           ),
@@ -498,8 +502,7 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
           Text(
             'ชื่อ',
             style: StyleFont.fontGoogleMali1,
-            ),
-          
+          ),
           Text(
             'จำนวน',
             style: StyleFont.fontGoogleMali1,

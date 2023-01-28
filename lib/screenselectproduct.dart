@@ -1,5 +1,6 @@
 import 'package:app_tutorial1/models/constant.dart';
 import 'package:app_tutorial1/models/foodlist.dart';
+import 'package:app_tutorial1/style/font.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'screen_cart.dart';
@@ -157,8 +158,10 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
                 Container(
                   margin:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-                  color: Colors.grey.shade800,
                   padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      color: Colors.grey.shade800,
+                      border: Border.all(color: Colors.white, width: 3)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -179,14 +182,26 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
                       itemCount: foodlist.length,
                       itemBuilder: (context, index) {
                         return Container(
-                            margin: const EdgeInsets.symmetric(
-                              horizontal: 5,
-                            ),
+                            // margin: const EdgeInsets.symmetric(
+                            //   horizontal: 5,
+                            // ),
                             height: 205,
                             width: double.infinity,
                             child: Column(
                               children: [
                                 Card(
+                                  shape: ShapeBorder.lerp(
+                                      OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.grey.shade500,
+                                            width: 5),
+                                      ),
+                                      OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.grey.shade500,
+                                            width: 5),
+                                      ),
+                                      5),
                                   elevation: 0,
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
@@ -199,13 +214,12 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
                                               foodlist[index].imageUrl,
                                               fit: BoxFit.cover,
                                             )),
-                                        const SizedBox(
-                                          width: bg / 3,
-                                        ),
+                                        SizedBox(width: StyleTheme.bg),
                                         Expanded(
                                             child: Container(
                                           margin: const EdgeInsets.symmetric(
-                                              vertical: 6),
+                                            vertical: 6,
+                                          ),
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -217,9 +231,12 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
                                                 children: [
                                                   Text(
                                                     foodlist[index].title,
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .headline6,
+                                                    style: StyleFont.fontMali(
+                                                      color: Colors.black,
+                                                      size: 19,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                    ),
                                                   ),
                                                   if (foodlist[index].qty > 0)
                                                     Chip(
@@ -274,9 +291,9 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
                                               ),
                                               Text(
                                                 'ราคา:   ${foodlist[index].price}',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .subtitle2,
+                                                style: StyleFont.fontMali(
+                                                    color: Colors.black,
+                                                    size: 16),
                                               ),
                                               const Padding(
                                                 padding: EdgeInsets.symmetric(
@@ -447,7 +464,11 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
                                                     ),
                                                   const Spacer(),
                                                   Text(
-                                                      'รวม : ${foodlist[index].total.toStringAsFixed(0)} '),
+                                                    'รวม : ${foodlist[index].total.toStringAsFixed(0)} ',
+                                                    style: StyleFont.fontMali(
+                                                        color: Colors.black,
+                                                        size: 15),
+                                                  ),
                                                 ],
                                               ),
                                             ],

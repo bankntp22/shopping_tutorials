@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:app_tutorial1/style/font.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -99,7 +100,10 @@ class _ScreenOrderState extends State<ScreenOrder> {
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
-            title: Text('รายการสั่งซื้อ', style: StyleFont.fontGoogleMali),
+            title: Text(
+              'รายการสั่งซื้อ',
+              style: StyleFont.fontMali(size: 25, fontWeight: FontWeight.bold),
+            ),
             centerTitle: true,
             leading: IconButton(
               onPressed: () {
@@ -151,18 +155,18 @@ class _ScreenOrderState extends State<ScreenOrder> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(sPayment = 'วิธีการชำระเงิน',
-                                style: StyleFont.fontMali(
-                                  size: 19,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                )),
+                            Text(
+                              sPayment = 'วิธีการชำระเงิน',
+                              style: StyleFont.fontMali(
+                                size: 19,
+                                color: Colors.grey.shade700,
+                              ),
+                            ),
                             Text(
                               sTotal = 'จำนวนเงิน',
                               style: StyleFont.fontMali(
                                 size: 19,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
+                                color: Colors.grey.shade700,
                               ),
                             ),
                           ],
@@ -223,10 +227,10 @@ class _ScreenOrderState extends State<ScreenOrder> {
             height: 110,
             child: Card(
               elevation: 0,
-              color: Color.fromARGB(255, 168, 175, 196),
+              color: Color.fromARGB(255, 186, 192, 211),
               // color: Color.fromARGB(255, 201, 235, 235),
               // color: Color.fromARGB(255, 255, 193, 101),
-              margin: EdgeInsets.only(bottom: 8),
+              margin: EdgeInsets.only(bottom: 6),
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: Column(
@@ -237,10 +241,10 @@ class _ScreenOrderState extends State<ScreenOrder> {
                         Expanded(
                           child: Text(
                             list[index].sPayment.toString().toUpperCase(),
-                            style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                            style: StyleFont.fontMali(
+                              size: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -248,10 +252,9 @@ class _ScreenOrderState extends State<ScreenOrder> {
                         ),
                         Text(
                           "\$ ${formatNumber(axs)}  ",
-                          style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w800,
-                            color: Colors.white,
+                          style: StyleFont.fontMali(
+                            size: 19,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                         // Container(
@@ -363,7 +366,8 @@ class _buttonConfirmandCancelOrderState
             Container(
               child: Text(
                 'ออเดอร์ ${widget.indexCode}',
-                style: TextStyle(color: Colors.white, fontSize: 16),
+                style:
+                    StyleFont.fontMali(size: 16, fontWeight: FontWeight.w500),
               ),
             ),
             Row(
