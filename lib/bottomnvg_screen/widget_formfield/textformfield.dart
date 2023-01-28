@@ -3,6 +3,7 @@ import 'package:app_tutorial1/db/db_profile.dart';
 import 'package:app_tutorial1/home.dart';
 import 'package:app_tutorial1/models/foodlist.dart';
 import 'package:app_tutorial1/models/model_profile.dart';
+import 'package:app_tutorial1/style/font.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -129,8 +130,9 @@ class _TextformfieldState extends State<Textformfield> {
   }
 
   _save() async {
-    int result = 0;
+    int result = 2;
     bool haveData = await _checkRecordDatabase();
+
     if (haveData) {
       result = await _updateData();
     } else {
@@ -326,8 +328,8 @@ class _TextformfieldState extends State<Textformfield> {
                         //     fontSize: 25,
                         //     fontWeight: FontWeight.bold,
                         //     color: Colors.black45),
-                        style:
-                            GoogleFonts.mali(fontSize: 23, color: Colors.grey.shade600)),
+                        style: GoogleFonts.mali(
+                            fontSize: 23, color: Colors.grey.shade600)),
                   ),
                   ElevatedButton.icon(
                     style: ButtonStyle(
