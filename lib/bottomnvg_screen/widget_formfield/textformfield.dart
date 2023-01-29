@@ -130,28 +130,22 @@ class _TextformfieldState extends State<Textformfield> {
   }
 
   _save() async {
-    int result = 2;
+    int result = 0;
     bool haveData = await _checkRecordDatabase();
 
     if (haveData) {
       result = await _updateData();
+      recordSnackbar('แก้ไขข้อมูลแล้ว');
     } else {
       result = await _insertItem();
-    }
-
-    if (result == 0) {
-      recordSnackbar('แก้ไขข้อมูลแล้ว');
-      // Navigator.push(context, MaterialPageRoute(builder: (context) {
-      //   return Home(screenIndex: 0,);
-      // },));
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   SnackBar(
-      //     content: Text('แก้ไขข้อมูลสำเร็จ!'),
-      //   ),
-      // );
-    } else if (result > 0) {
       recordSnackbar('บันทึกสำเร็จ');
     }
+
+    // if (result == 0) {
+    //   recordSnackbar('แก้ไขข้อมูลแล้ว');
+    // } else if (result > 0) {
+    //   recordSnackbar('บันทึกสำเร็จ');
+    //
   }
 
   var sizedBox5 = SizedBox(

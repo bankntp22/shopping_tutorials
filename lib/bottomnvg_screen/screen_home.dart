@@ -39,6 +39,8 @@ class _ScreenHomeState extends State<ScreenHome> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(14),
                         color: Colors.white54,
+                        border:
+                            Border.all(color: Colors.grey.shade300, width: 3),
                       ),
                       width: 160,
                       height: 130,

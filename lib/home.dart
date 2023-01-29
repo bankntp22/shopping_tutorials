@@ -54,7 +54,6 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        
         backgroundColor: Colors.white70,
         // appBar: AppBar(
         //   title: Text('หมวดหมู่อาหาร'),
@@ -67,32 +66,42 @@ class _HomeState extends State<Home> {
         //   ],
         // ),
         body: listMenu.elementAt(widget.screenIndex),
-        bottomNavigationBar: NavigationBar(
-          // selectedItemColor: Colors.black,
-          backgroundColor: Colors.white,
-          elevation: 5,
-          onDestinationSelected: (value) {
-            setState(() {
-              widget.screenIndex = value;
-            });
-          },
-          selectedIndex: widget.screenIndex,
-          // onTap: updatedIndex,
-          // currentIndex: widget.screenIndex,
-          destinations: const [
-            NavigationDestination(
-                icon: Icon(
-                  Icons.home_rounded,
-                  color: Colors.blueAccent,
-                ),
-                label: 'Home'),
-            NavigationDestination(
-                icon: Icon(Icons.mark_as_unread, color: Colors.blueAccent),
-                label: 'ORDER'),
-            NavigationDestination(
-                icon: Icon(Icons.person, color: Colors.blueAccent),
-                label: 'Profile'),
-          ],
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            border: Border(
+              top: BorderSide(
+                color: Colors.grey.shade400,
+              ),
+            ),
+          ),
+          child: NavigationBar(
+            height: 65,
+            // selectedItemColor: Colors.black,
+            backgroundColor: Colors.white,
+            elevation: 5,
+            onDestinationSelected: (value) {
+              setState(() {
+                widget.screenIndex = value;
+              });
+            },
+            selectedIndex: widget.screenIndex,
+            // onTap: updatedIndex,
+            // currentIndex: widget.screenIndex,
+            destinations: const [
+              NavigationDestination(
+                  icon: Icon(
+                    Icons.home_rounded,
+                    color: Colors.blueAccent,
+                  ),
+                  label: 'Home'),
+              NavigationDestination(
+                  icon: Icon(Icons.mark_as_unread, color: Colors.blueAccent),
+                  label: 'ORDER'),
+              NavigationDestination(
+                  icon: Icon(Icons.person, color: Colors.blueAccent),
+                  label: 'Profile'),
+            ],
+          ),
         ),
       ),
     );

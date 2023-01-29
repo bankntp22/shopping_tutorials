@@ -95,14 +95,9 @@ class SqlLiteManager {
   Future<int> updateData(Map<String, dynamic> map, String code) async {
     final db = await database;
     // String sWhere = Constant.code + "= ?";
-    String sWhere = Constant.code + "= ?";
-
+    String sWhere = Constant.statusOrder + "= ?";
     List<String> list = [code];
-    return await db!.update(
-      tableHead,
-      map,
-      where: sWhere,
-    );
+    return await db!.update(tableHead, map, where: sWhere, whereArgs: list);
   }
 
   // initDatabase() async {

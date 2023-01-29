@@ -363,20 +363,37 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
                             content: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                TextButton(
-                                    onPressed: () {},
-                                    child: Text('รับสินค้า',
-                                        style: GoogleFonts.mali(
-                                          fontSize: 22,
-                                          color: Colors.white,
-                                        ))),
-                                TextButton(
-                                    onPressed: () {},
-                                    child: Text('รับสินค้า',
-                                        style: GoogleFonts.mali(
-                                          fontSize: 22,
-                                          color: Colors.white,
-                                        ))),
+                                ContainerStyle.styleContainer(
+                                  Text(
+                                    'ตกลง',
+                                    style: StyleFont.fontMali(
+                                        size: 15, color: Colors.black),
+                                  ),
+                                  Colors.black12,
+                                  padding: EdgeInsets.only(
+                                    left: 10,
+                                    right: 10,
+                                    top: 5,
+                                    bottom: 5,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                ContainerStyle.styleContainer(
+                                  Text(
+                                    'ยกเลิก',
+                                    style: StyleFont.fontMali(
+                                        size: 15, color: Colors.black),
+                                  ),
+                                  Colors.black12,
+                                  padding: EdgeInsets.only(
+                                    left: 10,
+                                    right: 10,
+                                    top: 5,
+                                    bottom: 5,
+                                  ),
+                                ),
                               ],
                             ),
                           ))));

@@ -38,3 +38,15 @@ class StyleFont {
         style: StyleFont.fontMali(size: 22),
       );
 }
+
+class ContainerStyle {
+  static styleContainer(Widget widget, Color color,
+      {EdgeInsets? margin, EdgeInsets? padding}) {
+    return Container(
+      child: widget,
+      color: color,
+      margin: margin,
+      padding: padding,
+    );
+  }
+}

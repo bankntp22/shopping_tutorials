@@ -150,9 +150,9 @@ class _ScreenCartState extends State<ScreenCart> {
         child: Container(
           margin: const EdgeInsets.all(8),
           padding: const EdgeInsets.only(
-            top: 15,
-            right: 2,
-            left: 2,
+            top: 5,
+            // right: 2,
+            // left: 2,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -215,26 +215,39 @@ class _ScreenCartState extends State<ScreenCart> {
                                 ),
                                 title: Text(
                                   widget.foodlistone[index].title,
-                                  style: Theme.of(context).textTheme.headline6,
+                                  style: StyleFont.fontMali(
+                                    size: 17,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
                                 tileColor: Colors.white24,
                                 mouseCursor: MouseCursor.defer,
                                 subtitle: Text(
                                   "ราคา :  ${widget.foodlistone[index].price.toString()}",
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold),
+                                  style: StyleFont.fontMali(
+                                    size: 14,
+                                    color: Colors.black,
+                                  ),
                                 ),
                                 trailing: Column(
                                   children: [
                                     Text(
                                       "จำนวน : ${widget.foodlistone[index].qty}",
+                                      style: StyleFont.fontMali(
+                                        size: 15,
+                                        color: Colors.black,
+                                      ),
                                     ),
                                     const Spacer(),
                                     Text(
-                                        "รวม : ${widget.foodlistone[index].total.toStringAsFixed(0)}",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline6),
+                                      "รวม : ${widget.foodlistone[index].total.toStringAsFixed(0)}",
+                                      style: StyleFont.fontMali(
+                                        size: 19,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ));

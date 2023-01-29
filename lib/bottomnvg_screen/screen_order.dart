@@ -74,7 +74,6 @@ class _ScreenOrderState extends State<ScreenOrder> {
   Future<int> updateRecordComplete(String code) async {
     Map<String, dynamic> map = Map<String, dynamic>();
     map[Constant.statusOrder] = Constant.completeOrder;
-    print(map);
     return db.updateData(map, code);
   }
 
@@ -200,139 +199,150 @@ class _ScreenOrderState extends State<ScreenOrder> {
     );
   }
 
-  ListView listviewOrder() {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: list.length,
-      itemBuilder: (context, index) {
-        // String sConvert = list[index].dTotal;
-        double pi = double.parse(list[index].dTotal);
-        iCodeOrder = list[index].sCode;
-        double axs = double.parse(pi.toStringAsFixed(0));
+  listviewOrder() {
+    return list.length > 0
+        ? ListView.builder(
+            shrinkWrap: true,
+            itemCount: list.length,
+            itemBuilder: (context, index) {
+              // String sConvert = list[index].dTotal;
+              double pi = double.parse(list[index].dTotal);
+              iCodeOrder = list[index].sCode;
+              double axs = double.parse(pi.toStringAsFixed(0));
 
-        return GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return ScreenOrderDetailpd(
-                    sCode: list[index].sCode,
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return ScreenOrderDetailpd(
+                          sCode: list[index].sCode,
+                        );
+                      },
+                    ),
                   );
                 },
-              ),
-            );
-          },
-          child: Container(
-            height: 110,
-            child: Card(
-              elevation: 0,
-              color: Color.fromARGB(255, 186, 192, 211),
-              // color: Color.fromARGB(255, 201, 235, 235),
-              // color: Color.fromARGB(255, 255, 193, 101),
-              margin: EdgeInsets.only(bottom: 6),
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            list[index].sPayment.toString().toUpperCase(),
-                            style: StyleFont.fontMali(
-                              size: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
+                child: Container(
+                  height: 110,
+                  child: Card(
+                    elevation: 0,
+                    color: Color.fromARGB(255, 186, 192, 211),
+                    // color: Color.fromARGB(255, 201, 235, 235),
+                    // color: Color.fromARGB(255, 255, 193, 101),
+                    margin: EdgeInsets.only(bottom: 6),
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  list[index].sPayment.toString().toUpperCase(),
+                                  style: StyleFont.fontMali(
+                                    size: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 30,
+                              ),
+                              Text(
+                                "\$ ${formatNumber(axs)}  ",
+                                style: StyleFont.fontMali(
+                                  size: 19,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              // Container(
+                              //   height: 50,
+                              //   child: DropdownButton<String>(
+                              //       value: _selectedValue,
+                              //       icon: Icon(Icons.more_horiz),
+                              //       isDense: true,
+                              //       onChanged:
+                              //           (String? newValue) {
+                              //         setState(() {
+                              //           showDialog(
+                              //             context: context,
+                              //             builder: (context) {
+                              //               return AlertDialog(
+                              //                 title: Text(
+                              //                   'คุณแน่ใจที่จะ ',
+                              //                   textAlign:
+                              //                       TextAlign
+                              //                           .center,
+                              //                 ),
+                              //                 content: Text(
+                              //                   newValue
+                              //                       .toString(),
+                              //                 ),
+                              //               );
+                              //             },
+                              //           );
+                              //         });
+                              //       },
+                              //       items: [
+                              //         DropdownMenuItem(
+                              //           value: 'ยกเลิก',
+                              //           child: Container(
+                              //             width: 50,
+                              //             child: Text(
+                              //               'ยกเลิก',
+                              //               style: TextStyle(
+                              //                 color: Colors
+                              //                     .redAccent,
+                              //                 fontWeight:
+                              //                     FontWeight.bold,
+                              //               ),
+                              //             ),
+                              //           ),
+                              //         ),
+                              //         DropdownMenuItem(
+                              //           value:
+                              //               'แน่ใจที่จะรับสินค้า',
+                              //           child: Container(
+                              //             width: 50,
+                              //             child: Text(
+                              //               'รับสินค้า',
+                              //               style: TextStyle(
+                              //                 fontWeight:
+                              //                     FontWeight.bold,
+                              //               ),
+                              //             ),
+                              //           ),
+                              //         ),
+                              //       ]),
+                              // ),
+                            ],
                           ),
-                        ),
-                        SizedBox(
-                          width: 30,
-                        ),
-                        Text(
-                          "\$ ${formatNumber(axs)}  ",
-                          style: StyleFont.fontMali(
-                            size: 19,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        // Container(
-                        //   height: 50,
-                        //   child: DropdownButton<String>(
-                        //       value: _selectedValue,
-                        //       icon: Icon(Icons.more_horiz),
-                        //       isDense: true,
-                        //       onChanged:
-                        //           (String? newValue) {
-                        //         setState(() {
-                        //           showDialog(
-                        //             context: context,
-                        //             builder: (context) {
-                        //               return AlertDialog(
-                        //                 title: Text(
-                        //                   'คุณแน่ใจที่จะ ',
-                        //                   textAlign:
-                        //                       TextAlign
-                        //                           .center,
-                        //                 ),
-                        //                 content: Text(
-                        //                   newValue
-                        //                       .toString(),
-                        //                 ),
-                        //               );
-                        //             },
-                        //           );
-                        //         });
-                        //       },
-                        //       items: [
-                        //         DropdownMenuItem(
-                        //           value: 'ยกเลิก',
-                        //           child: Container(
-                        //             width: 50,
-                        //             child: Text(
-                        //               'ยกเลิก',
-                        //               style: TextStyle(
-                        //                 color: Colors
-                        //                     .redAccent,
-                        //                 fontWeight:
-                        //                     FontWeight.bold,
-                        //               ),
-                        //             ),
-                        //           ),
-                        //         ),
-                        //         DropdownMenuItem(
-                        //           value:
-                        //               'แน่ใจที่จะรับสินค้า',
-                        //           child: Container(
-                        //             width: 50,
-                        //             child: Text(
-                        //               'รับสินค้า',
-                        //               style: TextStyle(
-                        //                 fontWeight:
-                        //                     FontWeight.bold,
-                        //               ),
-                        //             ),
-                        //           ),
-                        //         ),
-                        //       ]),
-                        // ),
-                      ],
+                          Spacer(),
+                          buttonConfirmandCancelOrder(
+                            indexCode: list[index].sCode,
+                            updateConfirm: () => updateRecordComplete,
+                            updateCancel: () => updateRecordCancel,
+                          )
+                        ],
+                      ),
                     ),
-                    Spacer(),
-                    buttonConfirmandCancelOrder(
-                      indexCode: list[index].sCode,
-                      updateConfirm: updateRecordComplete,
-                      updateCancel: updateRecordCancel,
-                    )
-                  ],
+                  ),
                 ),
+              );
+            },
+          )
+        : Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'ไม่มีรายการที่กำลังสั่งซื้อ',
+                style: StyleFont.fontMali(size: 20, color: Colors.black),
               ),
-            ),
-          ),
-        );
-      },
-    );
+            ],
+          );
   }
 }
 
@@ -397,6 +407,7 @@ class _buttonConfirmandCancelOrderState
                                   ),
                                   onPressed: () {
                                     widget.updateConfirm();
+                                    Navigator.pop(context);
                                   },
                                   child: Text('ยืนยัน'),
                                 ),
@@ -453,6 +464,7 @@ class _buttonConfirmandCancelOrderState
                                   ),
                                   onPressed: () {
                                     widget.updateCancel();
+                                    Navigator.pop(context);
                                   },
                                   child: Text('ยืนยัน'),
                                 ),
