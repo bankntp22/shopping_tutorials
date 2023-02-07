@@ -27,10 +27,16 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
   sumTotalPrice() {
     for (int i = 0; i < foodlist.length; i++) {
       double totalprice = 0;
+      int iQty = 0;
       totalprice = foodlist[i].total;
+      iQty = foodlist[i].qty;
       dTotalall = totalprice + dTotalall;
+      qtySum = qtySum + iQty;
+      // if(qtySum == 0){
+      //   foodlist[i].total = 0;
+      //   foodlist[i].qty = 0;
+      // }
     }
-
     setState(() {});
   }
 
@@ -80,6 +86,7 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
         builder: (context) {
           return ScreenCart(
             foodlistone: listfoodselect,
+            
           );
         },
       ));
@@ -97,18 +104,18 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
     return listfoodselect;
   }
 
-  sumQty() {
-    for (int i = 0; i < foodlist.length; i++) {
-      int sumqty = 0;
-      sumqty = foodlist[i].qty;
-      qtySum = sumqty + qtySum;
-    }
-  }
+  // sumQty() {
+  //   for (int i = 0; i < foodlist.length; i++) {
+  //     int sumqty = 0;
+  //     sumqty = foodlist[i].qty;
+  //     qtySum = sumqty + qtySum;   
+  //   }
+  // }
 
   @override
   void initState() {
     sumTotalPrice();
-    sumQty();
+    // sumQty();
     super.initState();
   }
 

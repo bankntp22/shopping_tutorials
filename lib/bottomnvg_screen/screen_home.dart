@@ -38,9 +38,10 @@ class _ScreenHomeState extends State<ScreenHome> {
                       padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(14),
-                        color: Colors.white54,
-                        border:
-                            Border.all(color: Colors.grey.shade300, width: 3),
+                        color: Colors.white,
+                        border: Border.all(
+                            color: Colors.grey.shade400.withOpacity(0.6),
+                            width: 5),
                       ),
                       width: 160,
                       height: 130,
@@ -60,11 +61,14 @@ class _ScreenHomeState extends State<ScreenHome> {
                       ),
                     ),
                   ),
-                  Text(listmenu[index].title,
-                      style: StyleFont.fontMali(
-                          size: 19,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black))
+                  Text(
+                    listmenu[index].title,
+                    style: StyleFont.fontMali(
+                      size: 19,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black.withOpacity(0.4),
+                    ),
+                  ),
                 ],
               );
             },

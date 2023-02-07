@@ -22,9 +22,12 @@ class _ScreenOrderState extends State<ScreenOrder> {
   List<OrderSummary> list = [];
 
   String iCodeOrder = '';
+  Map<String, dynamic> map = Map<String, dynamic>();
 
   String? sPayment, sTotal;
   var _selectedValue;
+  
+  var sGetStatusComplete;
 
   Future<List<Map<String, dynamic>>> _getListSummaryOrder() async {
     List<Map<String, dynamic>> listMap = await db.getData();
@@ -47,9 +50,23 @@ class _ScreenOrderState extends State<ScreenOrder> {
     return listMap;
   }
 
-  // Future<List<Map<String, dynamic>>> get listMapData {
+  getDataTableHead (String sCode)async {
+    List<Map<dynamic, dynamic>> listGetdata = await db.getOrder(sCode);
+    listGetdata.forEach((row) {
+      print(row);
+     });
+  }
 
+
+
+  // getDataStatus (String sCode)async {
+  //   List<Map<String,Object?>> listGet = await db.queryDataStatusOrder(sCode);
+  //   listGet.forEach((row) {
+  //     print(row);
+  //    });
   // }
+
+ 
 
   String formatNumber(double number) {
     var formatter = NumberFormat('#,###.##');
@@ -71,19 +88,31 @@ class _ScreenOrderState extends State<ScreenOrder> {
     return fontRed;
   }
 
+  
   Future<int> updateRecordComplete(String code) async {
-    Map<String, dynamic> map = Map<String, dynamic>();
     map[Constant.statusOrder] = Constant.completeOrder;
+    print('Confirm');
     return db.updateData(map, code);
   }
 
   Future<int> updateRecordCancel(String code) async {
-    Map<String, dynamic> map = Map<String, dynamic>();
     map[Constant.statusOrder] = Constant.cancelOrder;
+    print('Cancel');
+
     return db.updateData(map, code);
   }
 
-  deleteOrder() {}
+  
+Future<int> insertRecordComplete(String code) async {
+    Map<String, Object> map = Map<String, Object>();
+    
+    map[Constant.statusOrder] = Constant.completeOrder;
+    print('Confirm');
+    return db.insertDataStatusOrder(map);
+  }
+  
+
+  
 
   @override
   void initState() {
@@ -222,6 +251,8 @@ class _ScreenOrderState extends State<ScreenOrder> {
                       },
                     ),
                   );
+                  getDataTableHead(list[index].sCode);
+                 
                 },
                 child: Container(
                   height: 110,
@@ -323,8 +354,8 @@ class _ScreenOrderState extends State<ScreenOrder> {
                           Spacer(),
                           buttonConfirmandCancelOrder(
                             indexCode: list[index].sCode,
-                            updateConfirm: () => updateRecordComplete,
-                            updateCancel: () => updateRecordCancel,
+                            updateConfirm: () => updateRecordComplete(list[index].sCode),
+                            updateCancel: () => updateRecordCancel(list[index].sCode),
                           )
                         ],
                       ),
@@ -408,6 +439,7 @@ class _buttonConfirmandCancelOrderState
                                   onPressed: () {
                                     widget.updateConfirm();
                                     Navigator.pop(context);
+
                                   },
                                   child: Text('ยืนยัน'),
                                 ),

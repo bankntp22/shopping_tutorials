@@ -7,7 +7,8 @@ class SqlLiteManager {
   final String databaseName = "po.db";
   final String tableHead = 'po_head';
   final String tableItem = 'po_item';
-  int version = 17;
+  final String tableStatusOrder = 'po_status';
+  int version = 24;
 
   static Database? _database;
 
@@ -24,7 +25,7 @@ class SqlLiteManager {
   Future<Database> _initDB(String filePath) async {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, filePath);
-    return await openDatabase(path, version: 3, onCreate: _createDB);
+    return await openDatabase(path, version: version, onCreate: _createDB);
   }
 
   Future _createDB(Database db, int version) async {
@@ -42,19 +43,45 @@ class SqlLiteManager {
     //         ;
 
     await db.execute(
-        "CREATE TABLE $tableHead ( ${Constant.totalPrice} $textType, ${Constant.payMent} $textType, ${Constant.statusOrder} $textType, ${Constant.code} $textType $primaryKey)");
+        "CREATE TABLE $tableHead ( ${Constant.totalPrice} $textType, ${Constant.payMent} $textType, ${Constant.code} $textType $primaryKey, ${Constant.statusOrder} $textType)");
     await db.execute(
         "CREATE TABLE $tableItem ( ${Constant.codeHead} $textType, ${Constant.nameProduct} $textType, ${Constant.priceProduct} $textType, ${Constant.qtyProduct} $textType, ${Constant.totalPriceProduct} $textType, FOREIGN KEY (${Constant.codeHead}) REFERENCES $tableHead (${Constant.code}) )");
+    // await db.execute(
+    //     "CREATE TABLE $tableStatusOrder ( ${Constant.sCodeStatus} $textType, ${Constant.statusOrder} $textType, FOREIGN KEY (${Constant.sCodeStatus}) REFERENCES $tableHead (${Constant.code}) )");
   }
 
   Future<List<Map<String, dynamic>>> getData() async {
     final db = await database;
     // String sWhere =
     //     Constant.statusOrder + " != ? and " + Constant.statusOrder + " != ? ";
-    String sWhere = Constant.statusOrder + " is null ";
-    List<String> list = ["null"];
-    // List<String> list = [Constant.completeOrder, Constant.cancelOrder];
-    return await db!.query(tableHead, where: sWhere);
+    // String sWhere = Constant.statusOrder + " is null ";
+    // List<String> list = ["null"];
+    // List<String> list = [Constant.statusOrder];
+    return await db!.query(tableHead);
+  }
+
+  Future<int> insertDataStatusOrder(Map<String, Object> map) async {
+    final db = await database;
+    // String sWhere =
+    //     Constant.statusOrder + " != ? and " + Constant.statusOrder + " != ? ";
+    // String sWhere = Constant.statusOrder + " is null ";
+    // List<String> list = ["null"];
+    // List<String> list = [Constant.statusOrder];
+
+    return await db!.insert(tableStatusOrder, map);
+  }
+
+  Future<List<Map<String, Object?>>> queryDataStatusOrder(String sCode) async {
+    final db = await database;
+    // String sWhere =
+    //     Constant.statusOrder + " != ? and " + Constant.statusOrder + " != ? ";
+    // String sWhere = Constant.statusOrder + " is null ";
+    // List<String> list = ["null"];
+    // List<String> list = [Constant.statusOrder];
+    String sWhere = Constant.code + "= ?";
+    List<String> list = [sCode];
+
+    return await db!.query(tableStatusOrder, where: sWhere, whereArgs: list);
   }
 
   Future<List<Map>> getOrder(String code) async {
@@ -92,11 +119,12 @@ class SqlLiteManager {
     return await db!.delete(tableHead);
   }
 
-  Future<int> updateData(Map<String, dynamic> map, String code) async {
+  Future<int> updateData(Map<String,dynamic> map,String code) async {
     final db = await database;
     // String sWhere = Constant.code + "= ?";
-    String sWhere = Constant.statusOrder + "= ?";
-    List<String> list = [code];
+    String sWhere = "${Constant.statusOrder} = ?";
+    List<String> list = [Constant.statusOrder];
+    
     return await db!.update(tableHead, map, where: sWhere, whereArgs: list);
   }
 

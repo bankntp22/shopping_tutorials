@@ -5,3 +5,8 @@ class ModelHead{
   String? sPayMent;
   String? sCode;
 }
+
+class ModelStatusOrder {
+  String? sConfirmOrder;
+  String? sCancelOrder;
+}

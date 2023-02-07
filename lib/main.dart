@@ -1,5 +1,6 @@
 import 'package:app_tutorial1/models/constant.dart';
 import 'package:app_tutorial1/models/foodlist.dart';
+import 'package:app_tutorial1/test/activity_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,11 +15,13 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(    
-      
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white70, fontFamily: "Gordita"),
+          scaffoldBackgroundColor:
+              Colors.white24.withOpacity(0.6),
+          fontFamily: "Gordita"),
+      // home: ActivityScreen(),
       home: Home(),
     );
   }

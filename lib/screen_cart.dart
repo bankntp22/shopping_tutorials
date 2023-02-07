@@ -12,6 +12,8 @@ import 'package:google_fonts/google_fonts.dart';
 // ignore: must_be_immutable
 class ScreenCart extends StatefulWidget {
   List<Food> foodlistone;
+  
+  
 
   ScreenCart({required this.foodlistone});
 
@@ -102,6 +104,11 @@ class _ScreenCartState extends State<ScreenCart> {
       result = await _insertHead();
     }
     if (result > 0) {}
+
+    for (int i = 0; i < foodlist.length; i++) {
+      foodlist[i].qty = 0;
+      foodlist[i].total = 0;
+    }
   }
 
   Future<String> getCodeHead() async {
