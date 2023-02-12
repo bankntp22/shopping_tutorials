@@ -12,8 +12,6 @@ import 'package:google_fonts/google_fonts.dart';
 // ignore: must_be_immutable
 class ScreenCart extends StatefulWidget {
   List<Food> foodlistone;
-  
-  
 
   ScreenCart({required this.foodlistone});
 
@@ -37,7 +35,7 @@ class _ScreenCartState extends State<ScreenCart> {
   final paymentTypeCreditCard = 'creditcard';
 
   getData() async {
-    List<Map> listMap = await db.getData();
+    List<Map> listMap = await db.getDataNoStatusOrder();
   }
 
   sumTotalPrice() {

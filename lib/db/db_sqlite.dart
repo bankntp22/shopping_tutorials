@@ -50,14 +50,14 @@ class SqlLiteManager {
     //     "CREATE TABLE $tableStatusOrder ( ${Constant.sCodeStatus} $textType, ${Constant.statusOrder} $textType, FOREIGN KEY (${Constant.sCodeStatus}) REFERENCES $tableHead (${Constant.code}) )");
   }
 
-  Future<List<Map<String, dynamic>>> getData() async {
+  Future<List<Map<String, dynamic>>> getDataNoStatusOrder() async {
     final db = await database;
-    // String sWhere =
-    //     Constant.statusOrder + " != ? and " + Constant.statusOrder + " != ? ";
-    // String sWhere = Constant.statusOrder + " is null ";
-    // List<String> list = ["null"];
+
+    String sWhere =
+        Constant.statusOrder + " is null or " + Constant.statusOrder + ' = ? ';
+    List<String> list = [""];
     // List<String> list = [Constant.statusOrder];
-    return await db!.query(tableHead);
+    return await db!.query(tableHead, where: sWhere, whereArgs: list);
   }
 
   Future<int> insertDataStatusOrder(Map<String, Object> map) async {
@@ -119,12 +119,11 @@ class SqlLiteManager {
     return await db!.delete(tableHead);
   }
 
-  Future<int> updateData(Map<String,dynamic> map,String code) async {
+  Future<int> updateData(Map<String, dynamic> map, String code) async {
     final db = await database;
     // String sWhere = Constant.code + "= ?";
-    String sWhere = "${Constant.statusOrder} = ?";
-    List<String> list = [Constant.statusOrder];
-    
+    String sWhere = "${Constant.code} = ?";
+    List<String> list = [code];
     return await db!.update(tableHead, map, where: sWhere, whereArgs: list);
   }
 

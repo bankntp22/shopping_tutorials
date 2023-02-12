@@ -26,11 +26,11 @@ class _ScreenOrderState extends State<ScreenOrder> {
 
   String? sPayment, sTotal;
   var _selectedValue;
-  
+
   var sGetStatusComplete;
 
   Future<List<Map<String, dynamic>>> _getListSummaryOrder() async {
-    List<Map<String, dynamic>> listMap = await db.getData();
+    List<Map<String, dynamic>> listMap = await db.getDataNoStatusOrder();
     listMap.forEach(
       (row) {
         String sGetPayment = row[Constant.payMent];
@@ -50,14 +50,12 @@ class _ScreenOrderState extends State<ScreenOrder> {
     return listMap;
   }
 
-  getDataTableHead (String sCode)async {
+  getDataTableHead(String sCode) async {
     List<Map<dynamic, dynamic>> listGetdata = await db.getOrder(sCode);
     listGetdata.forEach((row) {
       print(row);
-     });
+    });
   }
-
-
 
   // getDataStatus (String sCode)async {
   //   List<Map<String,Object?>> listGet = await db.queryDataStatusOrder(sCode);
@@ -65,8 +63,6 @@ class _ScreenOrderState extends State<ScreenOrder> {
   //     print(row);
   //    });
   // }
-
- 
 
   String formatNumber(double number) {
     var formatter = NumberFormat('#,###.##');
@@ -88,11 +84,12 @@ class _ScreenOrderState extends State<ScreenOrder> {
     return fontRed;
   }
 
-  
   Future<int> updateRecordComplete(String code) async {
+    int iresult = 0;
     map[Constant.statusOrder] = Constant.completeOrder;
     print('Confirm');
-    return db.updateData(map, code);
+    iresult = await db.updateData(map, code);
+    return iresult;
   }
 
   Future<int> updateRecordCancel(String code) async {
@@ -102,17 +99,13 @@ class _ScreenOrderState extends State<ScreenOrder> {
     return db.updateData(map, code);
   }
 
-  
-Future<int> insertRecordComplete(String code) async {
+  Future<int> insertRecordComplete(String code) async {
     Map<String, Object> map = Map<String, Object>();
-    
+
     map[Constant.statusOrder] = Constant.completeOrder;
     print('Confirm');
     return db.insertDataStatusOrder(map);
   }
-  
-
-  
 
   @override
   void initState() {
@@ -252,7 +245,6 @@ Future<int> insertRecordComplete(String code) async {
                     ),
                   );
                   getDataTableHead(list[index].sCode);
-                 
                 },
                 child: Container(
                   height: 110,
@@ -354,8 +346,11 @@ Future<int> insertRecordComplete(String code) async {
                           Spacer(),
                           buttonConfirmandCancelOrder(
                             indexCode: list[index].sCode,
-                            updateConfirm: () => updateRecordComplete(list[index].sCode),
-                            updateCancel: () => updateRecordCancel(list[index].sCode),
+                            updateConfirm: () async {
+                              await updateRecordComplete(list[index].sCode);
+                            },
+                            updateCancel: () =>
+                                updateRecordCancel(list[index].sCode),
                           )
                         ],
                       ),
@@ -417,50 +412,49 @@ class _buttonConfirmandCancelOrderState
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
                           Color.fromARGB(255, 10, 212, 54))),
-                  onPressed: () {
-                    setState(() {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: Text(
-                              'คุณยืนยันที่จะรับสินค้า ? ',
-                              textAlign: TextAlign.center,
-                            ),
-                            content: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                ElevatedButton(
-                                  style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
-                                      Colors.greenAccent.shade700,
-                                    ),
+                  onPressed: () async {
+                    await showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text(
+                            'คุณยืนยันที่จะรับสินค้า ? ',
+                            textAlign: TextAlign.center,
+                          ),
+                          content: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(
+                                    Colors.greenAccent.shade700,
                                   ),
-                                  onPressed: () {
-                                    widget.updateConfirm();
-                                    Navigator.pop(context);
+                                ),
+                                onPressed: () async {
+                                  await widget.updateConfirm();
 
-                                  },
-                                  child: Text('ยืนยัน'),
-                                ),
-                                SizedBox(
-                                  width: 7,
-                                ),
-                                ElevatedButton(
-                                  style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
-                                      Colors.redAccent.shade700,
-                                    ),
+                                  Navigator.pop(context);
+                                },
+                                child: Text('ยืนยัน'),
+                              ),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(
+                                    Colors.redAccent.shade700,
                                   ),
-                                  onPressed: () {},
-                                  child: Text('ยกเลิก'),
                                 ),
-                              ],
-                            ),
-                          );
-                        },
-                      );
-                    });
+                                onPressed: () {},
+                                child: Text('ยกเลิก'),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                    setState(() {});
                   },
                   icon: Icon(Icons.check),
                   label: Text(
