@@ -1,3 +1,6 @@
+import 'package:app_tutorial1/db/db_sqlite.dart';
+import 'package:app_tutorial1/models/constant.dart';
+import 'package:app_tutorial1/models/model_ordersummary.dart';
 import 'package:app_tutorial1/style/font.dart';
 import 'package:flutter/material.dart';
 import 'package:app_tutorial1/models/foodlist.dart';
@@ -10,7 +13,34 @@ class HistoryOrder extends StatefulWidget {
 }
 
 class _HistoryOrderState extends State<HistoryOrder> {
-  List<FoodTest> listfoodadd = [];
+  List<OrderSummary> listfoodadd = [];
+
+  SqlLiteManager db = SqlLiteManager();
+
+  void getDataHistory() async {
+    List<Map<String, dynamic>> getlist =
+        await db.getDataNoStatusOrder('is not null or');
+    getlist.forEach((row) {
+      String sGetPayment = row[Constant.payMent];
+      String sGetTotalPrice = row[Constant.totalPrice];
+      String sGetCode = row[Constant.code];
+      String sGetStatus = row[Constant.statusOrder] ?? "";
+
+      OrderSummary orderSummarymodel = OrderSummary();
+      orderSummarymodel.sPayment = sGetPayment;
+      orderSummarymodel.dTotal = sGetTotalPrice;
+      orderSummarymodel.sCode = sGetCode;
+      orderSummarymodel.sStatus = sGetStatus;
+      listfoodadd.insert(0, orderSummarymodel);
+    });
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    getDataHistory();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,114 +61,114 @@ class _HistoryOrderState extends State<HistoryOrder> {
                 Icons.arrow_back,
               ),
             ),
-            title: Text(TextName.textTitle, style: StyleFont.textSizeAppbar),
+            title: Text(
+              TextName.textTitle,
+              style: StyleFont.fontMali(
+                  color: Colors.white, size: 23, fontWeight: FontWeight.w500),
+            ),
           ),
           body: Container(
+            margin: EdgeInsets.all(7),
+            color: Colors.grey.shade300.withOpacity(0.9),
             child: Column(
               children: [
                 Expanded(
                   child: Container(
-                    margin: EdgeInsets.only(
-                      top: 10,
-                      bottom: 10,
-                      left: 5,
-                      right: 5,
-                    ),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 147, 181, 255),
-                      // color: Color.fromARGB(255, 193, 208, 240),
-
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Container(
-                      margin: EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: ListView.builder(
-                        itemCount: listFoodTest.length,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            height: 65,
-                            width: double.infinity,
-                            color: Colors.lightBlue,
-                            margin: EdgeInsets.only(bottom: 5),
-                            padding: EdgeInsets.only(right: 5, left: 5),
-                            child: Container(
-                              child: Row(
-                                children: [
-                                  Container(
-                                    width: 50,
-                                    height: 50,
-                                    color: Colors.orangeAccent.shade200,
-                                    alignment: Alignment.center,
-                                    child: Text(listFoodTest[index]
-                                        .price
-                                        .toStringAsFixed(0)),
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      margin: EdgeInsets.all(5),
-                                      height: double.infinity,
-                                      color: Colors.white,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(listFoodTest[index].title),
-                                          Expanded(
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                ElevatedButton(
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      // listFoodTest
-                                                      //     .removeAt(index);
-                                                      // listfoodadd.insert(
-                                                      //   index,
-                                                      //   listFoodTest[index],
-                                                      // );
-                                                      listfoodadd.add(
-                                                          listFoodTest[index]);
-                                                      listFoodTest.remove(
-                                                        listFoodTest[index],
-                                                      );
-                                                      if (index >= 0 &&
-                                                          index <
-                                                              listFoodTest
-                                                                  .length) {
-                                                        var item =
-                                                            listFoodTest[index];
-                                                      }
-                                                    });
-                                                  },
-                                                  child: Text('ลบ'),
-                                                ),
-                                              ],
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+                    color: Colors.blueGrey.shade200.withOpacity(0.9),
+                    height: 450,
+                    child: ListView.builder(
+                      itemCount: listfoodadd.length,
+                      itemBuilder: (context, i) {
+                        return _buildContainerListtile(
+                          listfoodadd[i].sCode,
+                          listfoodadd[i].sPayment,
+                          listfoodadd[i].sStatus,
+                        );
+                      },
                     ),
                   ),
-                ),
+                )
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Column _buildContainerListtile(String sName, String sCode, String sStatus) {
+    return Column(
+      children: [
+        Container(
+          height: 90,
+          child: Card(
+            elevation: 2,
+            child: ListTile(
+              leading: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.fastfood,
+                      size: 30,
+                    )
+                  ],
+                ),
+              ),
+              title: Container(
+                padding: EdgeInsets.only(top: 10),
+                child: Text(
+                  "เลขที่ : ${sName}",
+                  style: StyleFont.fontMali(
+                    size: 18,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              subtitle: Container(
+                padding: EdgeInsets.only(top: 15),
+                height: 55,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      sCode,
+                      style: StyleFont.fontMali(
+                        size: 16,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              trailing: Column(
+                children: [
+                  Chip(
+                    backgroundColor: sStatus == Constant.completeOrder
+                        ? Colors.greenAccent.shade700
+                        : Colors.redAccent.shade700,
+                    label: Text(
+                      sStatus,
+                      style: sStatus == Constant.completeOrder
+                          ? StyleFont.fontMali(
+                              size: 15,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            )
+                          : StyleFont.fontMali(
+                              size: 15,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

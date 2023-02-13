@@ -30,7 +30,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
   var sGetStatusComplete;
 
   Future<List<Map<String, dynamic>>> _getListSummaryOrder() async {
-    List<Map<String, dynamic>> listMap = await db.getDataNoStatusOrder();
+    List<Map<String, dynamic>> listMap = await db.getDataNoStatusOrder('is null or');
     listMap.forEach(
       (row) {
         String sGetPayment = row[Constant.payMent];

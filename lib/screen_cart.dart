@@ -34,9 +34,9 @@ class _ScreenCartState extends State<ScreenCart> {
   final paymentTypeCash = 'cash';
   final paymentTypeCreditCard = 'creditcard';
 
-  getData() async {
-    List<Map> listMap = await db.getDataNoStatusOrder();
-  }
+  // getData() async {
+  //   List<Map> listMap = await db.getDataNoStatusOrder();
+  // }
 
   sumTotalPrice() {
     for (int i = 0; i < widget.foodlistone.length; i++) {
@@ -125,7 +125,7 @@ class _ScreenCartState extends State<ScreenCart> {
   @override
   void initState() {
     sumTotalPrice();
-    getData();
+    // getData();
     defaultPayment();
     sumqtyScreenCart();
     super.initState();

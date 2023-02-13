@@ -40,8 +40,9 @@ class _ScreenHomeState extends State<ScreenHome> {
                         borderRadius: BorderRadius.circular(14),
                         color: Colors.white,
                         border: Border.all(
-                            color: Colors.grey.shade400.withOpacity(0.6),
-                            width: 5),
+                          color: Colors.grey.shade400.withOpacity(0.6),
+                          width: 5,
+                        ),
                       ),
                       width: 160,
                       height: 130,
