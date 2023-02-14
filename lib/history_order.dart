@@ -52,6 +52,7 @@ class _HistoryOrderState extends State<HistoryOrder> {
             backgroundColor: Color.fromARGB(255, 63, 106, 141),
             centerTitle: true,
             elevation: 0,
+            actions: [Icon(Icons.more_vert)],
             leading: IconButton(
               color: Colors.white,
               onPressed: () {
@@ -68,7 +69,7 @@ class _HistoryOrderState extends State<HistoryOrder> {
             ),
           ),
           body: Container(
-            margin: EdgeInsets.all(7),
+            margin: EdgeInsets.symmetric(vertical: 2),
             color: Colors.grey.shade300.withOpacity(0.9),
             child: Column(
               children: [
@@ -76,18 +77,34 @@ class _HistoryOrderState extends State<HistoryOrder> {
                   child: Container(
                     color: Colors.blueGrey.shade200.withOpacity(0.9),
                     height: 450,
-                    child: ListView.builder(
-                      itemCount: listfoodadd.length,
-                      itemBuilder: (context, i) {
-                        return _buildContainerListtile(
-                          listfoodadd[i].sCode,
-                          listfoodadd[i].sPayment,
-                          listfoodadd[i].sStatus,
-                        );
-                      },
-                    ),
+                    child: listfoodadd.length > 0
+                        ? ListView.builder(
+                            itemCount: listfoodadd.length,
+                            itemBuilder: (context, i) {
+                              return _buildContainerListtile(
+                                listfoodadd[i].sCode,
+                                listfoodadd[i].sPayment,
+                                listfoodadd[i].sStatus,
+                              );
+                            },
+                          )
+                        : Container(
+                            width: double.infinity,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'ไม่มีรายการ',
+                                  style: StyleFont.fontMali(
+                                    size: 28,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -121,7 +138,7 @@ class _HistoryOrderState extends State<HistoryOrder> {
                   "เลขที่ : ${sName}",
                   style: StyleFont.fontMali(
                     size: 18,
-                    color: Colors.black,
+                    color: Colors.grey.shade700,
                   ),
                 ),
               ),
@@ -134,8 +151,8 @@ class _HistoryOrderState extends State<HistoryOrder> {
                     Text(
                       sCode,
                       style: StyleFont.fontMali(
-                        size: 16,
-                        color: Colors.black,
+                        size: 17,
+                        color: Colors.greenAccent.shade700,
                         fontWeight: FontWeight.w500,
                       ),
                     ),

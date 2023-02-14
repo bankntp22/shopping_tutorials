@@ -3,5 +3,6 @@ class OrderSummary {
   String dTotal = '';
   String sCode = "";
   String sStatus = "";
+  String sDateTime = "";
 
 }

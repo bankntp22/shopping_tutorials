@@ -30,17 +30,20 @@ class _ScreenOrderState extends State<ScreenOrder> {
   var sGetStatusComplete;
 
   Future<List<Map<String, dynamic>>> _getListSummaryOrder() async {
-    List<Map<String, dynamic>> listMap = await db.getDataNoStatusOrder('is null or');
+    List<Map<String, dynamic>> listMap =
+        await db.getDataNoStatusOrder('is null or');
     listMap.forEach(
       (row) {
         String sGetPayment = row[Constant.payMent];
         String sGetTotalPrice = row[Constant.totalPrice];
         String sGetCode = row[Constant.code];
+        String sGetDateTime = row[Constant.sDatetimeOrder] ?? "";
 
         OrderSummary orderSummarymodel = OrderSummary();
         orderSummarymodel.sPayment = sGetPayment;
         orderSummarymodel.dTotal = sGetTotalPrice;
         orderSummarymodel.sCode = sGetCode;
+        orderSummarymodel.sDateTime = sGetDateTime;
         list.insert(0, orderSummarymodel);
       },
     );
@@ -179,16 +182,16 @@ class _ScreenOrderState extends State<ScreenOrder> {
                             Text(
                               sPayment = 'วิธีการชำระเงิน',
                               style: StyleFont.fontMali(
-                                size: 19,
-                                color: Colors.grey.shade700,
-                              ),
+                                  size: 19,
+                                  color: Colors.grey.shade600,
+                                  fontWeight: FontWeight.bold),
                             ),
                             Text(
                               sTotal = 'จำนวนเงิน',
                               style: StyleFont.fontMali(
-                                size: 19,
-                                color: Colors.grey.shade700,
-                              ),
+                                  size: 19,
+                                  color: Colors.grey.shade600,
+                                  fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
@@ -199,7 +202,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
                       Column(
                         children: [
                           Container(
-                            height: 420,
+                            height: 470,
                             decoration: BoxDecoration(
                               border: Border(
                                 bottom: BorderSide(
@@ -226,6 +229,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
         ? ListView.builder(
             shrinkWrap: true,
             itemCount: list.length,
+            
             itemBuilder: (context, index) {
               // String sConvert = list[index].dTotal;
               double pi = double.parse(list[index].dTotal);
@@ -247,16 +251,22 @@ class _ScreenOrderState extends State<ScreenOrder> {
                   getDataTableHead(list[index].sCode);
                 },
                 child: Container(
-                  height: 110,
+                  height: 130,
                   child: Card(
                     elevation: 0,
-                    color: Color.fromARGB(255, 186, 192, 211),
+                    color: Color.fromARGB(255, 105, 117, 156),
                     // color: Color.fromARGB(255, 201, 235, 235),
                     // color: Color.fromARGB(255, 255, 193, 101),
                     margin: EdgeInsets.only(bottom: 6),
                     child: Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 5,
+                          color: Color.fromARGB(255, 220, 223, 231),
+                        ),
+                      ),
+                      padding: EdgeInsets.only(
+                          top: 10, bottom: 5, left: 10, right: 10),
                       child: Column(
                         children: [
                           Row(
@@ -343,7 +353,23 @@ class _ScreenOrderState extends State<ScreenOrder> {
                               // ),
                             ],
                           ),
-                          Spacer(),
+                          Container(                            
+                            color: Colors.white,
+                            margin: EdgeInsets.only(top: 3, bottom: 10),
+                            padding: EdgeInsets.all(5),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'วันที่ : ${list[index].sDateTime}',
+                                  style: StyleFont.fontMali(
+                                    size: 16,
+                                    color: Colors.grey.shade700,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                           buttonConfirmandCancelOrder(
                             indexCode: list[index].sCode,
                             updateConfirm: () async {
@@ -351,7 +377,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
                             },
                             updateCancel: () =>
                                 updateRecordCancel(list[index].sCode),
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -397,9 +423,11 @@ class _buttonConfirmandCancelOrderState
       child: Container(
         height: 70,
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
+              padding: EdgeInsets.only(top: 2),
               child: Text(
                 'ออเดอร์ ${widget.indexCode}',
                 style:

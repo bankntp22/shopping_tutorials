@@ -1,6 +1,7 @@
 import 'package:app_tutorial1/home.dart';
 import 'package:app_tutorial1/style/font.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'bottomnvg_screen/screen_order.dart';
 import 'models/constant.dart';
@@ -8,6 +9,8 @@ import 'db/db_sqlite.dart';
 import 'models/foodlist.dart';
 import './screenselectproduct.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'dart:core';
+import 'package:intl/date_symbol_data_local.dart';
 
 // ignore: must_be_immutable
 class ScreenCart extends StatefulWidget {
@@ -63,6 +66,7 @@ class _ScreenCartState extends State<ScreenCart> {
   Future<int> _insertItem() async {
     int result = 0;
     String sCode = await getCodeHead();
+
     for (int i = 0; i < widget.foodlistone.length; i++) {
       String nameProduct = widget.foodlistone[i].title;
       String priceProduct = widget.foodlistone[i].price.toString();
@@ -83,13 +87,16 @@ class _ScreenCartState extends State<ScreenCart> {
   }
 
   Future<int> _insertHead() async {
+    await initializeDateFormatting('th_TH', null);
     String sCode = await getCodeHead();
     String sTotal = dtotal.toString();
-
+    DateTime now = DateTime.now();
+    String formatDatetime = DateFormat.yMEd('th').add_Hm().format(now);
     Map<String, dynamic> map = {
       Constant.totalPrice: sTotal,
       Constant.payMent: payMent,
-      Constant.code: sCode
+      Constant.code: sCode,
+      Constant.sDatetimeOrder: formatDatetime
     };
 
     return await db.insertHead(map);

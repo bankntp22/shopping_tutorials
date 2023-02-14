@@ -8,7 +8,7 @@ class SqlLiteManager {
   final String tableHead = 'po_head';
   final String tableItem = 'po_item';
   final String tableStatusOrder = 'po_status';
-  int version = 24;
+  int version = 25;
 
   static Database? _database;
 
@@ -43,7 +43,7 @@ class SqlLiteManager {
     //         ;
 
     await db.execute(
-        "CREATE TABLE $tableHead ( ${Constant.totalPrice} $textType, ${Constant.payMent} $textType, ${Constant.code} $textType $primaryKey, ${Constant.statusOrder} $textType)");
+        "CREATE TABLE $tableHead ( ${Constant.totalPrice} $textType, ${Constant.payMent} $textType, ${Constant.code} $textType $primaryKey, ${Constant.statusOrder} $textType, ${Constant.sDatetimeOrder} $textType)");
     await db.execute(
         "CREATE TABLE $tableItem ( ${Constant.codeHead} $textType, ${Constant.nameProduct} $textType, ${Constant.priceProduct} $textType, ${Constant.qtyProduct} $textType, ${Constant.totalPriceProduct} $textType, FOREIGN KEY (${Constant.codeHead}) REFERENCES $tableHead (${Constant.code}) )");
     // await db.execute(
