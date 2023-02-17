@@ -427,7 +427,7 @@ class _buttonConfirmandCancelOrderState
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              padding: EdgeInsets.only(top: 2),
+              padding: EdgeInsets.only(top: 1),
               child: Text(
                 'ออเดอร์ ${widget.indexCode}',
                 style:

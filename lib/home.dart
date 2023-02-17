@@ -1,7 +1,9 @@
 import 'package:app_tutorial1/models/foodlist.dart';
 import 'package:app_tutorial1/screen_cart.dart';
+import 'package:app_tutorial1/screen_new_all/screen_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import 'bottomnvg_screen/screen_account.dart';
 
@@ -43,9 +45,7 @@ class _HomeState extends State<Home> {
     listMenu = [
       ScreenHome(),
       ScreenOrder(),
-      ScreenAccount(
-        updatedIndex,
-      ),
+      ProfileScreen(),
     ];
     super.initState();
   }

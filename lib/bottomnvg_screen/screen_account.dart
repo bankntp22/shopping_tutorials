@@ -12,28 +12,7 @@ class ScreenAccount extends StatefulWidget {
   _ScreenAccountState createState() => _ScreenAccountState();
 }
 
-Column TextFormfield(String name) {
-  return Column(
-    children: [
-      TextFormField(
-        decoration: InputDecoration(
-          isDense: true,
-          hintText: name,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-            borderSide: BorderSide(
-              color: Colors.green,
-              width: 2,
-            ),
-          ),
-        ),
-      ),
-      SizedBox(
-        height: 5,
-      )
-    ],
-  );
-}
+
 
 class _ScreenAccountState extends State<ScreenAccount> {
   @override
