@@ -30,8 +30,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
   var sGetStatusComplete;
 
   Future<List<Map<String, dynamic>>> _getListSummaryOrder() async {
-    List<Map<String, dynamic>> listMap =
-        await db.getDataNoStatusOrder('is null or');
+    List<Map<String, dynamic>> listMap = await db.getDataNoStatusOrder();
     listMap.forEach(
       (row) {
         String sGetPayment = row[Constant.payMent];
@@ -229,7 +228,6 @@ class _ScreenOrderState extends State<ScreenOrder> {
         ? ListView.builder(
             shrinkWrap: true,
             itemCount: list.length,
-            
             itemBuilder: (context, index) {
               // String sConvert = list[index].dTotal;
               double pi = double.parse(list[index].dTotal);
@@ -353,7 +351,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
                               // ),
                             ],
                           ),
-                          Container(                            
+                          Container(
                             color: Colors.white,
                             margin: EdgeInsets.only(top: 3, bottom: 10),
                             padding: EdgeInsets.all(5),
