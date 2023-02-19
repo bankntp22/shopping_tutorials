@@ -50,11 +50,23 @@ class SqlLiteManager {
     //     "CREATE TABLE $tableStatusOrder ( ${Constant.sCodeStatus} $textType, ${Constant.statusOrder} $textType, FOREIGN KEY (${Constant.sCodeStatus}) REFERENCES $tableHead (${Constant.code}) )");
   }
 
-  Future<List<Map<String, dynamic>>> getDataNoStatusOrder(String sStatus) async {
+  Future<List<Map<String, dynamic>>> getDataNoStatusOrder() async {
     final db = await database;
 
     String sWhere =
-        Constant.statusOrder + " $sStatus " + Constant.statusOrder + ' = ? ';
+        Constant.statusOrder + " is null or " + Constant.statusOrder + ' = ? ';
+    List<String> list = [""];
+    // List<String> list = [Constant.statusOrder];
+    return await db!.query(tableHead, where: sWhere, whereArgs: list);
+  }
+
+  Future<List<Map<String, dynamic>>> getDataHistoryOrder() async {
+    final db = await database;
+
+    String sWhere = Constant.statusOrder +
+        " is not null or " +
+        Constant.statusOrder +
+        ' != ? ';
     List<String> list = [""];
     // List<String> list = [Constant.statusOrder];
     return await db!.query(tableHead, where: sWhere, whereArgs: list);
@@ -69,7 +81,7 @@ class SqlLiteManager {
     // String sWhere = '${Constant.statusOrder} IS NOT NULL';
     // List<String> list = [Constant.statusOrder];
     // List<String> list = [Constant.statusOrder];
-    return await db!.query(tableHead, where: sWhere,whereArgs: list);
+    return await db!.query(tableHead, where: sWhere, whereArgs: list);
   }
 
   Future<int> insertDataStatusOrder(Map<String, Object> map) async {

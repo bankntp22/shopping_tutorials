@@ -357,8 +357,8 @@ class _ScreenCartState extends State<ScreenCart> {
                                               primary:
                                                   Colors.greenAccent.shade700,
                                             ),
-                                            onPressed: () {
-                                              saveTransaction();
+                                            onPressed: () async {
+                                              await saveTransaction();
 
                                               // Navigator.push(context,
                                               //     MaterialPageRoute(

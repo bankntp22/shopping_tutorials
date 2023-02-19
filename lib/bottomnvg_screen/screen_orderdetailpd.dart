@@ -99,6 +99,7 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
         listItem.add(sGetModelItem);
       },
     );
+    setState(() {});
   }
 
   List<DropdownMenuItem> get SelectStatusOrder {
@@ -148,9 +149,8 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
         child: Scaffold(
           appBar: AppBar(
             title: Text('รายละเอียดสินค้า', style: StyleFont.fontGoogleMali),
-            centerTitle: true,
             elevation: 0,
-            backgroundColor: Color.fromARGB(255, 63, 106, 141),
+            backgroundColor: Color.fromARGB(255, 63, 106, 141).withOpacity(0.9),
             leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
@@ -161,8 +161,8 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
           body: RefreshIndicator(
             onRefresh: _refresh,
             child: Container(
+              margin: EdgeInsets.only(bottom: 8),
               width: double.infinity,
-              margin: EdgeInsets.all(7),
               child: Column(
                 children: [
                   Container(
@@ -292,7 +292,7 @@ class _ScreenOrderDetailpdState extends State<ScreenOrderDetailpd> {
   Container listviewOrder() {
     return Container(
       padding: EdgeInsets.only(left: 20, top: 5, bottom: 5, right: 20),
-      color: Colors.black12,
+      color: Colors.black12.withOpacity(0.10),
       child: ListView.builder(
         itemCount: listItem.length,
         itemBuilder: (context, index) {

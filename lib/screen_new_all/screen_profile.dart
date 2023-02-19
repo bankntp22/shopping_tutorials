@@ -1,3 +1,4 @@
+import 'package:app_tutorial1/models/constant.dart';
 import 'package:app_tutorial1/provider/provider_profile.dart';
 import 'package:app_tutorial1/style/font.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -8,42 +9,39 @@ import 'package:provider/provider.dart';
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
-  
-
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => ProviderProfile(context),
-        ),
-      ],
+    return ChangeNotifierProvider(
+      create: (context) => ProviderProfile(context),
       child: Profile(),
     );
   }
 }
 
 class Profile extends StatelessWidget {
-  late ProviderProfile ctxWatch;   
+  late ProviderProfile ctxWatch;
+  late Constant constant = Constant();
 
   String sInk = '';
 
   @override
   Widget build(BuildContext context) {
     ctxWatch = context.watch<ProviderProfile>();
-    
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.grey.shade500.withOpacity(0.8),
+          elevation: 0,
           title: Text(
             'กรอกข้อมูล',
             style: StyleFont.fontGoogleMali,
           ),
+          centerTitle: true,
         ),
         body: SingleChildScrollView(
           child: Container(
             width: double.infinity,
-            color: Colors.blueGrey,
+            color: Colors.white54,
             child: Column(
               children: [
                 _buildInputForm(),
@@ -56,17 +54,12 @@ class Profile extends StatelessWidget {
   }
 
   _buildInputForm() {
-    return Container(       
-      
+    return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(24),
-          topRight: Radius.circular(24),
-        ),
       ),
       child: Container(
-        margin: EdgeInsets.all(14),
+        margin: EdgeInsets.only(top: 5, right: 10, left: 10, bottom: 5),
         child: Column(
           children: [
             Row(
@@ -91,8 +84,7 @@ class Profile extends StatelessWidget {
                   icon: Icon(Icons.save, color: Colors.white),
                   label: Text(
                     'บันทึก',
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                 )
               ],
@@ -278,6 +270,31 @@ class Profile extends StatelessWidget {
                     ctxWatch.postalCodeController,
                     ctxWatch.postalCodeController.text,
                   ),
+                  Container(
+                    margin: EdgeInsets.only(top: 10),
+                    height: 50,
+                    width: double.infinity,
+                    color: Colors.deepOrange.shade300.withOpacity(0.9),
+                    alignment: Alignment.center,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.add,
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                        Text(
+                          'สร้างร้านค้า',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),

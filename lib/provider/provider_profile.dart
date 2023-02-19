@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 
 class ProviderProfile extends ChangeNotifier {
   BuildContext context;
-  ProviderProfile(this.context);
+  ProviderProfile(this.context) {
+    getitem();
+  }
 
   int _count = 0;
   String? myValue;
@@ -70,54 +72,53 @@ class ProviderProfile extends ChangeNotifier {
   String sGetPostalCode = '';
 
   void recordSnackbar(String title) {
-    
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => Home(screenIndex: 0),
-      ));
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(title),
-        ),
-      );
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+      builder: (context) => Home(screenIndex: 0),
+    ));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(title),
+      ),
+    );
     notifyListeners();
   }
 
   getitem() async {
     List<Map<String, dynamic>> list = await db.getData();
-    
-      list.forEach((row) {
-        print(row);
-        sGetid = row[_modelProfile.sID];
-        sGetFirstName = row[_modelProfile.sFirstName];
-        sGetLastName = row[_modelProfile.sLastName];
-        sGetNickName = row[_modelProfile.sNickName];
-        sGetNumberPhone = row[_modelProfile.sNumberPhone];
-        sGetNumberHouse = row[_modelProfile.sNumberHouse];
-        sGetVillage = row[_modelProfile.sVillage];
-        sGetVillageNo = row[_modelProfile.sVillageNo];
-        sGetLane = row[_modelProfile.sLane];
-        sGetRoad = row[_modelProfile.sRoad];
-        sGetSubdistrict = row[_modelProfile.sSubdistrict];
-        sGetDistrict = row[_modelProfile.sDistrict];
-        sGetProvince = row[_modelProfile.sProvince];
-        sGetPostalCode = row[_modelProfile.sPostalCode];
-        idController = TextEditingController(text: sGetid);
-        nickNameController = TextEditingController(text: sGetNickName);
-        firstNameController = TextEditingController(text: sGetFirstName);
-        lastNameController = TextEditingController(text: sGetLastName);
-        numberPhoneController = TextEditingController(text: sGetNumberPhone);
-        numberHouseController = TextEditingController(text: sGetNumberHouse);
-        villageController = TextEditingController(text: sGetVillage);
-        villageNoController = TextEditingController(text: sGetVillageNo);
-        laneController = TextEditingController(text: sGetLane);
-        roadController = TextEditingController(text: sGetRoad);
-        subDistrictController = TextEditingController(text: sGetSubdistrict);
-        districtController = TextEditingController(text: sGetDistrict);
-        provincetController = TextEditingController(text: sGetProvince);
-        postalCodeController = TextEditingController(text: sGetPostalCode);
 
-        // print(idController.text);
-      });
+    list.forEach((row) {
+      print(row);
+      sGetid = row[_modelProfile.sID];
+      sGetFirstName = row[_modelProfile.sFirstName];
+      sGetLastName = row[_modelProfile.sLastName];
+      sGetNickName = row[_modelProfile.sNickName];
+      sGetNumberPhone = row[_modelProfile.sNumberPhone];
+      sGetNumberHouse = row[_modelProfile.sNumberHouse];
+      sGetVillage = row[_modelProfile.sVillage];
+      sGetVillageNo = row[_modelProfile.sVillageNo];
+      sGetLane = row[_modelProfile.sLane];
+      sGetRoad = row[_modelProfile.sRoad];
+      sGetSubdistrict = row[_modelProfile.sSubdistrict];
+      sGetDistrict = row[_modelProfile.sDistrict];
+      sGetProvince = row[_modelProfile.sProvince];
+      sGetPostalCode = row[_modelProfile.sPostalCode];
+      idController = TextEditingController(text: sGetid);
+      nickNameController = TextEditingController(text: sGetNickName);
+      firstNameController = TextEditingController(text: sGetFirstName);
+      lastNameController = TextEditingController(text: sGetLastName);
+      numberPhoneController = TextEditingController(text: sGetNumberPhone);
+      numberHouseController = TextEditingController(text: sGetNumberHouse);
+      villageController = TextEditingController(text: sGetVillage);
+      villageNoController = TextEditingController(text: sGetVillageNo);
+      laneController = TextEditingController(text: sGetLane);
+      roadController = TextEditingController(text: sGetRoad);
+      subDistrictController = TextEditingController(text: sGetSubdistrict);
+      districtController = TextEditingController(text: sGetDistrict);
+      provincetController = TextEditingController(text: sGetProvince);
+      postalCodeController = TextEditingController(text: sGetPostalCode);
+
+      // print(idController.text);
+    });
     notifyListeners();
   }
 
@@ -188,10 +189,6 @@ class ProviderProfile extends ChangeNotifier {
   //    idController  = TextEditingController(text: sGetid);
   // }
 
-  
-
-  
-
   controllerDispose() {
     idController.dispose();
     nickNameController.dispose();
@@ -210,4 +207,3 @@ class ProviderProfile extends ChangeNotifier {
     postalCodeController.dispose();
   }
 }
-

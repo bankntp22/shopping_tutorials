@@ -18,8 +18,7 @@ class _HistoryOrderState extends State<HistoryOrder> {
   SqlLiteManager db = SqlLiteManager();
 
   void getDataHistory() async {
-    List<Map<String, dynamic>> getlist =
-        await db.getDataNoStatusOrder('is not null or');
+    List<Map<String, dynamic>> getlist = await db.getDataHistoryOrder();
     getlist.forEach((row) {
       String sGetPayment = row[Constant.payMent];
       String sGetTotalPrice = row[Constant.totalPrice];
@@ -32,7 +31,6 @@ class _HistoryOrderState extends State<HistoryOrder> {
       orderSummarymodel.sCode = sGetCode;
       orderSummarymodel.sStatus = sGetStatus;
       listfoodadd.insert(0, orderSummarymodel);
-          
     });
     setState(() {});
   }
