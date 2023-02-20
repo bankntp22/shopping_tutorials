@@ -29,6 +29,10 @@ class _ScreenOrderState extends State<ScreenOrder> {
 
   var sGetStatusComplete;
 
+  void reBuildSetState() {
+    setState(() {});
+  }
+
   Future<List<Map<String, dynamic>>> _getListSummaryOrder() async {
     List<Map<String, dynamic>> listMap = await db.getDataNoStatusOrder();
     listMap.forEach(
@@ -91,6 +95,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
     map[Constant.statusOrder] = Constant.completeOrder;
     print('Confirm');
     iresult = await db.updateData(map, code);
+
     return iresult;
   }
 
@@ -401,6 +406,7 @@ class buttonConfirmandCancelOrder extends StatefulWidget {
 
   Function updateConfirm;
   Function updateCancel;
+
   buttonConfirmandCancelOrder({
     Key? key,
     required this.indexCode,

@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           scaffoldBackgroundColor:
-              Colors.white24.withOpacity(0.6),
+              Colors.white24.withOpacity(0.8),
           fontFamily: "Gordita"),
       // home: ActivityScreen(),
       home: Home(),

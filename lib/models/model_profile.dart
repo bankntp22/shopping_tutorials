@@ -15,5 +15,4 @@ class ModelProfile {
   String sProvince = 'province'; //จังหวัด
   String sPostalCode = 'postalcode'; //เลขไปรษณีย์
   String sOrderStatus = 'postalcode'; //เลขไปรษณีย์
-
 }

@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:app_tutorial1/db/db_profile.dart';
 import 'package:app_tutorial1/home.dart';
 import 'package:app_tutorial1/models/model_profile.dart';
 import 'package:app_tutorial1/style/font.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -188,6 +191,20 @@ class ProviderProfile extends ChangeNotifier {
   //   String sGetid = _modelProfile.sFirstName;
   //    idController  = TextEditingController(text: sGetid);
   // }
+
+  File? image;
+
+  Future<void> pickImage(ImageSource source) async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.getImage(source: source);
+
+    if (pickedFile != null) {
+      image = File(pickedFile.path);
+    } else {
+      print('No image selected.');
+    }
+    notifyListeners();
+  }
 
   controllerDispose() {
     idController.dispose();

@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:app_tutorial1/models/constant.dart';
+import 'package:app_tutorial1/models/model_profile.dart';
 import 'package:app_tutorial1/provider/provider_profile.dart';
 import 'package:app_tutorial1/style/font.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -27,10 +31,11 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ctxWatch = context.watch<ProviderProfile>();
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.grey.shade500.withOpacity(0.8),
+          backgroundColor: Colors.grey.shade700.withOpacity(0.6),
           elevation: 0,
           title: Text(
             'กรอกข้อมูล',
@@ -95,44 +100,53 @@ class Profile extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ctxWatch.imagesController.text.isEmpty
-                    ? Stack(
-                        alignment: AlignmentDirectional.bottomEnd,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
-                            child: Container(
-                              width: 140,
-                              height: 140,
-                              color: Colors.grey.shade200,
-                              child: Image.asset(
-                                'assets/placeholder-image.png',
-                                fit: BoxFit.cover,
+                ctxWatch.image == null
+                    ? GestureDetector(
+                        onTap: () => ctxWatch.pickImage(ImageSource.gallery),
+                        child: Stack(
+                          alignment: AlignmentDirectional.bottomEnd,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(16),
+                              child: Container(
+                                width: 140,
+                                height: 140,
+                                color: Colors.grey.shade200,
+                                child: Image.asset(
+                                  'assets/placeholder-image.png',
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
-                          ),
-                          Icon(
-                            Icons.image,
-                            size: 28,
-                          ),
-                        ],
+                            Icon(
+                              Icons.image,
+                              size: 28,
+                            ),
+                          ],
+                        ),
                       )
                     : Container(
                         width: 140,
                         height: 140,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(16),
-                          child: CachedNetworkImage(
+                          child: Image.file(
+                            ctxWatch.image!,
                             fit: BoxFit.cover,
-                            imageUrl: ctxWatch.imagesController.text,
-                            errorWidget: (context, url, error) =>
-                                Icon(Icons.error),
-                            placeholder: (context, url) {
-                              return CircularProgressIndicator();
-                            },
                           ),
                         ),
-                      )
+                      ),
+                GestureDetector(
+                  onTap: () {
+                    // ctxWatch.removeImage();
+                  },
+                  child: Container(
+                    child: Icon(
+                      Icons.restart_alt,
+                      size: 27,
+                    ),
+                  ),
+                )
               ],
             ),
             SizedBox(

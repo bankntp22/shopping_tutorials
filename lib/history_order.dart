@@ -160,23 +160,32 @@ class _HistoryOrderState extends State<HistoryOrder> {
               ),
               trailing: Column(
                 children: [
-                  Chip(
-                    backgroundColor: sStatus == Constant.completeOrder
-                        ? Colors.greenAccent.shade700
-                        : Colors.redAccent.shade700,
-                    label: Text(
-                      sStatus,
-                      style: sStatus == Constant.completeOrder
-                          ? StyleFont.fontMali(
-                              size: 15,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                            )
-                          : StyleFont.fontMali(
-                              size: 15,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                            ),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          child: sStatus == Constant.completeOrder
+                              ? Text(
+                                  'CONFIRM',
+                                  style: StyleFont.fontMali(
+                                    color: Colors.greenAccent.shade700,
+                                    fontWeight: FontWeight.w800,
+                                    size: 18,
+                                  ),
+                                )
+                              : Container(
+                                  child: Text(
+                                    'CANCEL',
+                                    style: StyleFont.fontMali(
+                                      color: Colors.redAccent.shade700,
+                                      fontWeight: FontWeight.w800,
+                                      size: 18,
+                                    ),
+                                  ),
+                                ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

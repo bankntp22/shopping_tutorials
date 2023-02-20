@@ -7,7 +7,7 @@ import '../models/model_profile.dart';
 class SQLiteDatabaseProfile {
   final String databaseName = "profile.db";
   final String tableProfile = "profile";
-  int version = 7;
+  int version = 8;
   static Database? _database;
 
   Future<Database?> get database async {
@@ -21,7 +21,7 @@ class SQLiteDatabaseProfile {
   Future<Database> _initDB(String filePath) async {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, filePath);
-    return await openDatabase(path, version: 7, onCreate: _createDB);
+    return await openDatabase(path, version: 8, onCreate: _createDB);
   }
 
   Future _createDB(Database db, int version) async {
@@ -35,7 +35,7 @@ class SQLiteDatabaseProfile {
     ModelProfile modelProfile = ModelProfile();
 
     await db.execute(
-        "CREATE TABLE $tableProfile ( ${modelProfile.sID} $textType, ${modelProfile.sFirstName} $textType, ${modelProfile.sLastName} $textType, ${modelProfile.sNumberPhone} $textType, ${modelProfile.sNumberHouse} $textType, ${modelProfile.sVillage} $textType, ${modelProfile.sVillageNo} $textType, ${modelProfile.sLane} $textType, ${modelProfile.sRoad} $textType, ${modelProfile.sSubdistrict} $textType, ${modelProfile.sDistrict} $textType, ${modelProfile.sProvince} $textType, ${modelProfile.sPostalCode} $textType, ${modelProfile.sNickName} $textType)");
+        "CREATE TABLE $tableProfile ( ${modelProfile.sID} $textType, ${modelProfile.sFirstName} $textType, ${modelProfile.sLastName} $textType, ${modelProfile.sNumberPhone} $textType, ${modelProfile.sNumberHouse} $textType, ${modelProfile.sVillage} $textType, ${modelProfile.sVillageNo} $textType, ${modelProfile.sLane} $textType, ${modelProfile.sRoad} $textType, ${modelProfile.sSubdistrict} $textType, ${modelProfile.sDistrict} $textType, ${modelProfile.sProvince} $textType, ${modelProfile.sPostalCode} $textType, ${modelProfile.sNickName} $textType, ${modelProfile.sImages} $textType)");
     // await db.execute(
     //         'CREATE TABLE $tableItem (${Constant.id} $idType , ${Constant.codeHead} $textType, ${Constant.nameProduct} $textType, ${Constant.priceProduct} $textType, ${Constant.qtyProduct} $textType, ${Constant.totalPriceProduct} $textType,$idForeignKey (${Constant.codeHead}) REFERENCES $tableHead (${Constant.code}))')
     //         ;
