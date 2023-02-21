@@ -7,7 +7,7 @@ import '../models/model_profile.dart';
 class SQLiteDatabaseProfile {
   final String databaseName = "profile.db";
   final String tableProfile = "profile";
-  int version = 8;
+  int version = 13;
   static Database? _database;
 
   Future<Database?> get database async {
@@ -21,7 +21,7 @@ class SQLiteDatabaseProfile {
   Future<Database> _initDB(String filePath) async {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, filePath);
-    return await openDatabase(path, version: 8, onCreate: _createDB);
+    return await openDatabase(path, version: version, onCreate: _createDB);
   }
 
   Future _createDB(Database db, int version) async {

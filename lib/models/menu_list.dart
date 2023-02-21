@@ -24,7 +24,7 @@ List<MenuList> listmenu = [
   ),
   MenuList(
     imageUrl: "assets/order.png",
-    title: "รายการออเดอร์   ",
+    title: "รายการออเดอร์  ",
     pageWidget: ScreenOrder(),
   ),
   // MenuList(imageUrl: "assets/whan.png", title: "ขนมหวาน"),

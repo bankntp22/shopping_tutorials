@@ -19,6 +19,7 @@ class ProviderProfile extends ChangeNotifier {
   String? defaultValue;
 
   int get count => _count;
+  String sImage = '';
 
   void increment() {
     _count++;
@@ -46,6 +47,7 @@ class ProviderProfile extends ChangeNotifier {
       _modelProfile.sDistrict.toString(): districtController.text,
       _modelProfile.sProvince.toString(): provincetController.text,
       _modelProfile.sPostalCode.toString(): postalCodeController.text,
+      _modelProfile.sImages : image.toString()
     };
   }
 
@@ -73,6 +75,7 @@ class ProviderProfile extends ChangeNotifier {
   String sGetDistrict = '';
   String sGetProvince = '';
   String sGetPostalCode = '';
+  String sGetImages = '';
 
   void recordSnackbar(String title) {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -105,6 +108,7 @@ class ProviderProfile extends ChangeNotifier {
       sGetDistrict = row[_modelProfile.sDistrict];
       sGetProvince = row[_modelProfile.sProvince];
       sGetPostalCode = row[_modelProfile.sPostalCode];
+      sGetImages = row[_modelProfile.sImages];
       idController = TextEditingController(text: sGetid);
       nickNameController = TextEditingController(text: sGetNickName);
       firstNameController = TextEditingController(text: sGetFirstName);
@@ -139,7 +143,6 @@ class ProviderProfile extends ChangeNotifier {
   _save() async {
     int result = 0;
     bool haveData = await _checkRecordDatabase();
-
     if (haveData) {
       result = await _updateData();
       recordSnackbar('แก้ไขข้อมูลแล้ว');

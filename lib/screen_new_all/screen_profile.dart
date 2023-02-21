@@ -100,51 +100,40 @@ class Profile extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ctxWatch.image == null
-                    ? GestureDetector(
-                        onTap: () => ctxWatch.pickImage(ImageSource.gallery),
-                        child: Stack(
-                          alignment: AlignmentDirectional.bottomEnd,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(16),
-                              child: Container(
-                                width: 140,
-                                height: 140,
-                                color: Colors.grey.shade200,
-                                child: Image.asset(
+                GestureDetector(
+                  onTap: () => ctxWatch.pickImage(ImageSource.gallery),
+                  child: Stack(
+                    alignment: AlignmentDirectional.bottomEnd,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: Container(
+                          width: 140,
+                          height: 140,
+                          color: Colors.grey.shade200,
+                          child: ctxWatch.image == null
+                              ? Image.asset(
                                   'assets/placeholder-image.png',
                                   fit: BoxFit.cover,
+                                )
+                              : Container(
+                                  width: 140,
+                                  height: 140,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(16),
+                                    child: Image.file(
+                                      ctxWatch.image!,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                            Icon(
-                              Icons.image,
-                              size: 28,
-                            ),
-                          ],
-                        ),
-                      )
-                    : Container(
-                        width: 140,
-                        height: 140,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(16),
-                          child: Image.file(
-                            ctxWatch.image!,
-                            fit: BoxFit.cover,
-                          ),
                         ),
                       ),
-                GestureDetector(
-                  onTap: () {
-                    // ctxWatch.removeImage();
-                  },
-                  child: Container(
-                    child: Icon(
-                      Icons.restart_alt,
-                      size: 27,
-                    ),
+                      Icon(
+                        Icons.image,
+                        size: 28,
+                      ),
+                    ],
                   ),
                 )
               ],
