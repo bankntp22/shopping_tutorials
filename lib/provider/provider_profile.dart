@@ -28,6 +28,9 @@ class ProviderProfile extends ChangeNotifier {
 
   SQLiteDatabaseProfile db = SQLiteDatabaseProfile();
   ModelProfile _modelProfile = ModelProfile();
+  String sFile = "";
+
+  
 
   Map<String, dynamic> getListmap() {
     Map<String, dynamic> mapp;
@@ -47,7 +50,7 @@ class ProviderProfile extends ChangeNotifier {
       _modelProfile.sDistrict.toString(): districtController.text,
       _modelProfile.sProvince.toString(): provincetController.text,
       _modelProfile.sPostalCode.toString(): postalCodeController.text,
-      _modelProfile.sImages : image.toString()
+      _modelProfile.sImages: image.toString()
     };
   }
 
@@ -89,6 +92,11 @@ class ProviderProfile extends ChangeNotifier {
     notifyListeners();
   }
 
+  File fileString(String ss) {
+    File file = File(ss);
+    return file;
+  }
+
   getitem() async {
     List<Map<String, dynamic>> list = await db.getData();
 
@@ -123,7 +131,7 @@ class ProviderProfile extends ChangeNotifier {
       districtController = TextEditingController(text: sGetDistrict);
       provincetController = TextEditingController(text: sGetProvince);
       postalCodeController = TextEditingController(text: sGetPostalCode);
-
+      sFile = sGetImages;
       // print(idController.text);
     });
     notifyListeners();
@@ -194,11 +202,11 @@ class ProviderProfile extends ChangeNotifier {
   //   String sGetid = _modelProfile.sFirstName;
   //    idController  = TextEditingController(text: sGetid);
   // }
-
   File? image;
 
   Future<void> pickImage(ImageSource source) async {
     final picker = ImagePicker();
+
     final pickedFile = await picker.getImage(source: source);
 
     if (pickedFile != null) {
