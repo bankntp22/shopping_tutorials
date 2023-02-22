@@ -12,6 +12,7 @@ class ProviderProfile extends ChangeNotifier {
   BuildContext context;
   ProviderProfile(this.context) {
     getitem();
+    getImage();
   }
 
   int _count = 0;
@@ -21,6 +22,22 @@ class ProviderProfile extends ChangeNotifier {
   int get count => _count;
   String sImage = '';
 
+  String sGetid = '';
+  String sGetFirstName = '';
+  String sGetLastName = '';
+  String sGetNickName = '';
+  String sGetNumberPhone = '';
+  String sGetNumberHouse = '';
+  String sGetVillage = '';
+  String sGetVillageNo = '';
+  String sGetLane = '';
+  String sGetRoad = '';
+  String sGetSubdistrict = '';
+  String sGetDistrict = '';
+  String sGetProvince = '';
+  String sGetPostalCode = '';
+  String sGetImages = '';
+
   void increment() {
     _count++;
     notifyListeners();
@@ -29,8 +46,6 @@ class ProviderProfile extends ChangeNotifier {
   SQLiteDatabaseProfile db = SQLiteDatabaseProfile();
   ModelProfile _modelProfile = ModelProfile();
   String sFile = "";
-
-  
 
   Map<String, dynamic> getListmap() {
     Map<String, dynamic> mapp;
@@ -64,22 +79,6 @@ class ProviderProfile extends ChangeNotifier {
     return db.updateData(map);
   }
 
-  String sGetid = '';
-  String sGetFirstName = '';
-  String sGetLastName = '';
-  String sGetNickName = '';
-  String sGetNumberPhone = '';
-  String sGetNumberHouse = '';
-  String sGetVillage = '';
-  String sGetVillageNo = '';
-  String sGetLane = '';
-  String sGetRoad = '';
-  String sGetSubdistrict = '';
-  String sGetDistrict = '';
-  String sGetProvince = '';
-  String sGetPostalCode = '';
-  String sGetImages = '';
-
   void recordSnackbar(String title) {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
       builder: (context) => Home(screenIndex: 0),
@@ -95,6 +94,14 @@ class ProviderProfile extends ChangeNotifier {
   File fileString(String ss) {
     File file = File(ss);
     return file;
+  }
+
+  getImage() async {
+    List<Map<String, dynamic>> listImage = await db.getDataImage();
+
+    listImage.forEach((element) {
+      print(element);
+    });
   }
 
   getitem() async {
@@ -202,6 +209,7 @@ class ProviderProfile extends ChangeNotifier {
   //   String sGetid = _modelProfile.sFirstName;
   //    idController  = TextEditingController(text: sGetid);
   // }
+
   File? image;
 
   Future<void> pickImage(ImageSource source) async {

@@ -9,6 +9,7 @@ class SQLiteDatabaseProfile {
   final String tableProfile = "profile";
   int version = 13;
   static Database? _database;
+  ModelProfile modelProfile = ModelProfile();
 
   Future<Database?> get database async {
     if (_database != null) {
@@ -32,8 +33,6 @@ class SQLiteDatabaseProfile {
     final primaryKey = ' PRIMARY KEY ';
     final String idForeignKey = "FOREIGN KEY";
 
-    ModelProfile modelProfile = ModelProfile();
-
     await db.execute(
         "CREATE TABLE $tableProfile ( ${modelProfile.sID} $textType, ${modelProfile.sFirstName} $textType, ${modelProfile.sLastName} $textType, ${modelProfile.sNumberPhone} $textType, ${modelProfile.sNumberHouse} $textType, ${modelProfile.sVillage} $textType, ${modelProfile.sVillageNo} $textType, ${modelProfile.sLane} $textType, ${modelProfile.sRoad} $textType, ${modelProfile.sSubdistrict} $textType, ${modelProfile.sDistrict} $textType, ${modelProfile.sProvince} $textType, ${modelProfile.sPostalCode} $textType, ${modelProfile.sNickName} $textType, ${modelProfile.sImages} $textType)");
     // await db.execute(
@@ -52,6 +51,11 @@ class SQLiteDatabaseProfile {
   Future<List<Map<String, dynamic>>> getData() async {
     final db = await database;
     return await db!.query(tableProfile);
+  }
+
+  Future<List<Map<String, dynamic>>> getDataImage() async {
+    final db = await database;
+    return await db!.query(tableProfile, columns: [modelProfile.sImages]);
   }
 
   Future<List<Map>> getData1() async {
