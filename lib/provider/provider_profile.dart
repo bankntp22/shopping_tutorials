@@ -104,6 +104,20 @@ class ProviderProfile extends ChangeNotifier {
     });
   }
 
+  Widget cContainer(File? path) {
+    return Container(
+      width: 140,
+      height: 140,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: Image.file(
+          image!,
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+
   getitem() async {
     List<Map<String, dynamic>> list = await db.getData();
 
@@ -138,7 +152,10 @@ class ProviderProfile extends ChangeNotifier {
       districtController = TextEditingController(text: sGetDistrict);
       provincetController = TextEditingController(text: sGetProvince);
       postalCodeController = TextEditingController(text: sGetPostalCode);
-      sFile = sGetImages;
+      String imagePath = sGetImages;
+      File imageFile = File(imagePath);
+      image = imageFile;
+
       // print(idController.text);
     });
     notifyListeners();
