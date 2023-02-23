@@ -69,12 +69,10 @@ class _HistoryOrderState extends State<HistoryOrder> {
           ),
           body: Container(
             margin: EdgeInsets.symmetric(vertical: 2),
-            color: Colors.grey.shade300.withOpacity(0.9),
             child: Column(
               children: [
                 Expanded(
                   child: Container(
-                    color: Colors.blueGrey.shade200.withOpacity(0.9),
                     height: 450,
                     child: listfoodadd.length > 0
                         ? ListView.builder(
@@ -95,9 +93,9 @@ class _HistoryOrderState extends State<HistoryOrder> {
                                 Text(
                                   'ไม่มีรายการ',
                                   style: StyleFont.fontMali(
-                                    size: 28,
-                                    color: Colors.black,
-                                  ),
+                                      size: 28,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w500),
                                 ),
                               ],
                             ),
@@ -117,9 +115,17 @@ class _HistoryOrderState extends State<HistoryOrder> {
       children: [
         Container(
           height: 90,
+          decoration: BoxDecoration(
+            border: Border.all(
+              width: 3,
+              color: Color.fromARGB(255, 224, 224, 224),
+            ),
+          ),
           child: Card(
-            elevation: 2,
+            color: Color.fromARGB(255, 51, 165, 127).withOpacity(0.7),
+            margin: EdgeInsets.all(0),
             child: ListTile(
+              dense: true,
               leading: Container(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -127,6 +133,7 @@ class _HistoryOrderState extends State<HistoryOrder> {
                     Icon(
                       Icons.fastfood,
                       size: 30,
+                      color: Colors.white,
                     )
                   ],
                 ),
@@ -136,9 +143,9 @@ class _HistoryOrderState extends State<HistoryOrder> {
                 child: Text(
                   "เลขที่ : ${sName}",
                   style: StyleFont.fontMali(
-                    size: 18,
-                    color: Colors.grey.shade700,
-                  ),
+                      size: 18,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600),
                 ),
               ),
               subtitle: Container(
@@ -151,7 +158,7 @@ class _HistoryOrderState extends State<HistoryOrder> {
                       sCode,
                       style: StyleFont.fontMali(
                         size: 17,
-                        color: Colors.greenAccent.shade700,
+                        color: Colors.white,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -169,7 +176,7 @@ class _HistoryOrderState extends State<HistoryOrder> {
                               ? Text(
                                   'CONFIRM',
                                   style: StyleFont.fontMali(
-                                    color: Colors.greenAccent.shade700,
+                                    color: Colors.white,
                                     fontWeight: FontWeight.w800,
                                     size: 18,
                                   ),
