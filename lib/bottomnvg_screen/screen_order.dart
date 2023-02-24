@@ -95,6 +95,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
     map[Constant.statusOrder] = Constant.completeOrder;
     print('Confirm');
     iresult = await db.updateData(map, code);
+    
 
     return iresult;
   }
@@ -375,8 +376,9 @@ class _ScreenOrderState extends State<ScreenOrder> {
                           ),
                           buttonConfirmandCancelOrder(
                             indexCode: list[index].sCode,
-                            updateConfirm: () async {
+                            updateConfirm: () async{
                               await updateRecordComplete(list[index].sCode);
+                              
                             },
                             updateCancel: () =>
                                 updateRecordCancel(list[index].sCode),
