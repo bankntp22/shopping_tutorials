@@ -7,6 +7,7 @@ class Constant {
   static const String code = 'CODE';
   static const String statusOrder = 'STATUS_ORDER';
   static const String sDatetimeOrder = 'DATETIME_ORDER';
+  static const String sDatetimeMilisecOrder = 'DATETIME_MILI_ORDER';
 //item--
   static const String idHead = 'ID_HEAD';
   static const String codeHead = 'CODE_HEAD';

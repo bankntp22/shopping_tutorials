@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:app_tutorial1/models/constant.dart';
 import 'package:app_tutorial1/models/model_profile.dart';
 import 'package:app_tutorial1/provider/provider_profile.dart';
+import 'package:app_tutorial1/screen_new_all/screen_create_menushop.dart';
 import 'package:app_tutorial1/style/font.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,7 @@ class Profile extends StatelessWidget {
             color: Colors.white54,
             child: Column(
               children: [
-                _buildInputForm(),
+                _buildInputForm(context),
               ],
             ),
           ),
@@ -58,7 +59,7 @@ class Profile extends StatelessWidget {
     );
   }
 
-  _buildInputForm() {
+  _buildInputForm(BuildContext ctx) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -273,29 +274,38 @@ class Profile extends StatelessWidget {
                     ctxWatch.postalCodeController,
                     ctxWatch.postalCodeController.text,
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 10),
-                    height: 50,
-                    width: double.infinity,
-                    color: Colors.deepOrange.shade300.withOpacity(0.9),
-                    alignment: Alignment.center,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.add,
-                          color: Colors.white,
-                          size: 30,
-                        ),
-                        Text(
-                          'สร้างร้านค้า',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(ctx, MaterialPageRoute(
+                        builder: (context) {
+                          return ScreenCreateMenushop();
+                        },
+                      ));
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(top: 10),
+                      height: 50,
+                      width: double.infinity,
+                      color: Colors.deepOrange.shade300.withOpacity(0.9),
+                      alignment: Alignment.center,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.add,
                             color: Colors.white,
+                            size: 30,
                           ),
-                        ),
-                      ],
+                          Text(
+                            'สร้างร้านค้า',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   )
                 ],

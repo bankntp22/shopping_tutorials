@@ -48,7 +48,7 @@ class _HistoryOrderState extends State<HistoryOrder> {
       home: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Color.fromARGB(255, 63, 106, 141),
+            backgroundColor: Color(0xFFF311b92),
             centerTitle: true,
             elevation: 0,
             actions: [Icon(Icons.more_vert)],
@@ -122,7 +122,7 @@ class _HistoryOrderState extends State<HistoryOrder> {
             ),
           ),
           child: Card(
-            color: Color.fromARGB(255, 51, 165, 127).withOpacity(0.7),
+            color: Color.fromARGB(255, 109, 101, 226).withOpacity(0.9),
             margin: EdgeInsets.all(0),
             child: ListTile(
               dense: true,
@@ -176,7 +176,7 @@ class _HistoryOrderState extends State<HistoryOrder> {
                               ? Text(
                                   'CONFIRM',
                                   style: StyleFont.fontMali(
-                                    color: Colors.white,
+                                    color: Colors.greenAccent,
                                     fontWeight: FontWeight.w800,
                                     size: 18,
                                   ),
@@ -185,7 +185,7 @@ class _HistoryOrderState extends State<HistoryOrder> {
                                   child: Text(
                                     'CANCEL',
                                     style: StyleFont.fontMali(
-                                      color: Colors.redAccent.shade700,
+                                      color: Colors.redAccent,
                                       fontWeight: FontWeight.w800,
                                       size: 18,
                                     ),

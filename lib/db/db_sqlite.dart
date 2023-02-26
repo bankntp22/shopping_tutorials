@@ -43,7 +43,7 @@ class SqlLiteManager {
     //         ;
 
     await db.execute(
-        "CREATE TABLE $tableHead ( ${Constant.totalPrice} $textType, ${Constant.payMent} $textType, ${Constant.code} $textType $primaryKey, ${Constant.statusOrder} $textType, ${Constant.sDatetimeOrder} $textType)");
+        "CREATE TABLE $tableHead ( ${Constant.totalPrice} $textType, ${Constant.payMent} $textType, ${Constant.code} $textType $primaryKey, ${Constant.statusOrder} $textType, ${Constant.sDatetimeOrder} $textType, ${Constant.sDatetimeMilisecOrder} $textType)");
     await db.execute(
         "CREATE TABLE $tableItem ( ${Constant.codeHead} $textType, ${Constant.nameProduct} $textType, ${Constant.priceProduct} $textType, ${Constant.qtyProduct} $textType, ${Constant.totalPriceProduct} $textType, FOREIGN KEY (${Constant.codeHead}) REFERENCES $tableHead (${Constant.code}) )");
     // await db.execute(
