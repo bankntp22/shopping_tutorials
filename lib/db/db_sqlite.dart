@@ -8,7 +8,7 @@ class SqlLiteManager {
   final String tableHead = 'po_head';
   final String tableItem = 'po_item';
   final String tableStatusOrder = 'po_status';
-  int version = 25;
+  int version = 26;
 
   static Database? _database;
 

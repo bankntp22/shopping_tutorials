@@ -4,5 +4,5 @@ class OrderSummary {
   String sCode = "";
   String sStatus = "";
   String sDateTime = "";
-
+  String sDateTimeMilisec = "";
 }
