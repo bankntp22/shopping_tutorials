@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:app_tutorial1/db/db_profile.dart';
 import 'package:app_tutorial1/home.dart';
 import 'package:app_tutorial1/models/model_profile.dart';
 import 'package:app_tutorial1/style/font.dart';
+import 'package:drift/drift.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +14,7 @@ class ProviderProfile extends ChangeNotifier {
   BuildContext context;
   ProviderProfile(this.context) {
     getitem();
-    getImage();
+    // getImage();
   }
 
   int _count = 0;
@@ -38,14 +40,13 @@ class ProviderProfile extends ChangeNotifier {
   String sGetPostalCode = '';
   String sGetImages = '';
 
-  void increment() {
-    _count++;
-    notifyListeners();
-  }
+  
 
   SQLiteDatabaseProfile db = SQLiteDatabaseProfile();
   ModelProfile _modelProfile = ModelProfile();
   String sFile = "";
+
+  Uint8List? imageBytes;
 
   Map<String, dynamic> getListmap() {
     Map<String, dynamic> mapp;
@@ -65,7 +66,7 @@ class ProviderProfile extends ChangeNotifier {
       _modelProfile.sDistrict.toString(): districtController.text,
       _modelProfile.sProvince.toString(): provincetController.text,
       _modelProfile.sPostalCode.toString(): postalCodeController.text,
-      _modelProfile.sImages: image.toString()
+      // _modelProfile.sImages: image.toString()
     };
   }
 
@@ -96,6 +97,13 @@ class ProviderProfile extends ChangeNotifier {
     return file;
   }
 
+  Future<int> insertImagePath(File? image) async {
+    var map = getListmap();
+    imageBytes = image!.readAsBytesSync();
+    map[_modelProfile.sImages] = imageBytes;
+    return db.insertImage(map);
+  }
+
   getImage() async {
     List<Map<String, dynamic>> listImage = await db.getDataImage();
 
@@ -118,8 +126,12 @@ class ProviderProfile extends ChangeNotifier {
     );
   }
 
+  String? getPhoto;
+
   getitem() async {
     List<Map<String, dynamic>> list = await db.getData();
+
+    
 
     list.forEach((row) {
       print(row);
@@ -137,7 +149,7 @@ class ProviderProfile extends ChangeNotifier {
       sGetDistrict = row[_modelProfile.sDistrict];
       sGetProvince = row[_modelProfile.sProvince];
       sGetPostalCode = row[_modelProfile.sPostalCode];
-      sGetImages = row[_modelProfile.sImages];
+      // sGetImages = row[_modelProfile.sImages];
       idController = TextEditingController(text: sGetid);
       nickNameController = TextEditingController(text: sGetNickName);
       firstNameController = TextEditingController(text: sGetFirstName);
@@ -152,15 +164,15 @@ class ProviderProfile extends ChangeNotifier {
       districtController = TextEditingController(text: sGetDistrict);
       provincetController = TextEditingController(text: sGetProvince);
       postalCodeController = TextEditingController(text: sGetPostalCode);
-      String imagePath = sGetImages;
-      File imageFile = File(imagePath);
-      image = imageFile;
-
+      // String imagePath = sGetImages;
+      // File imageFile = File(imagePath);
+      // image = imageFile;
+      
       // print(idController.text);
     });
-    
     notifyListeners();
   }
+
 
   Future<bool> _checkRecordDatabase() async {
     bool haveData = false;
@@ -190,10 +202,6 @@ class ProviderProfile extends ChangeNotifier {
     //   recordSnackbar('บันทึกสำเร็จ');
     //
   }
-
-  var sizedBox5 = SizedBox(
-    height: 10,
-  );
 
   final formKey = GlobalKey<FormState>();
   final formKeytest = GlobalKey<FormState>();
@@ -237,6 +245,7 @@ class ProviderProfile extends ChangeNotifier {
 
     if (pickedFile != null) {
       image = File(pickedFile.path);
+      await insertImagePath(image);
     } else {
       print('No image selected.');
     }

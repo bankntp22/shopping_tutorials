@@ -7,7 +7,7 @@ import '../models/model_profile.dart';
 class SQLiteDatabaseProfile {
   final String databaseName = "profile.db";
   final String tableProfile = "profile";
-  int version = 13;
+  int version = 16;
   static Database? _database;
   ModelProfile modelProfile = ModelProfile();
 
@@ -41,6 +41,12 @@ class SQLiteDatabaseProfile {
 
     // await db.execute(
     //     "CREATE TABLE $tableProfile ( ${Constant.totalPrice} $textType, ${Constant.payMent} $textType, ${Constant.code} $textType $primaryKey)");
+  }
+
+  Future<int> insertImage (Map<String,dynamic> map )async{
+    final db = await database;
+
+    return db!.insert(tableProfile, map);
   }
 
   Future<int> insertItem(Map<String, dynamic> map) async {

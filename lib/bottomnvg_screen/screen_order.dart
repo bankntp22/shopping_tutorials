@@ -93,7 +93,6 @@ class _ScreenOrderState extends State<ScreenOrder> {
 
   Future<int> updateDateTimeMilisec(String code) async {
     var time = DateTime.now().millisecondsSinceEpoch;
-
     map[Constant.sDatetimeMilisecOrder] = time.toString();
     print('UpdateMilisec');
     return await db.updateData(map, code);
@@ -104,7 +103,6 @@ class _ScreenOrderState extends State<ScreenOrder> {
     map[Constant.statusOrder] = Constant.completeOrder;
     print('Confirm');
     iresult = await db.updateData(map, code);
-
     return iresult;
   }
 
@@ -134,106 +132,111 @@ class _ScreenOrderState extends State<ScreenOrder> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            title: Text(
-              'รายการสั่งซื้อ',
-              style: StyleFont.fontMali(size: 25, fontWeight: FontWeight.bold),
-            ),
-            centerTitle: true,
-            leading: IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return Home();
-                    },
-                  ),
-                );
-              },
-              icon: Icon(
-                Icons.arrow_back,
-                size: 25,
-                color: Colors.white,
-              ),
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: Text(
+            'รายการสั่งซื้อ',
+            style: StyleFont.fontMali(size: 25, fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return Home();
+                  },
+                ),
+              );
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              size: 25,
+              color: Colors.white,
             ),
           ),
-          // backgroundColor: Color.fromARGB(255, 26, 140, 192),
-          backgroundColor: Color.fromARGB(255, 63, 106, 141),
-          body: Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(25),
-                topLeft: Radius.circular(25),
-              ),
+        ),
+        // backgroundColor: Color.fromARGB(255, 26, 140, 192),
+        backgroundColor: Color.fromARGB(255, 42, 72, 97),
+        body: Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadius.only(
+              topRight: Radius.circular(15),
+              topLeft: Radius.circular(15),
             ),
-            margin: const EdgeInsets.only(top: 15),
-            child: Column(
-              children: [
-                Container(
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  child: Column(
-                    children: [
-                      const Divider(
-                        thickness: 2,
-                        height: 20,
-                        color: Colors.white,
-                      ),
-                      Container(
-                        padding: const EdgeInsets.only(
-                            top: 12, bottom: 12, right: 5, left: 5),
-                        width: double.infinity,
-                        margin: EdgeInsets.only(bottom: 5),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              sPayment = 'วิธีการชำระเงิน',
-                              style: StyleFont.fontMali(
-                                  size: 19,
-                                  color: Colors.grey.shade600,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              sTotal = 'จำนวนเงิน',
-                              style: StyleFont.fontMali(
-                                  size: 19,
-                                  color: Colors.grey.shade600,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 4,
-                      ),
-                      Column(
+          ),
+          margin: const EdgeInsets.only(top: 15),
+          child: Column(
+            children: [
+              Container(
+                margin:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                child: Column(
+                  children: [
+                    const Divider(
+                      thickness: 2,
+                      height: 20,
+                      color: Colors.white,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.only(
+                          top: 12, bottom: 12, right: 5, left: 5),
+                      width: double.infinity,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                            height: 470,
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  color: Colors.white,
-                                  width: 3,
-                                ),
-                              ),
-                            ),
-                            child: listviewOrder(),
+                          Text(
+                            sPayment = 'วิธีการชำระเงิน',
+                            style: StyleFont.fontMali(
+                                size: 17,
+                                color: Colors.grey.shade600,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            sTotal = 'จำนวนเงิน',
+                            style: StyleFont.fontMali(
+                                size: 17,
+                                color: Colors.grey.shade600,
+                                fontWeight: FontWeight.bold),
                           ),
                         ],
-                      )
-                    ],
-                  ),
+                      ),
+                    ),
+                    Divider(
+                      color: Colors.black,
+                      thickness: 1,
+                      endIndent: 70,
+                      indent: 70,
+                    ),
+                    Column(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(top: 5),
+                          height: 465,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: Colors.white,
+                                width: 3,
+                              ),
+                            ),
+                          ),
+                          child: listviewOrder(),
+                        ),
+                      ],
+                    )
+                  ],
                 ),
-              ],
-            ),
-          )),
+              ),
+            ],
+          ),
+        ),
+        
+      ),
     );
   }
 
@@ -263,10 +266,10 @@ class _ScreenOrderState extends State<ScreenOrder> {
                   getDataTableHead(list[index].sCode);
                 },
                 child: Container(
-                  height: 130,
+                  height: 140,
                   child: Card(
                     elevation: 0,
-                    color: Color.fromARGB(255, 46, 69, 145),
+                    color: Color(0xFFF616161),
                     // color: Color.fromARGB(255, 201, 235, 235),
                     // color: Color.fromARGB(255, 255, 193, 101),
                     margin: EdgeInsets.only(bottom: 6),
@@ -290,6 +293,7 @@ class _ScreenOrderState extends State<ScreenOrder> {
                                   style: StyleFont.fontMali(
                                     size: 20,
                                     fontWeight: FontWeight.bold,
+                                    letter: 1.0,
                                   ),
                                 ),
                               ),
@@ -441,131 +445,319 @@ class _buttonConfirmandCancelOrderState
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                Container(
-                  height: 37,
-                  alignment: Alignment.topCenter,
-                  child: Text(
-                    'ออเดอร์ ${widget.indexCode}',
+            Container(
+              height: 50,
+              alignment: Alignment.topCenter,
+              child: Row(
+                children: [
+                  Text(
+                    'เลขที่ ${widget.indexCode}',
                     style: StyleFont.fontMali(
-                        size: 16, fontWeight: FontWeight.w500),
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
+            ),
+            // Row(
+            //   children: [
+            //     Container(
+            //       height: 37,
+            //       alignment: Alignment.topCenter,
+            //       child: Text(
+            //         'ออเดอร์ ${widget.indexCode}',
+            //         style: StyleFont.fontMali(
+            //             size: 16, fontWeight: FontWeight.w500),
+            //       ),
+            //     ),
+            //   ],
+            // ),
+            // Container(
+            //   child: Row(
+            //     children: [
+            //       ElevatedButton.icon(
+            //         style: ButtonStyle(
+            //             backgroundColor: MaterialStateProperty.all(
+            //                 Color.fromARGB(255, 10, 212, 54))),
+            //         onPressed: () async {
+            //           await showDialog(
+            //             context: context,
+            //             builder: (context) {
+            //               return AlertDialog(
+            //                 title: Text(
+            //                   'คุณยืนยันที่จะรับสินค้า ? ',
+            //                   textAlign: TextAlign.center,
+            //                 ),
+            //                 content: Row(
+            //                   mainAxisAlignment: MainAxisAlignment.end,
+            //                   children: [
+            //                     ElevatedButton(
+            //                       style: ButtonStyle(
+            //                         backgroundColor: MaterialStateProperty.all(
+            //                           Colors.greenAccent.shade700,
+            //                         ),
+            //                       ),
+            //                       onPressed: () async {
+            //                         await widget.updateConfirm();
+            //                         widget.updateMilisec();
+            //                         Navigator.pop(context);
+            //                       },
+            //                       child: Text('ยืนยัน'),
+            //                     ),
+            //                     ElevatedButton(
+            //                       style: ButtonStyle(
+            //                         backgroundColor: MaterialStateProperty.all(
+            //                           Colors.redAccent.shade700,
+            //                         ),
+            //                       ),
+            //                       onPressed: () {},
+            //                       child: Text('ยกเลิก'),
+            //                     ),
+            //                   ],
+            //                 ),
+            //               );
+            //             },
+            //           );
+            //           setState(() {});
+            //         },
+            //         icon: Icon(Icons.check),
+            //         label: Text(
+            //           'รับสินค้า',
+            //           style: TextStyle(fontSize: 17),
+            //         ),
+            //       ),
+            //       ElevatedButton.icon(
+            //         style: ButtonStyle(
+            //             backgroundColor: MaterialStateProperty.all(
+            //                 Color.fromARGB(255, 255, 72, 72))),
+            //         onPressed: () {
+            //           setState(() {
+            //             showDialog(
+            //               context: context,
+            //               builder: (context) {
+            //                 return AlertDialog(
+            //                   title: Text(
+            //                     'คุณแน่ใจที่จะลบออเดอร์นี้  ? ',
+            //                     textAlign: TextAlign.center,
+            //                   ),
+            //                   content: Row(
+            //                     mainAxisAlignment: MainAxisAlignment.end,
+            //                     children: [
+            //                       ElevatedButton(
+            //                         style: ButtonStyle(
+            //                           backgroundColor:
+            //                               MaterialStateProperty.all(
+            //                             Colors.greenAccent.shade700,
+            //                           ),
+            //                         ),
+            //                         onPressed: () {
+            //                           widget.updateCancel();
+            //                           Navigator.pop(context);
+            //                         },
+            //                         child: Text('ยืนยัน'),
+            //                       ),
+            //                       SizedBox(
+            //                         width: 7,
+            //                       ),
+            //                       ElevatedButton(
+            //                         style: ButtonStyle(
+            //                           backgroundColor:
+            //                               MaterialStateProperty.all(
+            //                             Colors.redAccent.shade700,
+            //                           ),
+            //                         ),
+            //                         onPressed: () {},
+            //                         child: Text('ยกเลิก'),
+            //                       ),
+            //                     ],
+            //                   ),
+            //                 );
+            //               },
+            //             );
+            //           });
+            //         },
+            //         icon: Icon(Icons.cancel),
+            //         label: Text('ยกเลิก', style: TextStyle(fontSize: 17)),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            SizedBox(
+              width: 5,
             ),
             Container(
               child: Row(
                 children: [
-                  ElevatedButton.icon(
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                            Color.fromARGB(255, 10, 212, 54))),
-                    onPressed: () async {
-                      await showDialog(
+                  InkWell(
+                    onTap: () {
+                      showDialog(
                         context: context,
                         builder: (context) {
                           return AlertDialog(
                             title: Text(
-                              'คุณยืนยันที่จะรับสินค้า ? ',
+                              'คุณยืนยันที่จะรับสินค้า',
+                              style: StyleFont.fontMali(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black,
+                              ),
                               textAlign: TextAlign.center,
                             ),
                             content: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                ElevatedButton(
-                                  style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
-                                      Colors.greenAccent.shade700,
-                                    ),
-                                  ),
-                                  onPressed: () async {
-                                    await widget.updateConfirm();
+                                GestureDetector(
+                                  onTap: () {
+                                    widget.updateConfirm();
                                     widget.updateMilisec();
                                     Navigator.pop(context);
                                   },
-                                  child: Text('ยืนยัน'),
-                                ),
-                                ElevatedButton(
-                                  style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
-                                      Colors.redAccent.shade700,
+                                  child: Container(
+                                    width: 80,
+                                    height: 40,
+                                    alignment: Alignment.center,
+                                    color: Colors.greenAccent.shade700,
+                                    child: Text(
+                                      'ยืนยัน',
+                                      style: StyleFont.fontMali(
+                                        color: Colors.white,
+                                        size: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                   ),
-                                  onPressed: () {},
-                                  child: Text('ยกเลิก'),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                GestureDetector(
+                                  onTap: () => Navigator.pop(context),
+                                  child: Container(
+                                    width: 80,
+                                    height: 40,
+                                    alignment: Alignment.center,
+                                    color: Colors.redAccent.shade700,
+                                    child: Text(
+                                      'ยกเลิก',
+                                      style: StyleFont.fontMali(
+                                        color: Colors.white,
+                                        size: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
                           );
                         },
                       );
-                      setState(() {});
                     },
-                    icon: Icon(Icons.check),
-                    label: Text(
-                      'รับสินค้า',
-                      style: TextStyle(fontSize: 17),
+                    child: Container(
+                      width: 80,
+                      height: 50,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Colors.greenAccent.shade700,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        'รับสินค้า',
+                        style: StyleFont.fontMali(
+                          color: Colors.white,
+                          size: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     ),
                   ),
-                  ElevatedButton.icon(
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                            Color.fromARGB(255, 255, 72, 72))),
-                    onPressed: () {
-                      setState(() {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Text(
-                                'คุณแน่ใจที่จะลบออเดอร์นี้  ? ',
-                                textAlign: TextAlign.center,
+                  SizedBox(
+                    width: 10,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text(
+                              'คุณแน่ใจที่จะยกเลิก',
+                              style: StyleFont.fontMali(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black,
                               ),
-                              content: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  ElevatedButton(
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                        Colors.greenAccent.shade700,
+                              textAlign: TextAlign.center,
+                            ),
+                            content: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    widget.updateCancel();
+                                    widget.updateMilisec();
+                                    Navigator.pop(context);
+                                  },
+                                  child: Container(
+                                    width: 80,
+                                    height: 40,
+                                    alignment: Alignment.center,
+                                    color: Colors.greenAccent.shade700,
+                                    child: Text(
+                                      'ยืนยัน',
+                                      style: StyleFont.fontMali(
+                                        color: Colors.white,
+                                        size: 16,
+                                        fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    onPressed: () {
-                                      widget.updateCancel();
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text('ยืนยัน'),
                                   ),
-                                  SizedBox(
-                                    width: 7,
-                                  ),
-                                  ElevatedButton(
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                        Colors.redAccent.shade700,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                GestureDetector(
+                                  onTap: () => Navigator.pop(context),
+                                  child: Container(
+                                    width: 80,
+                                    height: 40,
+                                    alignment: Alignment.center,
+                                    color: Colors.redAccent.shade700,
+                                    child: Text(
+                                      'ยกเลิก',
+                                      style: StyleFont.fontMali(
+                                        color: Colors.white,
+                                        size: 16,
+                                        fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    onPressed: () {},
-                                    child: Text('ยกเลิก'),
                                   ),
-                                ],
-                              ),
-                            );
-                          },
-                        );
-                      });
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
                     },
-                    icon: Icon(Icons.cancel),
-                    label: Text('ยกเลิก', style: TextStyle(fontSize: 17)),
+                    child: Container(
+                      width: 80,
+                      height: 50,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Colors.redAccent.shade700,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        'ยกเลิก',
+                        style: StyleFont.fontMali(
+                          color: Colors.white,
+                          size: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
-            ),
-            SizedBox(
-              width: 5,
             ),
           ],
         ),

@@ -28,9 +28,16 @@ class StyleFont {
   );
 
   static TextStyle fontMali(
-      {double size = 17, Color color = Colors.white, FontWeight? fontWeight}) {
+      {double size = 17,
+      Color color = Colors.white,
+      FontWeight? fontWeight,
+      double? letter}) {
     return GoogleFonts.mali(
-        fontSize: size, color: color, fontWeight: fontWeight);
+      fontSize: size,
+      color: color,
+      fontWeight: fontWeight,
+      letterSpacing: letter,
+    );
   }
 
   static Text buttonTextName(String name) => Text(

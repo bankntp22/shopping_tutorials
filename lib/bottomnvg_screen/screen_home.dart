@@ -37,10 +37,10 @@ class _ScreenHomeState extends State<ScreenHome> {
                     child: Container(
                       padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(13),
                         color: Colors.white,
                         border: Border.all(
-                          color: Colors.grey.shade400.withOpacity(0.5),
+                          color: Colors.grey.shade500.withOpacity(0.2),
                           width: 5,
                         ),
                       ),
@@ -65,9 +65,9 @@ class _ScreenHomeState extends State<ScreenHome> {
                   Text(
                     listmenu[index].title,
                     style: StyleFont.fontMali(
-                      size: 18,
+                      size: 17,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black.withOpacity(0.6),
+                      color: Colors.black.withOpacity(0.5),
                     ),
                   ),
                 ],

@@ -63,8 +63,15 @@ class ScreenCreateMenushop extends StatelessWidget {
       height: 100,
       alignment: Alignment.center,
       decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Color.fromARGB(255, 183, 108, 221),
+            Color.fromARGB(255, 140, 87, 167),
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.center
+        ),
         borderRadius: BorderRadius.circular(10),
-        color: Color(0xFFFAA00FF),
         border: Border.all(
           width: 3,
           color: Colors.grey.withOpacity(0.5),

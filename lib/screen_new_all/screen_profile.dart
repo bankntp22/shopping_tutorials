@@ -112,7 +112,7 @@ class Profile extends StatelessWidget {
                           width: 140,
                           height: 140,
                           color: Colors.grey.shade200,
-                          child: ctxWatch.image == null
+                          child: ctxWatch.imageBytes == null
                               ? Image.asset(
                                   'assets/placeholder-image.png',
                                   fit: BoxFit.cover,
@@ -122,8 +122,8 @@ class Profile extends StatelessWidget {
                                   height: 140,
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(16),
-                                    child: Image.file(
-                                      ctxWatch.image!,
+                                    child: Image.memory(
+                                      ctxWatch.imageBytes!,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
