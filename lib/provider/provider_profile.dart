@@ -40,8 +40,6 @@ class ProviderProfile extends ChangeNotifier {
   String sGetPostalCode = '';
   String sGetImages = '';
 
-  
-
   SQLiteDatabaseProfile db = SQLiteDatabaseProfile();
   ModelProfile _modelProfile = ModelProfile();
   String sFile = "";
@@ -130,9 +128,6 @@ class ProviderProfile extends ChangeNotifier {
 
   getitem() async {
     List<Map<String, dynamic>> list = await db.getData();
-
-    
-
     list.forEach((row) {
       print(row);
       sGetid = row[_modelProfile.sID];
@@ -167,12 +162,11 @@ class ProviderProfile extends ChangeNotifier {
       // String imagePath = sGetImages;
       // File imageFile = File(imagePath);
       // image = imageFile;
-      
+
       // print(idController.text);
     });
     notifyListeners();
   }
-
 
   Future<bool> _checkRecordDatabase() async {
     bool haveData = false;

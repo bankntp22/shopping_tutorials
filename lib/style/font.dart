@@ -12,6 +12,14 @@ class StyleFont {
     fontWeight: FontWeight.bold,
   );
 
+  static SizedBox useSizeBox({Widget? widget, double? height, double? width}) {
+    return SizedBox(
+      child: widget,
+      height: height,
+      width: width,
+    );
+  }
+
   static var fontGoogleKrub = GoogleFonts.krub(fontSize: 23);
   static var fontGoogleMali =
       GoogleFonts.mali(fontSize: 23, fontWeight: FontWeight.bold);

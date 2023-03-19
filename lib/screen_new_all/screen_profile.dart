@@ -96,7 +96,12 @@ class Profile extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 5,
+              width: 190,
+              height: 30,
+              child: Divider(
+                color: Colors.grey.shade300,
+                thickness: 2,
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -142,7 +147,7 @@ class Profile extends StatelessWidget {
             SizedBox(
               height: 15,
             ),
-            ImageTextFormfield(ctxWatch.idController.text),
+            // ImageTextFormfield(ctxWatch.idController.text),
             SizedBox(
               height: 10,
             ),

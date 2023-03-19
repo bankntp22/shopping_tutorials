@@ -55,7 +55,7 @@ class _HomeState extends State<Home> {
     return SafeArea(
       child: Scaffold(
         // backgroundColor: Colors.white70,
-        backgroundColor: Color(0xFFF424242),
+        // backgroundColor: Color(0xFFF424242),
         // appBar: AppBar(
         //   title: Text('หมวดหมู่อาหาร'),
         //   elevation: 1,
@@ -68,7 +68,7 @@ class _HomeState extends State<Home> {
         // ),
         body: listMenu.elementAt(widget.screenIndex),
         bottomNavigationBar: Container(
-          decoration: BoxDecoration(           
+          decoration: BoxDecoration(
             border: Border(
               top: BorderSide(
                 color: Colors.grey.shade400,
@@ -79,7 +79,7 @@ class _HomeState extends State<Home> {
             height: 65,
             // selectedItemColor: Colors.black,
             backgroundColor: Colors.white,
-           
+
             elevation: 5,
             onDestinationSelected: (value) {
               setState(() {
