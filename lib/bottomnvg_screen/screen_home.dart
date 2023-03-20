@@ -19,6 +19,23 @@ class _ScreenHomeState extends State<ScreenHome> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(       
+           leading: Container(),  
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.shop,
+              ),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.restart_alt,
+              ),
+            ),
+          ],
+        ),
         body: Container(
           width: double.infinity,
           child: Column(
@@ -41,7 +58,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                   ),
                   Container(
                     margin: EdgeInsets.only(
-                      top: 70,
+                      top: 50,
                       right: 27,
                       left: 27,
                     ),
@@ -106,8 +123,9 @@ class _ScreenHomeState extends State<ScreenHome> {
                                     'เมนู',
                                     style: StyleFont.fontMali(
                                       letter: 2.5,
-                                      size: 15,
+                                      size: 14,
                                       color: Colors.black54,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                 ],
@@ -153,8 +171,9 @@ class _ScreenHomeState extends State<ScreenHome> {
                                         'ประวัติ',
                                         style: StyleFont.fontMali(
                                           letter: 2.5,
-                                          size: 15,
+                                          size: 14,
                                           color: Colors.black54,
+                                          fontWeight: FontWeight.w600,
                                         ),
                                       ),
                                     ],
@@ -201,8 +220,9 @@ class _ScreenHomeState extends State<ScreenHome> {
                                     'ออเดอร์',
                                     style: StyleFont.fontMali(
                                       letter: 2.5,
-                                      size: 15,
+                                      size: 14,
                                       color: Colors.black54,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                 ],
@@ -242,7 +262,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     width: double.infinity,
-                    height: 250,
+                    height: 200,
                     child: Container(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -266,37 +286,37 @@ class _ScreenHomeState extends State<ScreenHome> {
                                     Image.asset(
                                       'assets/breakfast.png',
                                       height: 70,
-                                      width: 150,
+                                      width: 270,
                                       fit: BoxFit.cover,
                                     ),
                                     Image.asset(
                                       'assets/kanom.png',
                                       height: 70,
-                                      width: 150,
+                                      width: 270,
                                       fit: BoxFit.cover,
                                     ),
                                     Image.asset(
                                       'assets/padkraplao.png',
                                       height: 70,
-                                      width: 150,
+                                      width: 270,
                                       fit: BoxFit.cover,
                                     ),
                                   ],
                                 ),
                               ),
-                              StyleFont.useSizeBox(
-                                height: 5,
-                              ),
-                              Text(
-                                'อาหารโปรโมชั่น ! ',
-                                style: StyleFont.fontMali(
-                                  color: Colors.grey.shade700,
-                                  letter: 1.5,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
+                              // StyleFont.useSizeBox(
+                              //   height: 10,
+                              // ),
+                              // Text(
+                              //   'อาหารโปรโมชั่น ! ',
+                              //   style: StyleFont.fontMali(
+                              //     color: Colors.grey.shade700,
+                              //     letter: 1.5,
+                              //   ),
+                              // ),
+                              // SizedBox(
+                              //   height: 10,
+                              // ),
                             ],
                           )
                         ],

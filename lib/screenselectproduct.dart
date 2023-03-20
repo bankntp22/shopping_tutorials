@@ -49,6 +49,69 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
     }
     return formatter.format(number);
   }
+  
+  
+  addProduct(int index) {
+    if (mounted) {
+      setState(() {
+        qtySum++;
+
+        temptotalprice = dTotalall + foodlist[index].price;
+
+        if (temptotalprice <= 2000) {
+          dTotalall = temptotalprice;
+
+          foodlist[index].qty++;
+
+          foodlist[index].total = foodlist[index].total + foodlist[index].price;
+
+          totalprice =
+              dTotalall;
+        } else {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16)),
+                title: const Text(
+                  'ขออภัย!',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      'คุณไม่สามารถสั่งอาหารเกินราคา 2000 ได้',
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Container(
+                          width: 80,
+                          height: 40,
+                          child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('OK'),),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              );
+            },
+          );
+        }
+      });
+    }
+  }
 
   // format() {
   //   number = formatNumber(
@@ -86,7 +149,6 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
         builder: (context) {
           return ScreenCart(
             foodlistone: listfoodselect,
-            
           );
         },
       ));
@@ -108,7 +170,7 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
   //   for (int i = 0; i < foodlist.length; i++) {
   //     int sumqty = 0;
   //     sumqty = foodlist[i].qty;
-  //     qtySum = sumqty + qtySum;   
+  //     qtySum = sumqty + qtySum;
   //   }
   // }
 
@@ -325,92 +387,93 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
                                                         onPressed: () {
                                                           // addQty();
 
-                                                          if (mounted) {
-                                                            setState(() {
-                                                              qtySum++;
+                                                          addProduct(index);
 
-                                                              temptotalprice =
-                                                                  dTotalall +
-                                                                      foodlist[
-                                                                              index]
-                                                                          .price;
+                                                          // if (mounted) {
+                                                          //   setState(() {
+                                                          //     qtySum++;
 
-                                                              if (temptotalprice <=
-                                                                  2000) {
-                                                                dTotalall =
-                                                                    temptotalprice;
+                                                          //     temptotalprice =
+                                                          //         dTotalall +
+                                                          //             foodlist[
+                                                          //                     index]
+                                                          //                 .price;
 
-                                                                foodlist[index]
-                                                                    .qty++;
+                                                          //     if (temptotalprice <=
+                                                          //         2000) {
+                                                          //       dTotalall =
+                                                          //           temptotalprice;
 
-                                                                foodlist[index]
-                                                                    .total = foodlist[
-                                                                            index]
-                                                                        .total +
-                                                                    foodlist[
-                                                                            index]
-                                                                        .price;
+                                                          //       foodlist[index]
+                                                          //           .qty++;
 
-                                                                // totalprice =
-                                                                //     dTotalall;
-                                                              } else {
-                                                                showDialog(
-                                                                  context:
-                                                                      context,
-                                                                  builder:
-                                                                      (context) {
-                                                                    return AlertDialog(
-                                                                      shape: RoundedRectangleBorder(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(16)),
-                                                                      title:
-                                                                          const Text(
-                                                                        'ขออภัย!',
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                20,
-                                                                            fontWeight:
-                                                                                FontWeight.bold),
-                                                                        textAlign:
-                                                                            TextAlign.center,
-                                                                      ),
-                                                                      content:
-                                                                          Column(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.min,
-                                                                        children: [
-                                                                          const Text(
-                                                                            'คุณไม่สามารถสั่งอาหารเกินราคา 2000 ได้',
-                                                                            textAlign:
-                                                                                TextAlign.center,
-                                                                          ),
-                                                                          const SizedBox(
-                                                                            height:
-                                                                                10,
-                                                                          ),
-                                                                          Row(
-                                                                            mainAxisAlignment:
-                                                                                MainAxisAlignment.end,
-                                                                            children: [
-                                                                              Container(
-                                                                                width: 80,
-                                                                                height: 40,
-                                                                                child: ElevatedButton(
-                                                                                    onPressed: () {
-                                                                                      Navigator.pop(context);
-                                                                                    },
-                                                                                    child: const Text('OK')),
-                                                                              ),
-                                                                            ],
-                                                                          )
-                                                                        ],
-                                                                      ),
-                                                                    );
-                                                                  },
-                                                                );
-                                                              }
-                                                            });
-                                                          }
+                                                          //       foodlist[index]
+                                                          //           .total = foodlist[
+                                                          //                   index]
+                                                          //               .total +
+                                                          //           foodlist[
+                                                          //                   index]
+                                                          //               .price;
+                                                          //       // totalprice =
+                                                          //       //     dTotalall;
+                                                          //     } else {
+                                                          //       showDialog(
+                                                          //         context:
+                                                          //             context,
+                                                          //         builder:
+                                                          //             (context) {
+                                                          //           return AlertDialog(
+                                                          //             shape: RoundedRectangleBorder(
+                                                          //                 borderRadius:
+                                                          //                     BorderRadius.circular(16)),
+                                                          //             title:
+                                                          //                 const Text(
+                                                          //               'ขออภัย!',
+                                                          //               style: TextStyle(
+                                                          //                   fontSize:
+                                                          //                       20,
+                                                          //                   fontWeight:
+                                                          //                       FontWeight.bold),
+                                                          //               textAlign:
+                                                          //                   TextAlign.center,
+                                                          //             ),
+                                                          //             content:
+                                                          //                 Column(
+                                                          //               mainAxisSize:
+                                                          //                   MainAxisSize.min,
+                                                          //               children: [
+                                                          //                 const Text(
+                                                          //                   'คุณไม่สามารถสั่งอาหารเกินราคา 2000 ได้',
+                                                          //                   textAlign:
+                                                          //                       TextAlign.center,
+                                                          //                 ),
+                                                          //                 const SizedBox(
+                                                          //                   height:
+                                                          //                       10,
+                                                          //                 ),
+                                                          //                 Row(
+                                                          //                   mainAxisAlignment:
+                                                          //                       MainAxisAlignment.end,
+                                                          //                   children: [
+                                                          //                     Container(
+                                                          //                       width: 80,
+                                                          //                       height: 40,
+                                                          //                       child: ElevatedButton(
+                                                          //                           onPressed: () {
+                                                          //                             Navigator.pop(context);
+                                                          //                           },
+                                                          //                           child: const Text('OK')),
+                                                          //                     ),
+                                                          //                   ],
+                                                          //                 )
+                                                          //               ],
+                                                          //             ),
+                                                          //           );
+                                                          //         },
+                                                          //       );
+                                                          //     }
+                                                          //   });
+                                                          // }
 
                                                           foodlist[index]
                                                                   .total1 =
