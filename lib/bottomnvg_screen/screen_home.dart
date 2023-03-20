@@ -19,23 +19,23 @@ class _ScreenHomeState extends State<ScreenHome> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(       
-           leading: Container(),  
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.shop,
-              ),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.restart_alt,
-              ),
-            ),
-          ],
-        ),
+        // appBar: AppBar(
+        //   leading: Container(),
+        //   actions: [
+        //     IconButton(
+        //       onPressed: () {},
+        //       icon: Icon(
+        //         Icons.shop,
+        //       ),
+        //     ),
+        //     IconButton(
+        //       onPressed: () {},
+        //       icon: Icon(
+        //         Icons.restart_alt,
+        //       ),
+        //     ),
+        //   ],
+        // ),
         body: Container(
           width: double.infinity,
           child: Column(
@@ -54,6 +54,10 @@ class _ScreenHomeState extends State<ScreenHome> {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                       ),
+                    ),
+                    child: Image.network(
+                      'https://media.istockphoto.com/id/1086859056/th/%E0%B9%80%E0%B8%A7%E0%B8%84%E0%B9%80%E0%B8%95%E0%B8%AD%E0%B8%A3%E0%B9%8C/%E0%B9%81%E0%B8%9A%E0%B8%99%E0%B9%80%E0%B8%99%E0%B8%AD%E0%B8%A3%E0%B9%8C%E0%B9%81%E0%B8%99%E0%B8%A7%E0%B8%99%E0%B8%AD%E0%B8%99%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%AD%E0%B8%9A%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%8C%E0%B8%95%E0%B8%B9%E0%B8%99%E0%B8%A3%E0%B8%B0%E0%B8%9A%E0%B8%B2%E0%B8%A2%E0%B8%AA%E0%B8%B5%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%AD%E0%B8%B2%E0%B8%AB%E0%B8%B2%E0%B8%A3%E0%B8%8D%E0%B8%B5%E0%B9%88%E0%B8%9B%E0%B8%B8%E0%B9%88%E0%B8%99%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%82%E0%B9%89%E0%B8%B2%E0%B8%A7%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%9B%E0%B8%A5%E0%B8%B2%E0%B9%81%E0%B8%8B%E0%B8%A5%E0%B8%A1%E0%B8%AD%E0%B8%99%E0%B8%9A%E0%B8%99%E0%B8%88%E0%B8%B2%E0%B8%99-%E0%B9%81%E0%B8%A1.jpg?s=1024x1024&w=is&k=20&c=8BkeJGAdw6xaC2tSJm6ZkwKlfVLQzsOkWB7xpE-w0EM=',
+                      fit: BoxFit.cover,
                     ),
                   ),
                   Container(
@@ -258,22 +262,23 @@ class _ScreenHomeState extends State<ScreenHome> {
                     ),
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
+                      color: Colors.white,
                     ),
                     width: double.infinity,
-                    height: 200,
+                    height: 220,
                     child: Container(
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
                                 'อาหารสุดพิเศษ ! ',
                                 style: StyleFont.fontMali(
-                                  color: Colors.grey.shade700,
+                                  color: Colors.grey.shade600,
                                   letter: 1.5,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                               StyleFont.useSizeBox(
@@ -317,6 +322,14 @@ class _ScreenHomeState extends State<ScreenHome> {
                               // SizedBox(
                               //   height: 10,
                               // ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    'See all',
+                                  ),
+                                ],
+                              )
                             ],
                           )
                         ],

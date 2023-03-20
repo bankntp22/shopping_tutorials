@@ -49,68 +49,90 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
     }
     return formatter.format(number);
   }
-  
-  
+
   addProduct(int index) {
     if (mounted) {
       setState(() {
         qtySum++;
 
-        temptotalprice = dTotalall + foodlist[index].price;
+        // temptotalprice = dTotalall + foodlist[index].price;
 
-        if (temptotalprice <= 2000) {
-          dTotalall = temptotalprice;
+        // if (temptotalprice <= 2000) {
+        //   dTotalall = temptotalprice;
 
-          foodlist[index].qty++;
+        //   foodlist[index].qty++;
 
-          foodlist[index].total = foodlist[index].total + foodlist[index].price;
+        //   foodlist[index].total = foodlist[index].total + foodlist[index].price;
 
-          totalprice =
-              dTotalall;
-        } else {
-          showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16)),
-                title: const Text(
-                  'ขออภัย!',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.center,
-                ),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text(
-                      'คุณไม่สามารถสั่งอาหารเกินราคา 2000 ได้',
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Container(
-                          width: 80,
-                          height: 40,
-                          child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: const Text('OK'),),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              );
-            },
-          );
-        }
+        //   // totalprice = dTotalall;
+        // } else {
+        //   alertDialogTotal();
+        // }
+        tempTotalPrice(index);
       });
     }
+  }
+
+  tempTotalPrice(int index) {
+    temptotalprice = dTotalall + foodlist[index].price;
+    if (temptotalprice <= 2000) {
+      setState(() {
+        dTotalall = temptotalprice;
+        foodlist[index].qty++;
+        foodlist[index].total = foodlist[index].total + foodlist[index].price;
+      });
+    } else {
+      alertDialogTotal();
+    }
+  }
+
+  alertDialogTotal() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          title: const Text(
+            'ขออภัย!',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.red,
+              letterSpacing: 2.0,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                'คุณไม่สามารถสั่งอาหารเกินราคา 2000 ได้',
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    width: 80,
+                    height: 40,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('OK'),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        );
+      },
+    );
   }
 
   // format() {
