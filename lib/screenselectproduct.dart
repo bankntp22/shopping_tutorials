@@ -50,10 +50,52 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
     return formatter.format(number);
   }
 
+  void updateFoodList(
+    int index,
+    List<Food> foodList,
+  ) {
+    qtySum++;
+    double temptotalprice = dTotalall + foodList[index].price;
+
+    if (temptotalprice <= 2000) {
+      dTotalall = temptotalprice;
+
+      foodList[index].qty++;
+      foodList[index].total = foodList[index].total + foodList[index].price;
+      // totalprice = dTotalall;
+    } else {
+      alertDialogTotal();
+    }
+  }
+
+  void onFoodListItemTap(int index, List<Food> foodList) {
+    if (mounted) {
+      setState(() {
+        updateFoodList(
+          index,
+          foodList,
+        );
+      });
+    }
+  }
+
   addProduct(int index) {
     if (mounted) {
       setState(() {
         qtySum++;
+
+        temptotalprice = dTotalall + foodlist[index].price;
+        if (temptotalprice <= 2000) {
+          setState(() {
+            dTotalall = temptotalprice;
+
+            foodlist[index].qty++;
+            foodlist[index].total =
+                foodlist[index].total + foodlist[index].price;
+          });
+        } else {
+          alertDialogTotal();
+        }
 
         // temptotalprice = dTotalall + foodlist[index].price;
 
@@ -68,21 +110,7 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
         // } else {
         //   alertDialogTotal();
         // }
-        tempTotalPrice(index);
       });
-    }
-  }
-
-  tempTotalPrice(int index) {
-    temptotalprice = dTotalall + foodlist[index].price;
-    if (temptotalprice <= 2000) {
-      setState(() {
-        dTotalall = temptotalprice;
-        foodlist[index].qty++;
-        foodlist[index].total = foodlist[index].total + foodlist[index].price;
-      });
-    } else {
-      alertDialogTotal();
     }
   }
 
@@ -409,7 +437,9 @@ class _ScreenselectproductState extends State<Screenselectproduct> {
                                                         onPressed: () {
                                                           // addQty();
 
-                                                          addProduct(index);
+                                                          // addProduct(index);
+                                                          onFoodListItemTap(
+                                                              index, foodlist);
 
                                                           // if (mounted) {
                                                           //   setState(() {
